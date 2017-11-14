@@ -14,14 +14,12 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import com.bridgelabz.model.User;
 
+
+@SuppressWarnings("deprecation")
 public class UserDaoImplement implements UserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
 	//***** Insert User details into database *****/
 	@Override
 	public void saveUser(User user) {	

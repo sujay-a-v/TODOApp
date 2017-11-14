@@ -86,7 +86,8 @@ public class UserNotesDaoImpl implements UserNotesDao {
 		try
 		{
 			Criteria criteria=session.createCriteria(Notes.class);
-			List list=criteria.list();
+			criteria.add(Restrictions.eq("user", user));
+			List<Notes> list=criteria.list();
 			return list;
 		}
 		catch (Exception e) {

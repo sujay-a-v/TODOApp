@@ -45,6 +45,8 @@ public class LoginController {
 		} else {
 			if (userLogin.isActive()) {
 				session.setAttribute("User", userLogin);
+				String token=tokens.generateToken(userLogin.getId());
+				mailService.sendMail(user.getUserEmail(), "ToDoApp", token + " \ncopy this token for token crud operation");
 				return ResponseEntity.status(HttpStatus.OK).body("User login successfully.");
 			}
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User didn't activated.");
@@ -70,6 +72,7 @@ public class LoginController {
 	public ResponseEntity<String> setNewPassword(@PathVariable("Token") String token, @RequestBody User user,
 			HttpSession session) throws Exception {
 		int id=tokens.validateToken(token);
+		System.out.println("User id for reset passwpord : "+id);
 		if(id>0)
 		{
 			String email = (String) session.getAttribute("Email");
