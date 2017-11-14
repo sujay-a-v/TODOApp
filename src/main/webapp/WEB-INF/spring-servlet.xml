@@ -1,0 +1,91 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.2.xsd
+   http://www.springframework.org/schema/aop
+   http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+   http://www.springframework.org/schema/mvc
+   http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+	<!-- <bean id="HandleMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/> -->
+	<context:component-scan base-package="com.bridgelabz" />
+
+	<mvc:annotation-driven />
+	
+
+	<bean id="dataBase"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/ToDoApp"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataBase" />
+
+		<property name="annotatedClasses">
+			<list>
+				<value>com.bridgelabz.model.Notes</value>
+				<value>com.bridgelabz.model.User</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="transactionManeger"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="userDao" class="com.bridgelabz.dao.UserDaoImplement">
+	</bean>
+	<bean id="userService" class="com.bridgelabz.service.userServiceImpl">
+	</bean>
+	<bean id="userValidation" class="com.bridgelabz.validation.UserValidationImplement"></bean>
+
+	<bean id="errorMassage" class="com.bridgelabz.model.ErrorMessage">
+	</bean>
+	<bean id="notesService" class="com.bridgelabz.service.NotesServiceImpl">
+	</bean>
+	<bean id="userNotesDao" class="com.bridgelabz.dao.UserNotesDaoImpl">
+	</bean>
+	<bean id="passwordEncrypt" class="com.bridgelabz.passwordencrypt.PasswordEncrypt">
+	</bean>
+	<bean id="tokens" class="com.bridgelabz.tokens.TokenImpl">
+	</bean>
+	<bean id="fbConnection" class="com.bridgelabz.sociallogin.FacebookLogin">
+	</bean>
+	<bean id="googleConnection" class="com.bridgelabz.sociallogin.GoogleLogin">
+	</bean>
+
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="snehajeevi555@gmail.com" />
+		<property name="password" value="sujay123" />
+
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="mailService" class="com.bridgelabz.service.MailServiceImpl"></bean>
+
+
+</beans>        
