@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -84,19 +83,8 @@ public class LoginController {
             }
           }	
         int id=tokens.validateToken(userToken);
-        /*if(id==0)
-        {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not Found");
-        }
-		System.out.println("User id for reset passwpord : "+id);*/
-		if(id>0)
+  		if(id>0)
 		{
-			/*String email = (String) session.getAttribute("Email");
-			User user1 = userService.getByEmail(email);
-			if (user1 == null) {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email not registered");
-			}*/
-	
 			String isPasswordValid = userValidation.passwordValidate(user.getUserPassword());
 			if (!isPasswordValid.equals("true")) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(isPasswordValid);
