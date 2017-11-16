@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -101,8 +102,6 @@ public class UserDaoImplement implements UserDao {
 
 	@Override
 	public void activateUser(int id, User user) {
-		
-		System.out.println("user Activate");
 		Session session=sessionFactory.openSession();
 		Transaction transaction=session.beginTransaction();
 		try
@@ -139,13 +138,17 @@ public class UserDaoImplement implements UserDao {
 
 	@Override
 	public String passwordReset(User user) {
-		
 		Session session=sessionFactory.openSession();
 		Transaction transaction=null;
 		try
 		{
 			transaction=session.beginTransaction();
-			session.update(user);
+			String hql="update User set userPassword=:userPassword where id=:id";
+			Query query=session.createQuery(hql);
+			query.setParameter("userPassword",user.getUserPassword());
+			query.setParameter("id", user.getId());
+			query.executeUpdate();
+			//session.update(user);
 			transaction.commit();
 			session.close();
 			return "Password set";

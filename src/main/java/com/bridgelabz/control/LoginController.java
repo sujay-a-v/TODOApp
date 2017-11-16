@@ -1,5 +1,7 @@
 package com.bridgelabz.control;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -62,24 +64,38 @@ public class LoginController {
 		}
 		session.setAttribute("Email", user.getUserEmail());
 		String compactToken=tokens.generateToken(user1.getId());
-		String url = request.getRequestURL().toString();
-		url = url.substring(0, url.lastIndexOf("/")) + "/resetPassword/" + compactToken;
-		mailService.sendMail(user.getUserEmail(), "ToDoApp", url + " \ncopy this link for reset your password");
+		/*String url = request.getRequestURL().toString();
+		url = url.substring(0, url.lastIndexOf("/")) + "/resetPassword/" + compactToken;*/
+		mailService.sendMail(user.getUserEmail(), "ToDoApp", compactToken + " \ncopy this token for reset your password");
 		return ResponseEntity.status(HttpStatus.OK).body("password reset link sent");
 	}
 
-	@RequestMapping(value = "/resetPassword/{Token:.+}", method = RequestMethod.POST)
-	public ResponseEntity<String> setNewPassword(@PathVariable("Token") String token, @RequestBody User user,
-			HttpSession session) throws Exception {
-		int id=tokens.validateToken(token);
-		System.out.println("User id for reset passwpord : "+id);
+	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+	public ResponseEntity<String> setNewPassword(@RequestBody User user,
+			HttpSession session,HttpServletRequest request) throws Exception {
+		
+		String userToken=null;
+		Enumeration headerNames = request.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String key = (String) headerNames.nextElement();
+            if(key.equals("token"))
+            {
+            	userToken=request.getHeader(key);
+            }
+          }	
+        int id=tokens.validateToken(userToken);
+        /*if(id==0)
+        {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not Found");
+        }
+		System.out.println("User id for reset passwpord : "+id);*/
 		if(id>0)
 		{
-			String email = (String) session.getAttribute("Email");
+			/*String email = (String) session.getAttribute("Email");
 			User user1 = userService.getByEmail(email);
 			if (user1 == null) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Email not registered");
-			}
+			}*/
 	
 			String isPasswordValid = userValidation.passwordValidate(user.getUserPassword());
 			if (!isPasswordValid.equals("true")) {
@@ -87,8 +103,9 @@ public class LoginController {
 			}
 			System.out.println("new password "+user.getUserPassword());
 			String password = passwordEncrypt.encrypt(user.getUserPassword());
-			user1.setUserPassword(password);
-			String message = userService.passwordReset(user1);
+			user.setUserPassword(password);
+			user.setId(id);
+			String message = userService.passwordReset(user);
 			return ResponseEntity.status(HttpStatus.OK).body(message);
 		}
 		else

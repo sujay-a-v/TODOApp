@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -53,7 +52,6 @@ public class NotesController {
         if(id==0)
         {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not Found");
-
         }
 		System.out.println("in side notes creation");
 		User user1=userService.retrieveById(id);
