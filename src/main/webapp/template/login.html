@@ -1,0 +1,44 @@
+<div class="row">
+<div class="col-sm-3"></div>
+		<div class="col-sm-6" style="background-color:  #00ffff"
+			style="padding: 10px" id="div1">
+			<h1>Sign In.</h1>
+			<hr style="border-width: 2px" color="black">
+				<div class="row">
+					<div class="col-sm-6">
+						<h3>
+							<b>use other account</b>
+						</h3>
+						You can also sign in using facebook account and google account<br>
+						<br>
+						<button type="button" class="btn btn-primary btn-block" id="fbbutton">login
+							using facebook</button>
+						<br>
+						<button type="button" class="btn btn-block"
+							style="background-color: black; color: white" id="gbutton">login
+							using google</button>
+					</div>
+					<div class="col-sm-6 col-lg-6 col-md-9 col-xs-12"
+						style="border-left: 1px solid grey">
+						<h3>
+							<b> Using your account</b>
+						</h3>
+						<h3 id="error1" ng-bind="error"></h3>
+						<br>
+						<div class="form-group" style="margin-left: 5px">
+							<input type="text" placeholder="Email" ng-model="user.userEmail" class="form-control" required><br> 
+							
+ 							<input type="password" placeholder="Password" ng-model="user.userPassword" class="form-control" required>
+						
+						</div>
+						<div class="form-group" style="margin-left: 5px">
+							<button type="submit" class="btn btn-info btn-block" ng-click="loginUser()">Singin</button><br>
+							<a href="#!/forgetPassword">Forgot your password?</a> 
+							<a href="#">Register </a>
+							<br>
+							<!-- <a href="#!/home">home</a> -->
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>

@@ -1,0 +1,22 @@
+{
+  "name": "webapp",
+  "homepage": "https://github.com/sujay-a-v/TODOApp",
+  "authors": [
+    "Sujay <sujay.av555@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.6",
+    "angular-material": "^1.1.5",
+    "angular-ui-router": "^1.0.11"
+  }
+}

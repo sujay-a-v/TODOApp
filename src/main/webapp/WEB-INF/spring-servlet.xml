@@ -16,6 +16,11 @@
 
 	<mvc:annotation-driven />
 	
+	<mvc:resources location="/template/" mapping="/template/**"/>
+	<mvc:resources location="/controller/" mapping="/controller/**"/>
+	<mvc:resources location="/script/" mapping="/script/**"/>
+	<mvc:resources location="/service/" mapping="/service/**"/>
+	<mvc:resources location="/bower_components/" mapping="/bower_components/**"/>
 
 	<bean id="dataBase"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

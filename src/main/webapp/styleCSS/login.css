@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+
+hr{
+background: black;
+}
+
+body{
+	width: 100%;
+}
+
+input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    background-color: #66ffff;
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: 1px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.container{
+	
+}
+
+#fbbutton {
+	background-color:#0000ff;
+	color: white;
+	padding: 10px 20px;
+	margin: 8px 0;
+	border: 2px;
+	cursor: pointer;
+	width: 100%;
+}
+
+#gbutton {
+	background-color:black;
+	color: white;
+	padding: 10px 20px;
+	margin: 8px 0;
+	border: 2px;
+	cursor: pointer;
+	width: 100%;
+}
+
+.vert{
+border-right:  solid ;
+}
+
+#div1{
+	top:100px;
+	height: 500px;
+}
