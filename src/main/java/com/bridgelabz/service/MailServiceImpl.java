@@ -18,13 +18,10 @@ public class MailServiceImpl implements MailService {
 		
 		SimpleMailMessage message = new SimpleMailMessage();
 		String from="sujay.av555@gmail.com";
-		//String subject="User Validate";
-
 		message.setFrom(from);
 		message.setTo(to);
 		message.setSubject(subject);
 		message.setText(msg);
-		System.out.println("msg sent");
 		mailSender.send(message);
 		
 	}

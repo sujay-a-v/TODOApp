@@ -8,6 +8,12 @@ toDoApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$u
 		controller:'loginController'
 	});
 	
+	$stateProvider.state('register',{
+		url:'/register',
+		templateUrl:'template/register.html',
+		controller:'registerController'
+	});
+	
 	$stateProvider.state('home',{
 		url:'/home',
 		templateUrl:'template/home.html',

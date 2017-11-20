@@ -48,7 +48,6 @@ public class UserDaoImplement implements UserDao {
 		criteria.add(email1);
 		User user=(User) criteria.uniqueResult();
 		session.close();
-		System.out.println("DAO    "+user.getUserEmail());
 			if(BCrypt.checkpw(password, user.getUserPassword()))
 			{
 				return user;

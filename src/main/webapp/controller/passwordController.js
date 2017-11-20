@@ -2,12 +2,13 @@ var toDoApp=angular.module('toDoApp');
 
 toDoApp.controller('passwordController',function($scope,passwordService,$state){
 	$scope.forgetPassword=function(){
-		var a=passwordService.forgetPassword($scope.user);
+		var a=passwordService.forgetPassword($scope.user,$scope.error);
 		a.then(function(response){
-			console.log(response.data.message);
-			localStorage.setItem('token',response.data.message)
-			$state.go('setPassword');
-			console.log("link sent")
+			localStorage.setItem('token',response.data.message);
+			$state.go('login');
+		},function(error){
+			$scope.errorMessage=error.data.message;
+			$state.go('/');
 		});
 	}
 });

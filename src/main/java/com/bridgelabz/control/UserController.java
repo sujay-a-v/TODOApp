@@ -1,6 +1,7 @@
 package com.bridgelabz.control;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.bridgelabz.model.ErrorMessage;
+import com.bridgelabz.model.Response;
 import com.bridgelabz.model.User;
 import com.bridgelabz.passwordencrypt.PasswordEncrypt;
 import com.bridgelabz.service.MailService;
@@ -24,16 +26,6 @@ import com.bridgelabz.validation.UserValidation;
 @Controller
 @RestController
 public class UserController {
-
-	/*
-	 * @InitBinder public void InitBinder(WebDataBinder binder) {
-	 * //binder.setDisallowedFields(new String[] {"studentMobile"});
-	 * //SimpleDateFormat dateFormat=new SimpleDateFormat("dd**MM**yyyy");
-	 * //binder.registerCustomEditor(Date.class, "studentDOB", new
-	 * CustomDateEditor(dateFormat, false));
-	 * //binder.registerCustomEditor(String.class, "studentName",new
-	 * StudentNameEditor()); }
-	 */
 
 	@Autowired
 	private UserService userService;
@@ -52,27 +44,33 @@ public class UserController {
 	
 	@Autowired
 	private Token tokens;
+	
+	@Autowired
+	private Response response;
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<ErrorMessage> doRegister(@RequestBody User user,
+	public ResponseEntity<Response> doRegister(@RequestBody User user,
 			HttpServletRequest request) throws Exception {
 
 		String isValid = userValidation.userValidate(user);
 		if (!isValid.equals("true")) {
-			errorMassage.setResponseMessage(isValid);
-			return new ResponseEntity<ErrorMessage>(errorMassage, HttpStatus.OK);
+			response.setMessage(isValid);
+			response.setStatus(-1);
+			return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
 
 		} else {
 			String isPasswordValid=userValidation.passwordValidate(user.getUserPassword());
 			if(!isPasswordValid.equals("true"))
 			{
-				errorMassage.setResponseMessage(isPasswordValid);
-				return new ResponseEntity<ErrorMessage>(errorMassage, HttpStatus.OK);
+				response.setMessage(isPasswordValid);
+				response.setStatus(-1);
+				return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
 			}
 			boolean status = userService.isUserExist(user.getUserEmail());
 			if (status) {
-				errorMassage.setResponseMessage("User email already exist");
-				return new ResponseEntity<ErrorMessage>(errorMassage, HttpStatus.BAD_REQUEST);
+				response.setMessage("User email already exist");
+				response.setStatus(-1);
+				return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
 			}
 
 			String password=passwordEncrypt.encrypt(user.getUserPassword());
@@ -86,13 +84,14 @@ public class UserController {
 
 			mailService.sendMail(user.getUserEmail(), "User Validate", url + " \nclick on the url to activate");
 
-			errorMassage.setResponseMessage("RegisterSuccess");
-			return new ResponseEntity<ErrorMessage>(errorMassage, HttpStatus.CREATED);
+			response.setMessage("RegisterSuccess and activation link sent to User mail");
+			response.setStatus(1);
+			return new ResponseEntity<Response>(response, HttpStatus.CREATED);
 		}
 	}
 
 	@RequestMapping(value = "/active/{Token:.+}", method = RequestMethod.GET)
-	public ResponseEntity<String> activeUser(@PathVariable("Token") String token)throws Exception {
+	public ResponseEntity<String> activeUser(@PathVariable("Token") String token, HttpServletResponse response)throws Exception {
 		int id=tokens.validateToken(token);
 		System.out.println("Token verified id "+id);
 		if(id>0)
@@ -103,6 +102,7 @@ public class UserController {
 			}
 			user.setActive(true);
 			userService.activateUser(id, user);
+			response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
 			return ResponseEntity.status(HttpStatus.OK).body("User activated");
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Id");

@@ -63,6 +63,7 @@
 
 	<bean id="errorMassage" class="com.bridgelabz.model.ErrorMessage">
 	</bean>
+	<bean id="response" class="com.bridgelabz.model.Response"></bean>
 	<bean id="notesService" class="com.bridgelabz.service.NotesServiceImpl">
 	</bean>
 	<bean id="userNotesDao" class="com.bridgelabz.dao.UserNotesDaoImpl">

@@ -1,7 +1,5 @@
 package com.bridgelabz.service;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bridgelabz.dao.UserDao;
@@ -25,7 +23,6 @@ public class userServiceImpl implements UserService {
 	
 	@Override
 	public boolean isUserExist(String email) {
-		System.out.println("inside service impl");
 		return userDao.isUserExit(email);
 	}
 	
@@ -49,5 +46,4 @@ public class userServiceImpl implements UserService {
 	public String passwordReset(User user) {
 		return userDao.passwordReset(user);
 	}
-
 }

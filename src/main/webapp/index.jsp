@@ -8,9 +8,13 @@
 
 <script src="controller/loginController.js" type="text/javascript"></script>
 <script src="controller/passwordController.js" type="text/javascript"></script>
+<script src="controller/setPasswordController.js" type="text/javascript"></script>
+<script src="controller/registerController.js" type="text/javascript"></script>
 
 <script src="service/loginService.js" type="text/javascript"></script>
 <script src="service/passwordService.js" type="text/javascript"></script>
+<script src="service/setPasswordService.js" type="text/javascript"></script>
+<script src="service/registerService.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="styleCSS/login.css" /> -->

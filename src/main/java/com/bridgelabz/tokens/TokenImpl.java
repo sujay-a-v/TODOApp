@@ -14,16 +14,12 @@ public class TokenImpl implements Token {
 
 	@Override
 	public String generateToken(int id) {
-
-		System.out.println("inside token generate");
 		Calendar calendar = Calendar.getInstance();
 		Date currentTime = calendar.getTime();
 		calendar.add(Calendar.MINUTE, 30);
 		Date expireTime = calendar.getTime();
 		token = Jwts.builder().setId(String.valueOf(id)).setIssuedAt(currentTime).setExpiration(expireTime)
 				.signWith(SignatureAlgorithm.HS256, key).compact();
-
-		System.out.println(token);
 		return token;
 	}
 
