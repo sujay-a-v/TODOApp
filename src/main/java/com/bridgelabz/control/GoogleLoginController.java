@@ -1,10 +1,13 @@
 package com.bridgelabz.control;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +40,7 @@ public class GoogleLoginController {
 	}
 
 	@RequestMapping(value="/getGoogleLogin", method = RequestMethod.GET)
-	public ResponseEntity<String> getGoogleToken(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+	public ResponseEntity<String> getGoogleToken(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException
 	{
 		String googleCode=(String)request.getParameter("code");
 		System.out.println("googleCode : "+googleCode);
@@ -66,14 +69,15 @@ public class GoogleLoginController {
 				System.out.println("Google user id : "+id);
 				if(id==0)
 				{
-					response.sendRedirect("http://localhost:8080/ToDoApp/login");
+					response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
 				}
 			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
+		return ResponseEntity.status(HttpStatus.OK).body("new Registered");
 		
 	}
 }

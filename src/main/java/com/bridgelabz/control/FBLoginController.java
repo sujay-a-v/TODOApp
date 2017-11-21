@@ -70,7 +70,7 @@ public class FBLoginController {
 				
 				if(id==-1)
 				{
-					response.sendRedirect("http://localhost:8080/ToDoApp/login");
+					response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
 				}
 				else
 				{
@@ -83,11 +83,14 @@ public class FBLoginController {
 				/*String accessToken=tokens.generateToken(user.getId());
 				session.setAttribute("ToDoAccessToken", accessToken);*/
 			}
+			response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
 		}
-		return null;
+		response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
+		return ResponseEntity.status(HttpStatus.OK).body("new Registered");
 		
 	}
 }

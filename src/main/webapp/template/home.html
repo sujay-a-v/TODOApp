@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h2>Hello world</h2>
-</body>
-</html>
+<div layout="column" flex >
+
+  <!-- ************************************* Showing of Top Bar start **********************************************-->
+  <top-nav-bar></top-nav-bar>
+  <!-- ************************************* Showing of Top Bar end **********************************************-->
+
+  <div layout="row" flex>
+
+<!-- ************************************* Showing of left side nav bar start **********************************************-->
+    <!-- <left-side-nav-bar ></left-side-nav-bar> -->
+    <md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4" md-is-locked-open="$mdMedia('gt-md')">
+      <md-content>
+        <md-list>
+          <md-list-item class="md-2-line" ng-click="null" ui-sref="notes">
+            <div class="md-list-item-text">
+              <h3>Notes</h3>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line" ng-click="null" ui-sref="archives">
+            <div class="md-list-item-text">
+              <h3>Archives</h3>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line" ng-click="null" ui-sref="remainder">
+            <div class="md-list-item-text">
+              <h3>Reminders</h3>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line">
+            <div class="md-list-item-text">
+              <h3><b>Labels</b></h3><br>
+              <p ng-repeat="label in labels">
+                <b ng-click="" ui-sref="label({labelName:label.label})">{{label.label}}</b><br><br>
+              </p>
+              <h4 ng-click="createLabel($event, labels)"> +&nbsp;&nbsp;Create or Edit Label</h4>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line" ng-click="null" ui-sref="trash">
+            <div class="md-list-item-text">
+              <h3>Trash</h3>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </md-sidenav>
+  <!-- ************************************* Showing of left side nav bar end **********************************************-->
+
+    </md-content>
+  </div>
+</div>
