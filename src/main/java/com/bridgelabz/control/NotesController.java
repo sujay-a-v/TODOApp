@@ -82,21 +82,13 @@ public class NotesController {
 	public ResponseEntity<List<Notes>> retrieveAllNotes(HttpServletRequest request)
 	{
 		String userToken=null;
-		Enumeration headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String key = (String) headerNames.nextElement();
-            if(key.equals("token"))
-            {
-            	userToken=request.getHeader(key);
-            }
-          }	
+        userToken=request.getHeader("token");
         int id=tokens.validateToken(userToken);
         if(id==0)
         {
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
-
         }
-		System.out.println("in side notes creation");
+		String token=request.getHeader("token");
 		User user=userService.retrieveById(id);
 		List<Notes> notes=noteService.fetchAllNotes(user);
 		if(notes==null)

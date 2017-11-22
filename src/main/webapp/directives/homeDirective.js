@@ -11,4 +11,10 @@ toDoApp.directive('sideNavBar',function(){
 		restrict:'E',
 		templateUrl:'./template/SideNavBar.html'
 	}
+})
+toDoApp.directive('addNote',function(){
+	return{
+		restrict:'E',
+		templateUrl:'./template/AddNote.html'
+	}
 });

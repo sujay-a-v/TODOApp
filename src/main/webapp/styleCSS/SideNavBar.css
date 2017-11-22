@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+
+#SideNavigation{
+	height: 100%;
+	width :20%;
+	background-color:#e8e8e8;
+    position : fixed;
+	z-index:2;
+	transition : 1000.0ms;
+}
+
+#SideNavigation li{
+	 list-style-type:none;
+     margin-right: 20px;
+     margin-top: 10px;
+     display: block;
+     padding: 20px;
+}
+
+#SideNavigation a{
+	color: black;
+    display: block;
+}

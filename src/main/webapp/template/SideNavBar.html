@@ -1,42 +1,14 @@
-<!-- <md-sidenav class="md-sidenav-left md-whiteframe-z2"
-        md-component-id="left">
-    <md-toolbar layout="row">
-     <div class="md-toolbar-tools">
-        <h2>
-          <span>Side Panel</span>
-        </h2>
-        <span flex></span>
-        <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
-          <md-tooltip>Close Side Panel</md-tooltip>
-          <md-icon class="md-default-theme" class="material-icons">&#xE5CD;</md-icon>
-        </md-button>
-       </div>
-    </md-toolbar> 
-    <md-content layout-padding="">
-      Side navigation Panel
-    </md-content> 
-    <md-button class="md-icon-button">
-          <md-icon md-svg-src="/images/ic_account_box_black_24px.svg"><b>Notes</b></md-icon>
-        </md-button>
-</md-sidenav> -->
+<div id="SideNavigation">
 
-<md-sidenav
-        class="md-sidenav-left"
-        md-component-id="left"
-        md-is-locked-open="$mdMedia('gt-md')"
-        md-whiteframe="4">
+	<ul>
+		<li><a href="#!/home">Notes</a></li>
 
-      <md-toolbar class="md-theme-indigo">
-        <h1 class="md-toolbar-tools">Sidenav Left</h1>
-      </md-toolbar>
-      <md-content layout-padding >
-        <md-button ng-click="close()" class="md-primary" hide-gt-md>
-          Close Sidenav Left
-        </md-button>
-        <p hide show-gt-md>
-          This sidenav is locked open on your device. To go back to the default behavior,
-          narrow your display.
-        </p>
-      </md-content>
+		<li><a href="">Reminder</a></li>
 
-    </md-sidenav>
+		<li><a href="#!/trash">Trash</a></li>
+		
+		<li><a href="#!/archive">Archive</a></li>
+
+	</ul>
+
+</div>

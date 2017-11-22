@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+
+div#topNavigation{
+	position : fixed;
+	width : 100%;
+	z-index:2;
+    background-color:#ffbb33;
+} 
+
+div#topNavigation li{
+     margin-right: 20px;
+     margin-top: 10px;
+}
+div#topNavigation input{
+	length:50px;
+}

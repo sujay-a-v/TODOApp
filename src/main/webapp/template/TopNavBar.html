@@ -1,25 +1,31 @@
-<div ng-controller="homeController" ng-cloak>
-  <md-content>
-    <md-toolbar style="background-color:rgb(255, 204, 0)">
-      <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" style="margin:10px">
-          <md-icon md-svg-src="./images/menu.svg"></md-icon>
-          <!-- <image class="" src="/home/bridgeit/Documents/Sujay/HTML/menu.png"/> -->
-        </md-button>
-        
-         <!-- <image class="" src="/home/bridgeit/Documents/Sujay/HTML/menu.png"/> -->
 
-        <h2>Fundoo Keep</h2><br/>
-        <input type="text" placeholder="search" style="align:center">
+<nav class="navbar">
+	<div class="container-fluid" id="topNavigation" ng-style="{'background-color': rgb(255, 204, 0)}">
+		<ul class="nav navbar-nav">
+			<li><i class="glyphicons glyphicons-show-lines"></i></li>
+			<li ng-click="sidebarToggle()">
+			<span style="font-size: 25px; cursor: pointer">&#9776;</span></li>
+			<li><h4 ng-bind="navBarHeading"></h4><h4>Fundoo Keep</h4></li>
+			<li><span style="padding-top: 10px" class="glyphicon glyphicon-search"></span></li>
+			<li>
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
+				</div>
+			</li>
+		</ul>
 
-        <md-button class="md-icon-button" >
-          <md-icon md-svg-src="./images/ic_search_black_24px.svg" ></md-icon>
-        </md-button>
-
-        <md-button class="md-icon-button">
-          <md-icon md-svg-src="/images/ic_account_box_black_24px.svg"></md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
-	</md-content>
-</div>
+		<ul class="nav navbar-nav navbar-right">
+		<li ng-click="listGrideView()"><img ng-if="!ListView" height="30px" alt="gride" src="images/viewList.png"></li>
+			<li>
+				<div class="dropdown">
+					<span class="btn dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-user"></span>
+					</span>
+					<ul class="dropdown-menu" role="menu" style="background-color: white; padding-left: 10px" aria-labelledby="menu1">
+						<li ng-click="logout()">logout</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
+</nav>

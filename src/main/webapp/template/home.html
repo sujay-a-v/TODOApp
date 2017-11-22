@@ -1,50 +1,102 @@
-<div layout="column" flex >
+<div class="mainHomePage">
+	<!-- ************************************* Start of Top Bar ********************************************** -->
+	<top-nav-bar></top-nav-bar>
+	<!-- ************************************* End of Top Bar  ********************************************** -->
 
-  <!-- ************************************* Showing of Top Bar start **********************************************-->
-  <top-nav-bar></top-nav-bar>
-  <!-- ************************************* Showing of Top Bar end **********************************************-->
+	<div class="row">
+		<div class="col-sm-3">
+			<!-- ************* Start of Side Bar ***************** -->
+			<side-nav-bar></side-nav-bar>
+			<!-- ********************* End of Side Bar *************************** -->
+		</div>
 
-  <div layout="row" flex>
+		<div class="col-sm-9">
+			<!-- <add-note></add-note> -->
+			<!-- <div layout="row" flex>
+				<div class="container">
+					<div class="card">
+						<div>
+							<h4>{{note.title}}</h4>
+						</div>
+						<br>
+						<div>{{note.description}}</div>
+						<button type="button" 
+							data-toggle="modal" data-target="#myModal">Take a note...</button>
+						<div class="modal fade" id="myModal" role="dialog">
+							<div class="modal-dialog">
 
-<!-- ************************************* Showing of left side nav bar start **********************************************-->
-    <!-- <left-side-nav-bar ></left-side-nav-bar> -->
-    <md-sidenav class="md-sidenav-left" md-component-id="left" md-whiteframe="4" md-is-locked-open="$mdMedia('gt-md')">
-      <md-content>
-        <md-list>
-          <md-list-item class="md-2-line" ng-click="null" ui-sref="notes">
-            <div class="md-list-item-text">
-              <h3>Notes</h3>
-            </div>
-          </md-list-item>
-          <md-list-item class="md-2-line" ng-click="null" ui-sref="archives">
-            <div class="md-list-item-text">
-              <h3>Archives</h3>
-            </div>
-          </md-list-item>
-          <md-list-item class="md-2-line" ng-click="null" ui-sref="remainder">
-            <div class="md-list-item-text">
-              <h3>Reminders</h3>
-            </div>
-          </md-list-item>
-          <md-list-item class="md-2-line">
-            <div class="md-list-item-text">
-              <h3><b>Labels</b></h3><br>
-              <p ng-repeat="label in labels">
-                <b ng-click="" ui-sref="label({labelName:label.label})">{{label.label}}</b><br><br>
-              </p>
-              <h4 ng-click="createLabel($event, labels)"> +&nbsp;&nbsp;Create or Edit Label</h4>
-            </div>
-          </md-list-item>
-          <md-list-item class="md-2-line" ng-click="null" ui-sref="trash">
-            <div class="md-list-item-text">
-              <h3>Trash</h3>
-            </div>
-          </md-list-item>
-        </md-list>
-      </md-content>
-    </md-sidenav>
-  <!-- ************************************* Showing of left side nav bar end **********************************************-->
-
-    </md-content>
-  </div>
+								Modal content
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title"><input type="text" placeholder="Title" name="note.title" id="title"></h4>
+									</div>
+									<div class="modal-body">
+										<input type="text" placeholder="Take a note..." name="note.description" id="description">
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-default" ng-click="addNote()">Done</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+					</div> -->
+					
+					<div class="container">
+	<div class="row">
+		<div class="col-sm-5" id="addNoteForm" style="background-color: {{AddNoteColor}}">
+		
+			<div class="form-group" >
+				<div ng-show="AddNoteBox" style="float: right">
+<!-- 					<span style="cursor: pointer" ng-click="pinUnpin()"><img ng-if="!pinStatus" style="height: 17px" alt="pin" src="image/pin.svg"><img ng-if="pinStatus" style="height: 17px" alt="pin" src="image/bluepin.svg"></span>
+ -->				</div>
+				<div ng-show="AddNoteBox" data-ph="Title" contenteditable="true" placeholder="title" id="title"></div>
+					<br>
+				<div contenteditable="true" data-ph="Take a note..." ng-click="addNote()" id="description"></div>
+				<br>
+				<div ng-show="AddNoteBox" style="float: right">
+				<div>
+					<!-- <div class="dropdown" style="float: right"> 
+						<div class="btn-group dropup colorDiv" uib-dropdown>
+							<img id ="dropdown" class="dropdown-toggle" data-toggle="dropdown" alt="color" 
+										src="image/colorpallete.svg"  uib-dropdown-toggle height="20px">
+									<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body" style="background-color: #000000">
+										 <a ng-repeat="color in colors"   role="menuitem">
+											<img ng-src="{{color.path}}"  height="25px" ng-click="addNoteColorChange(color.color)">
+										</a>
+									</ul>
+						</div>
+						
+					<span ng-click="addArchiveNote()">
+						<img alt="archive" src="image/archive.svg" height="20px">
+					</span>
+					</div> -->
+					<span ng-click="addNote()" >DONE</span>
+					<!-- </div> -->
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+</div>
+
+					<div layout="row" flex>
+						<div class="container" style="padding: 2px 16px">
+							<div ng-repeat="note in notes">
+								<div class="card">
+									<div>
+										<h4>{{note.title}}</h4>
+									</div>
+									<br>
+									<div>{{note.description}}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
