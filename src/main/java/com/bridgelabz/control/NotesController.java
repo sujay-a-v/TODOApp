@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bridgelabz.model.Notes;
+import com.bridgelabz.model.Response;
 import com.bridgelabz.model.User;
 import com.bridgelabz.service.NotesService;
 import com.bridgelabz.service.UserService;
@@ -34,9 +35,12 @@ public class NotesController {
 	@Autowired
 	private Token tokens;
 	
+	@Autowired
+	private Response response;
+	
 	//***** Adding the Notes ******///
 	@RequestMapping(value="/notesCreate", method = RequestMethod.POST)
-	public ResponseEntity<String> addNotes(@RequestBody Notes notes,HttpServletRequest request)
+	public ResponseEntity<Response> addNotes(@RequestBody Notes notes,HttpServletRequest request)
 	{
 		System.out.println("in side notes creation");
 		String userToken=null;
@@ -51,7 +55,8 @@ public class NotesController {
         int id=tokens.validateToken(userToken);
         if(id==0)
         {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not Found");
+        	response.setMessage("User not Found");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
 		System.out.println("in side notes creation");
 		User user1=userService.retrieveById(id);
@@ -62,7 +67,8 @@ public class NotesController {
 		//User user=((User) session.getAttribute("User"));
 		notes.setUser(user1);
 		noteService.addUserNotes(notes);
-		return ResponseEntity.status(HttpStatus.OK).body("Notes added successfully");
+		response.setMessage("Notes added successfully");
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 	
 	//*************** Retrieve the Notes By Id ********//
@@ -101,34 +107,38 @@ public class NotesController {
 	
 	//********* Delete the Notes By Id ********//
 	@RequestMapping(value="/notesDelete/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<String> deleteNotesById(@PathVariable ("id") int id, HttpSession session)
+	public ResponseEntity<Response> deleteNotesById(@PathVariable ("id") int id, HttpSession session)
 	{
 		Notes currentNotes=noteService.fetchById(id);
 		if(currentNotes==null)
 		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Notes not found for id "+id);
+			response.setMessage("Notes not found for id ");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
 		noteService.dalateUserNotes(id);
-		return ResponseEntity.status(HttpStatus.OK).body("Notes deleted");
+		response.setMessage("Notes deleted");
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 	
 	
 	//******* Update the Notes by Id ********//
 	@RequestMapping(value="notesUpdate/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<String> updateNotes(@PathVariable ("id") int id,@RequestBody Notes notes, HttpSession session )
+	public ResponseEntity<Response> updateNotes(@PathVariable ("id") int id,@RequestBody Notes notes, HttpSession session )
 	{
 		Date date=new Date();
 		notes.setModifiedDate(date);
 		Notes currentNotes=noteService.fetchById(id);
 		if(currentNotes==null)
 		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Notes not found for id "+id);
+			response.setMessage("Notes not found for id ");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
 		currentNotes.setDescription(notes.getDescription());
 		currentNotes.setModifiedDate(notes.getModifiedDate());
 		currentNotes.setTitle(notes.getTitle());
 		currentNotes.setUser((User) session.getAttribute("User"));
 		noteService.modifiedNotes(id, currentNotes);
-		return ResponseEntity.status(HttpStatus.OK).body("Note Updated");
+		response.setMessage("Note Updated");
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 }

@@ -16,7 +16,7 @@ public class TokenImpl implements Token {
 	public String generateToken(int id) {
 		Calendar calendar = Calendar.getInstance();
 		Date currentTime = calendar.getTime();
-		calendar.add(Calendar.MINUTE, 30);
+		calendar.add(Calendar.MINUTE, 300);
 		Date expireTime = calendar.getTime();
 		token = Jwts.builder().setId(String.valueOf(id)).setIssuedAt(currentTime).setExpiration(expireTime)
 				.signWith(SignatureAlgorithm.HS256, key).compact();

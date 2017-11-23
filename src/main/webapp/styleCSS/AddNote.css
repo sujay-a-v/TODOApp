@@ -3,20 +3,18 @@
 div#addNoteForm{
 	margin-top: 10px;
 	margin-bottom: 25px;
-	margin-left: 20%;
+	margin-left: 15%;
+	 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
 }
-div#noteDescription{
+div#description{
+	outline:none;
+	padding-top:5px;
+	height: 28px;
+	word-break: break-all;
+}
+
+div#title{
 	outline:none;
 	padding-top:5px;
 	height: 28px;
 }
-
-div#notetitle{
-	outline:none;
-	padding-top:5px;
-	height: 28px;
-}
-
-[contentEditable=true]:empty:not(:focus):before{
-	color:#989faa;
-content:attr(data-ph) }

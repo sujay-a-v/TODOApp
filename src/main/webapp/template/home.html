@@ -3,7 +3,7 @@
 	<top-nav-bar></top-nav-bar>
 	<!-- ************************************* End of Top Bar  ********************************************** -->
 
-	<div class="row">
+	<div class="row" id="homeId">
 		<div class="col-sm-3">
 			<!-- ************* Start of Side Bar ***************** -->
 			<side-nav-bar></side-nav-bar>
@@ -12,91 +12,90 @@
 
 		<div class="col-sm-9">
 			<!-- <add-note></add-note> -->
-			<!-- <div layout="row" flex>
-				<div class="container">
-					<div class="card">
-						<div>
-							<h4>{{note.title}}</h4>
-						</div>
-						<br>
-						<div>{{note.description}}</div>
-						<button type="button" 
-							data-toggle="modal" data-target="#myModal">Take a note...</button>
-						<div class="modal fade" id="myModal" role="dialog">
-							<div class="modal-dialog">
-
-								Modal content
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title"><input type="text" placeholder="Title" name="note.title" id="title"></h4>
-									</div>
-									<div class="modal-body">
-										<input type="text" placeholder="Take a note..." name="note.description" id="description">
-									</div>
-									<div class="modal-footer">
-										<button type="submit" class="btn btn-default" ng-click="addNote()">Done</button>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-6" id="addNoteForm"
+						style="background-color: rgb(250, 250, 250);">
+						<div class="form-group">
+							<div ng-show="AddNoteBox" data-text="Title"
+								contentEditable="true" id="title"></div>
+							<br>
+							<div contentEditable="true" data-text="Take a note..."
+								ng-click="ShowAddNote()" id="description" style="margin-bottom: 5px"></div>
+							<br>
+							<div role="button">
+								<div ng-show="AddNoteBox" style="float: right">
+									<div>
+										<div class="dropdown" style="float: right">
+											<div class="btn-group dropup colorDiv"></div>
+											<span ng-click="addNote()">DONE</span>
+										</div>
 									</div>
 								</div>
+
 							</div>
 						</div>
 					</div>
-					</div>
-					</div> -->
-					
-					<div class="container">
-	<div class="row">
-		<div class="col-sm-5" id="addNoteForm" style="background-color: {{AddNoteColor}}">
-		
-			<div class="form-group" >
-				<div ng-show="AddNoteBox" style="float: right">
-<!-- 					<span style="cursor: pointer" ng-click="pinUnpin()"><img ng-if="!pinStatus" style="height: 17px" alt="pin" src="image/pin.svg"><img ng-if="pinStatus" style="height: 17px" alt="pin" src="image/bluepin.svg"></span>
- -->				</div>
-				<div ng-show="AddNoteBox" data-ph="Title" contenteditable="true" placeholder="title" id="title"></div>
-					<br>
-				<div contenteditable="true" data-ph="Take a note..." ng-click="addNote()" id="description"></div>
-				<br>
-				<div ng-show="AddNoteBox" style="float: right">
-				<div>
-					<!-- <div class="dropdown" style="float: right"> 
-						<div class="btn-group dropup colorDiv" uib-dropdown>
-							<img id ="dropdown" class="dropdown-toggle" data-toggle="dropdown" alt="color" 
-										src="image/colorpallete.svg"  uib-dropdown-toggle height="20px">
-									<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body" style="background-color: #000000">
-										 <a ng-repeat="color in colors"   role="menuitem">
-											<img ng-src="{{color.path}}"  height="25px" ng-click="addNoteColorChange(color.color)">
+
+				</div>
+			</div>
+
+			<!--************* getting All Notes ******************-->
+			<div>
+				<div layout="row" layout-wrap flex>
+					<div class="container" style="padding: 2px 16px">
+						<div ng-repeat="note in notes | orderBy:'-modifiedDate' " >
+						<div>
+							<div class="card">
+								<div style="margin: 8px">
+									<h4>{{note.title}}</h4>
+								</div>
+								<div style="margin: 7px">{{note.description}}</div><br/>
+																					
+						<div id="moreOptions">
+
+							<div class="dropdown" style="float: left">
+								<img alt="reminder" src="images/reminder.svg" height="20px">
+								<img alt="colaburator" src="images/reminder.svg" height="20px">
+								<div class="btn-group dropup colorDiv" uib-dropdown>
+									<img id="dropdown" class="dropdown-toggle"
+										data-toggle="dropdown" alt="color"
+										src="images/ic_color_lens_black_24px.svg" uib-dropdown-toggle height="20px">
+									<!-- <ul class="dropdown-menu" uib-dropdown-menu role="menu"
+										aria-labelledby="btn-append-to-body"
+										style="background-color: #f9fbff">
+										<a ng-repeat="color in colors" role="menuitem"> <img
+											ng-src="{{color.path}}" height="25px"
+											ng-click="note.noteColor =color.color;addNoteColorChange(color.color)">
 										</a>
+									</ul> -->
+								</div>
+								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px"> <span
+									ng-click="archiveNote(note)"><img alt="archive"
+									src="images/ic_archive_black_24px.svg" height="20px"></span>
+								<div style="float: right">
+									<span class="btn dropdown-toggle" id="menu1"
+										data-toggle="dropdown"> <span
+										class="glyphicon glyphicon-option-vertical"></span>
+									</span>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+										<li><a ng-click="deleteNote(note)">Delete</a></li>
+										<li><a>Add Lable</a></li>
+										<li><a ng-click="copy(note)">Make a Copy</a></li>
 									</ul>
+								</div>
+							</div>
 						</div>
+									
+							</div>
+							</div>
 						
-					<span ng-click="addArchiveNote()">
-						<img alt="archive" src="image/archive.svg" height="20px">
-					</span>
-					</div> -->
-					<span ng-click="addNote()" >DONE</span>
-					<!-- </div> -->
+					</div>
+				</div>
 				</div>
 			</div>
 		</div>
+
+
 	</div>
 </div>
-</div>
-
-					<div layout="row" flex>
-						<div class="container" style="padding: 2px 16px">
-							<div ng-repeat="note in notes">
-								<div class="card">
-									<div>
-										<h4>{{note.title}}</h4>
-									</div>
-									<br>
-									<div>{{note.description}}</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-			</div>
-		</div>
