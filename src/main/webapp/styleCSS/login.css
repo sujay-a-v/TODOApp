@@ -3,6 +3,14 @@
 hr{
 background: black;
 }
+
+#login{
+	background-color:  #00ffff;
+	 margin-top: 75px;
+	  width: 500px; 
+	  margin-left: 35px;
+}
+
 .login{
 	 margin: 8px 0;
 	align:center;

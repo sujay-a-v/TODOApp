@@ -1,5 +1,7 @@
 package com.bridgelabz.control;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -19,6 +21,7 @@ import com.bridgelabz.model.Response;
 import com.bridgelabz.model.User;
 import com.bridgelabz.passwordencrypt.PasswordEncrypt;
 import com.bridgelabz.service.MailService;
+import com.bridgelabz.service.Producer;
 import com.bridgelabz.service.UserService;
 import com.bridgelabz.tokens.Token;
 import com.bridgelabz.validation.UserValidation;
@@ -33,8 +36,8 @@ public class UserController {
 	@Autowired
 	private UserValidation userValidation;
 
-	@Autowired
-	private ErrorMessage errorMassage;
+	/*@Autowired
+	private ErrorMessage errorMassage;*/
 
 	@Autowired
 	private MailService mailService;
@@ -47,6 +50,9 @@ public class UserController {
 	
 	@Autowired
 	private Response response;
+	
+	@Autowired
+	private Producer producer;
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<Response> doRegister(@RequestBody User user,
@@ -81,8 +87,13 @@ public class UserController {
 			
 			String compactToken=tokens.generateToken(user.getId());
 			url = url.substring(0, url.lastIndexOf("/")) + "/active/" + compactToken;
+			
+			HashMap<String, String> map=new HashMap<>();
+			map.put("to", user.getUserEmail());
+			map.put("message", url);
+			producer.send(map);
 
-			mailService.sendMail(user.getUserEmail(), "User Validate", url + " \nclick on the url to activate");
+			//mailService.sendMail(user.getUserEmail(), "User Validate", url + " \nclick on the url to activate");
 
 			response.setMessage("RegisterSuccess and activation link sent to User mail");
 			response.setStatus(1);

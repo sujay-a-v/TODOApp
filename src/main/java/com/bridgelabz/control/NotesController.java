@@ -42,7 +42,12 @@ public class NotesController {
 	@RequestMapping(value="/notesCreate", method = RequestMethod.POST)
 	public ResponseEntity<Response> addNotes(@RequestBody Notes notes,HttpServletRequest request)
 	{
-		System.out.println("in side notes creation");
+		
+		if((notes.getDescription()=="" || notes.getDescription()==null) && (notes.getTitle()=="" || notes.getTitle()== null))
+		{
+			response.setMessage("Notes adding failed");
+			return ResponseEntity.status(HttpStatus.OK).body(response);
+		}
 		String userToken=null;
 		Enumeration headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
@@ -58,11 +63,12 @@ public class NotesController {
         	response.setMessage("User not Found");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
-		System.out.println("in side notes creation");
 		User user1=userService.retrieveById(id);
 		Date date=new Date();
 		notes.setCreateDate(date);
 		notes.setModifiedDate(date);
+		
+		
 		
 		//User user=((User) session.getAttribute("User"));
 		notes.setUser(user1);

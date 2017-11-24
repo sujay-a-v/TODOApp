@@ -17,4 +17,5 @@ div#title{
 	outline:none;
 	padding-top:5px;
 	height: 28px;
+	word-break: break-all;
 }
