@@ -100,7 +100,6 @@ public class NotesController {
         {
 			return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
-		String token=request.getHeader("token");
 		User user=userService.retrieveById(id);
 		List<Notes> notes=noteService.fetchAllNotes(user);
 		if(notes==null)
@@ -113,7 +112,7 @@ public class NotesController {
 	
 	//********* Delete the Notes By Id ********//
 	@RequestMapping(value="/notesDelete/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Response> deleteNotesById(@PathVariable ("id") int id, HttpSession session)
+	public ResponseEntity<Response> deleteNotesById(@PathVariable("id") int id, HttpSession session)
 	{
 		Notes currentNotes=noteService.fetchById(id);
 		if(currentNotes==null)
@@ -128,7 +127,7 @@ public class NotesController {
 	
 	
 	//******* Update the Notes by Id ********//
-	@RequestMapping(value="notesUpdate/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value="/notesUpdate/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Response> updateNotes(@PathVariable ("id") int id,@RequestBody Notes notes, HttpSession session )
 	{
 		Date date=new Date();

@@ -1,0 +1,33 @@
+<div id="mainHome">
+	<top-navigation-bar></top-navigation-bar>
+
+	<div class="col-sm-2" id="sidebarWrapper" ng-show="showSideBar">
+		<side-navigation-bar></side-navigation-bar>
+	</div>
+
+	<div class="col-sm-10" id="mainWrapper">
+		<br> <br>
+			<br>
+			<br>
+			<div class="card" style=" width:27% ; background-color: {{note.noteColor}}"
+				ng-repeat="note in userNotes | orderBy : '-modifiedDate' | filter :{deleteStatus:'true'}">
+				
+				<div ng-bind-html="note.title"></div>
+				<br>
+				<div ng-bind-html="note.description"></div>
+				<br>
+				<div id="moreOptions">
+					<div class="dropdown" style="float: left">
+						<span class="btn dropdown-toggle" id="menu1" data-toggle="dropdown">
+							<span class="glyphicon glyphicon-option-vertical"></span>
+						</span>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+							<li><a ng-click="deleteNoteForever(note.id)">Delete Forever</a></li>
+							<li><a ng-click="restoreNote(note)">Restore</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+	</div>
+</div>

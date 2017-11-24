@@ -2,6 +2,7 @@ package com.bridgelabz.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,72 @@ public class Notes {
 	private String title;
 	private String description;
 	
+	@Column(name = "PIN")
+	private String pin;
+	
+	@Column(name="ARCHIVE_STATUS")
+	private String archiveStatus;
+	
+	@Column(name="DELETE_STATUS")
+	private String deleteStatus;
+	
+	@Column(name="REMINDER_STATUS")
+	private String reminderStatus;
+	
+	@Column(name = "NOTE_STATUS")
+	private String noteStatus;
+	
+	@Column(name="NOTE_COLOR")
+	private String noteColor;
+	
+	public String getPin() {
+		return pin;
+	}
+
+	public String getArchiveStatus() {
+		return archiveStatus;
+	}
+
+	public String getDeleteStatus() {
+		return deleteStatus;
+	}
+
+	public String getReminderStatus() {
+		return reminderStatus;
+	}
+
+	public String getNoteStatus() {
+		return noteStatus;
+	}
+
+	public String getNoteColor() {
+		return noteColor;
+	}
+
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+
+	public void setArchiveStatus(String archiveStatus) {
+		this.archiveStatus = archiveStatus;
+	}
+
+	public void setDeleteStatus(String deleteStatus) {
+		this.deleteStatus = deleteStatus;
+	}
+
+	public void setReminderStatus(String reminderStatus) {
+		this.reminderStatus = reminderStatus;
+	}
+
+	public void setNoteStatus(String noteStatus) {
+		this.noteStatus = noteStatus;
+	}
+
+	public void setNoteColor(String noteColor) {
+		this.noteColor = noteColor;
+	}
+
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name="userId")
