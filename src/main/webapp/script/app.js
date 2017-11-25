@@ -32,6 +32,19 @@ toDoApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$u
 		controller:'setPasswordController'
 	});
 	
+	$stateProvider.state('Trash',{
+		url:'/Trash',
+		templateUrl:'template/Trash.html',
+		controller:'homeController'
+	});
+	
+	$stateProvider.state('Archive',{
+		url:'/Archive',
+		templateUrl:'template/Archive.html',
+		controller:'homeController'
+	});
+	
+	
 	$urlRouterProvider.otherwise('login');
 	}
 	]);

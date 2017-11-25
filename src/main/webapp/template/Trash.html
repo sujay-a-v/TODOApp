@@ -1,20 +1,22 @@
 <div id="mainHome">
-	<top-navigation-bar></top-navigation-bar>
-
-	<div class="col-sm-2" id="sidebarWrapper" ng-show="showSideBar">
-		<side-navigation-bar></side-navigation-bar>
+	<!-- ************************************* Start of Top Bar ********************************************** -->
+	<top-nav-bar></top-nav-bar>
+	<!-- ************************************* End of Top Bar  ********************************************** -->
+<div class="row" id="homeId">
+	<div class="col-sm-3" id="sidebarWrapper" ng-show="showSideBar">
+		<!-- ************* Start of Side Bar ***************** -->
+			<side-nav-bar></side-nav-bar>
+			<!-- ********************* End of Side Bar *************************** -->
 	</div>
 
-	<div class="col-sm-10" id="mainWrapper">
+	<div class="col-sm-9" id="mainWrapper">
 		<br> <br>
-			<br>
-			<br>
-			<div class="card" style=" width:27% ; background-color: {{note.noteColor}}"
-				ng-repeat="note in userNotes | orderBy : '-modifiedDate' | filter :{deleteStatus:'true'}">
+			
+			<div class="card" style=" width:27% ;"
+				ng-repeat="note in notes | orderBy : '-modifiedDate' | filter :{deleteStatus:'true'}">
 				
-				<div ng-bind-html="note.title"></div>
-				<br>
-				<div ng-bind-html="note.description"></div>
+				<div style="margin: 8px"><b>{{note.title}}</b></div>
+				<div style="margin: 7px">{{note.description}}</div>
 				<br>
 				<div id="moreOptions">
 					<div class="dropdown" style="float: left">
@@ -22,12 +24,13 @@
 							<span class="glyphicon glyphicon-option-vertical"></span>
 						</span>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-							<li><a ng-click="deleteNoteForever(note.id)">Delete Forever</a></li>
+							<li><a ng-click="deleteNoteForever(note)">Delete Forever</a></li>
 							<li><a ng-click="restoreNote(note)">Restore</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
 
+	</div>
 	</div>
 </div>

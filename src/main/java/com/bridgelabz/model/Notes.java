@@ -67,22 +67,27 @@ public class Notes {
 	}
 
 	public void setPin(String pin) {
+		if(pin.equals("true") || pin.equals("false"))
 		this.pin = pin;
 	}
 
 	public void setArchiveStatus(String archiveStatus) {
+		if(archiveStatus.equals("true")|| archiveStatus.equals("false"))
 		this.archiveStatus = archiveStatus;
 	}
 
 	public void setDeleteStatus(String deleteStatus) {
+		if(deleteStatus.equals("true") || deleteStatus.equals("false"))
 		this.deleteStatus = deleteStatus;
 	}
 
 	public void setReminderStatus(String reminderStatus) {
+		if(reminderStatus.equals("true") || reminderStatus.equals("false"))
 		this.reminderStatus = reminderStatus;
 	}
 
 	public void setNoteStatus(String noteStatus) {
+		if(noteStatus.equals("true") || noteStatus.equals("false"))
 		this.noteStatus = noteStatus;
 	}
 
@@ -142,6 +147,15 @@ public class Notes {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	@Override
+	public String toString() {
+		return "Notes [id=" + id + ", createDate=" + createDate + ", modifiedDate=" + modifiedDate + ", title=" + title
+				+ ", description=" + description + ", pin=" + pin + ", archiveStatus=" + archiveStatus
+				+ ", deleteStatus=" + deleteStatus + ", reminderStatus=" + reminderStatus + ", noteStatus=" + noteStatus
+				+ ", noteColor=" + noteColor + ", user=" + user + "]";
+	}
 	
 
+	
 }

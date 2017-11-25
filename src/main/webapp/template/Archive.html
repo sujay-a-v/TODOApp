@@ -1,41 +1,47 @@
 <div id="mainHome">
-	<top-navigation-bar></top-navigation-bar>
+	<!-- ************************************* Start of Top Bar ********************************************** -->
+	<top-nav-bar></top-nav-bar>
+	<!-- ************************************* End of Top Bar  ********************************************** -->
 
-	<div class="col-sm-2" id="sidebarWrapper" ng-show="showSideBar">
-		<side-navigation-bar></side-navigation-bar>
+	<div class="row" id="homeId" style="margin-top: 0px; ">
+	<div class="col-sm-3" id="sidebarWrapper" ng-show="showSideBar">
+		<!-- ************* Start of Side Bar ***************** -->
+			<side-nav-bar></side-nav-bar>
+			
+			<!-- ********************* End of Side Bar *************************** -->
 	</div>
 
-	<div class="col-sm-10" id="mainWrapper">
+<!-- filter :{archiveStatus:'true',noteStatus:'false'} -->
+
+
+	<div class="col-sm-9" id="mainWrapper">
 		<br> <br>
-			<br>
-			<br>
-			<div class="card" style="background-color: {{note.noteColor}}"
-				ng-repeat="note in userNotes | orderBy : '-modifiedDate' | filter :{archiveStatus:'true',noteStatus:'false'}">
+			<div class="card" style=" width:30% ;"
+				ng-repeat="note in notes | orderBy : '-modifiedDate' | filter :{archiveStatus:'true', deleteStatus:'false'}">
 				<div id="moreOptions" style="float: right">
 					<span style="cursor: pointer"
 						ng-click="note.pin='true';note.archiveStatus='false' ;note.noteStatus='true'; updateNote(note)"> <img
-						alt="pin" style="height: 17px" src="image/pin.svg"></img>
+						alt="pin" style="height: 17px" src="images/pin.png"></img>
 					</span>
 				</div>
-				<div ng-bind-html="note.title"></div>
+				<div style="margin: 8px"><b>{{note.title}}</b></div>
+				<div style="margin: 7px">{{note.description}}</div><br/>
 				<br>
-				<div ng-bind-html="note.description"></div>
-				<br>
-				<div id="moreOptions">
+				<!-- <div id="moreOptions">
 					<div class="dropdown" style="float: right">
-						<img alt="reminder" src="image/reminder.svg" height="15px">
-						<img alt="colaburator" src="image/colaburator.png" height="25px"> 
+						<img alt="reminder" src="images/reminder.svg" height="20px">
+						<img alt="colaburator" src="images/colaburator.png" height="20px"> 
 						<div class="btn-group dropup colorDiv" uib-dropdown>
 							<img id ="dropdown" class="dropdown-toggle" data-toggle="dropdown" alt="color" 
-										src="image/colorpallete.svg"  uib-dropdown-toggle height="20px">
+										src="images/ic_color_lens_black_24px.svg"  uib-dropdown-toggle height="20px">
 									<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body" style="background-color: #f9fbff">
 										 <a ng-repeat="color in colors"   role="menuitem">
 											<img ng-src="{{color.path}}"  height="25px" ng-click="note.noteColor =color.color; changeColor(note)">
 										</a>
 									</ul>
 						</div>
-						<img alt="image" src="image/image.svg" height="20px">
-						<span ng-click="unarchiveNote(note)"><img alt="archive" src="image/unarchive.png" height="17px"></span> 
+						<img alt="image" src="images/ic_photo_black_24px.svg" height="20px">
+						<span ng-click="unarchiveNote(note)"><img alt="unarchive" src="images/unarchive.svg" height="20px"></span> 
 						<span class="btn dropdown-toggle" id="menu1" data-toggle="dropdown">
 							<span class="glyphicon glyphicon-option-vertical"></span>
 						</span>
@@ -45,8 +51,45 @@
 							<li><a ng-click="copy(note)">Make a Copy</a></li>
 						</ul>
 					</div>
-				</div>
-			</div>
+				</div> -->
+				
+				
+				<div id="moreOptions">
 
+							<div class="dropdown" style="float: left">
+								<img alt="reminder" src="images/reminder.svg" height="20px">
+								<img alt="colaburator" src="images/colaburator.png" height="20px">
+								<div class="btn-group dropup colorDiv" uib-dropdown>
+									<img id="dropdown" class="dropdown-toggle"
+										data-toggle="dropdown" alt="color"
+										src="images/ic_color_lens_black_24px.svg" uib-dropdown-toggle height="20px">
+									<!-- <ul class="dropdown-menu" uib-dropdown-menu role="menu"
+										aria-labelledby="btn-append-to-body"
+										style="background-color: #f9fbff">
+										<a ng-repeat="color in colors" role="menuitem"> <img
+											ng-src="{{color.path}}" height="25px"
+											ng-click="note.noteColor =color.color;addNoteColorChange(color.color)">
+										</a>
+									</ul> -->
+								</div>
+								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px"> <span
+									ng-click="unarchiveNote(note)"><img alt="archive"
+									src="images/unarchive.svg" height="20px"></span>
+								<div style="float: right">
+									<span class="btn dropdown-toggle" id="menu1"
+										data-toggle="dropdown"> <span
+										class="glyphicon glyphicon-option-vertical"></span>
+									</span>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+										<li><a ng-click="deleteNote(note)">Delete</a></li>
+										<li><a>Add Lable</a></li>
+										<li><a ng-click="copy(note)">Make a Copy</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+				
+			</div>
+		</div>
 	</div>
 </div>

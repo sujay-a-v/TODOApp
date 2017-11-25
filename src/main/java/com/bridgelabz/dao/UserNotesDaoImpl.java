@@ -26,6 +26,11 @@ public class UserNotesDaoImpl implements UserNotesDao {
 		Transaction transaction=session.beginTransaction();
 		try
 		{
+			/*notes.setPin("true");
+			notes.setArchiveStatus("false");
+			notes.setDeleteStatus("false");
+			notes.setNoteStatus("true");
+			notes.setReminderStatus("true");*/
 			session.save(notes);
 			transaction.commit();
 			session.close();

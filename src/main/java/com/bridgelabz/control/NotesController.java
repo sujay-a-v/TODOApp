@@ -42,6 +42,8 @@ public class NotesController {
 	@RequestMapping(value="/notesCreate", method = RequestMethod.POST)
 	public ResponseEntity<Response> addNotes(@RequestBody Notes notes,HttpServletRequest request)
 	{
+		System.out.println(notes);
+		System.out.println("line 1");
 		
 		if((notes.getDescription()=="" || notes.getDescription()==null) && (notes.getTitle()=="" || notes.getTitle()== null))
 		{
@@ -111,39 +113,63 @@ public class NotesController {
 	
 	
 	//********* Delete the Notes By Id ********//
-	@RequestMapping(value="/notesDelete/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value="/noteDelete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Response> deleteNotesById(@PathVariable("id") int id, HttpSession session)
 	{
-		Notes currentNotes=noteService.fetchById(id);
-		if(currentNotes==null)
+		Notes currentNote=noteService.fetchById(id);
+		if(currentNote==null)
 		{
 			response.setMessage("Notes not found for id ");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
 		noteService.dalateUserNotes(id);
-		response.setMessage("Notes deleted");
+		response.setMessage("Note deleted");
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 	
 	
 	//******* Update the Notes by Id ********//
-	@RequestMapping(value="/notesUpdate/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value="/noteUpdate/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Response> updateNotes(@PathVariable ("id") int id,@RequestBody Notes notes, HttpSession session )
 	{
 		Date date=new Date();
 		notes.setModifiedDate(date);
-		Notes currentNotes=noteService.fetchById(id);
-		if(currentNotes==null)
+		Notes currentNote=noteService.fetchById(id);
+		if(currentNote==null)
 		{
 			response.setMessage("Notes not found for id ");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
-		currentNotes.setDescription(notes.getDescription());
-		currentNotes.setModifiedDate(notes.getModifiedDate());
-		currentNotes.setTitle(notes.getTitle());
-		currentNotes.setUser((User) session.getAttribute("User"));
-		noteService.modifiedNotes(id, currentNotes);
+		currentNote.setDescription(notes.getDescription());
+		currentNote.setModifiedDate(notes.getModifiedDate());
+		currentNote.setTitle(notes.getTitle());
+		currentNote.setUser((User) session.getAttribute("User"));
+		noteService.modifiedNotes(id, currentNote);
 		response.setMessage("Note Updated");
 		return ResponseEntity.status(HttpStatus.OK).body(response);
+	}
+	
+	@RequestMapping(value="/update/{id}",method = RequestMethod.POST)
+	public ResponseEntity<Response> inTrash(@PathVariable ("id") int id,@RequestBody Notes note, HttpSession session,HttpServletRequest request )
+	{
+		
+		
+        int uid=tokens.validateToken(request.getHeader("token"));
+        
+		User user=userService.retrieveById(uid);
+		note.setUser(user);
+		System.out.println("line 1");
+		System.out.println(note);
+		System.out.println("line 2");
+		Notes currentNote=noteService.fetchById(id);
+		if(currentNote==null)
+		{
+			response.setMessage("Notes not found for id ");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+		//currentNote.setDeleteStatus("true");
+		noteService.modifiedNotes(id, note);
+		return ResponseEntity.status(HttpStatus.OK).body(response);
+		
 	}
 }

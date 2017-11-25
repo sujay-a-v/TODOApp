@@ -44,37 +44,36 @@
 			<div>
 				<div layout="row" layout-wrap flex>
 					<div class="card" style="padding: 2px 16px" ng-click="popup(note)" style="background-color: {{note.noteColor}}"
-					 ng-repeat="note in notes | orderBy:'-modifiedDate' " >
+					 ng-repeat="note in notes | orderBy:'-modifiedDate'| filter :{pin:'true', archiveStatus:'false' , noteStatus:'true' , deleteStatus:'false'}" >
 					 
 					 <div id="moreOptions" style="float: right">
 							<span style="cursor: pointer"
-								ng-click="note.pin='true'; updateNote(note)"> <img
+								ng-click="note.pin=false; updateNote(note)"> <img
 								alt="pin" style="height: 17px" src="images/pin.png"></img>
 							</span>
 						</div>
 					 
 						<div>
-							<!-- <div class="card"> -->
-								<div style="margin: 8px"><h4>{{note.title}}</h4></div>
+								<div style="margin: 8px"><b>{{note.title}}</b></div>
 								<div style="margin: 7px">{{note.description}}</div><br/>
 																					
 						<div id="moreOptions">
 
 							<div class="dropdown" style="float: left">
 								<img alt="reminder" src="images/reminder.svg" height="20px">
-								<img alt="colaburator" src="images/reminder.svg" height="20px">
+								<img alt="colaburator" src="images/colaburator.png" height="20px">
 								<div class="btn-group dropup colorDiv" uib-dropdown>
 									<img id="dropdown" class="dropdown-toggle"
 										data-toggle="dropdown" alt="color"
 										src="images/ic_color_lens_black_24px.svg" uib-dropdown-toggle height="20px">
-									<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+									<!-- <ul class="dropdown-menu" uib-dropdown-menu role="menu"
 										aria-labelledby="btn-append-to-body"
 										style="background-color: #f9fbff">
 										<a ng-repeat="color in colors" role="menuitem"> <img
 											ng-src="{{color.path}}" height="25px"
 											ng-click="note.noteColor =color.color;addNoteColorChange(color.color)">
 										</a>
-									</ul>
+									</ul> -->
 								</div>
 								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px"> <span
 									ng-click="archiveNote(note)"><img alt="archive"
@@ -92,8 +91,6 @@
 								</div>
 							</div>
 						</div>
-									
-							<!-- </div> -->
 							</div>
 						
 					</div>

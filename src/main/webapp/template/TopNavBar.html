@@ -1,11 +1,11 @@
 
 <nav class="navbar">
-	<div class="container-fluid" id="topNavigation" ng-style="{'background-color': rgb(255, 204, 0)}">
+	<div class="container-fluid" id="topNavigation" ng-style="{'background-color': navBarColor}">
 		<ul class="nav navbar-nav">
 			<li><i class="glyphicons glyphicons-show-lines"></i></li>
 			<li ng-click="toggleSideBar()">
 			<span style="font-size: 25px; cursor: pointer">&#9776;</span></li>
-			<li></h4><h4>{{topNavBarHeading}}</h4></li>
+			<li><h4>{{navBarHeading}}</h4></li>
 			<li><span style="padding-top: 10px" class="glyphicon glyphicon-search"></span></li>
 			<li>
 				<div class="form-group">
@@ -15,7 +15,7 @@
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right">
-		<li ng-click="listGrideView()"><img ng-if="!ListView" height="30px" alt="gride" src="images/viewList.png"></li>
+		<li ng-click="listGrideView()"><img ng-if="!ListView" height="30px" alt="gride" src="images/view.svg"></li>
 			<li>
 				<div class="dropdown">
 					<span class="btn dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">

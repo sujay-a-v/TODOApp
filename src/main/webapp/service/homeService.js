@@ -14,11 +14,16 @@ toDoApp.factory('homeService',function($http){
 		});
 	}
 	
-	/*******  Delete Note ********/
-	notes.deleteNote=function(note){
+	/*******  Common Service ********/
+	notes.service=function(url,method,note,token){
+		console.log("inside delete Service common service");
 		return $http({
-			method:'DELETE',
-			url:'notesDelete/' + note.id
+			method:method,
+			url:url,
+			data:note,
+			headers:{
+				'token':token
+			}
 		});
 	}
 	
@@ -32,8 +37,22 @@ toDoApp.factory('homeService',function($http){
 	}
 	
 	
-	/*******  Add Note ********/
+	/******** Home Service ********/
+	/*notes.service=function(url,method,note,token){
+		
+		return $http({
+			url:url,
+			method:method,
+			data:note,
+			headers:{
+				'token':token
+			}
+		});
+	}*/
+	
+	/*******  Add Note ********//*
 	notes.addNote=function(token,note){
+		console.log(note);
 		return $http({
 			method:'POST',
 			url:'notesCreate',
@@ -42,6 +61,6 @@ toDoApp.factory('homeService',function($http){
 				'token':token
 			}
 		});
-	}
+	}*/
 	return notes;
 });
