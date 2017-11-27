@@ -13,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bridgelabz.model.Response;
 import com.bridgelabz.model.User;
 import com.bridgelabz.service.UserService;
 import com.bridgelabz.sociallogin.GoogleLogin;
+import com.bridgelabz.tokens.Token;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -26,6 +28,11 @@ public class GoogleLoginController {
 
 	@Autowired
 	private GoogleLogin googleConnection;
+	
+	@Autowired
+	private Token tokens;
+	@Autowired
+	private Response response;
 	
 	@RequestMapping(value="/googleLogin")
 	public void googleLogin(HttpServletRequest request, HttpServletResponse response)throws Exception
@@ -69,15 +76,39 @@ public class GoogleLoginController {
 				System.out.println("Google user id : "+id);
 				if(id==0)
 				{
-					response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
+					response.sendRedirect("http://localhost:8080/ToDoApp/#!/socialLogin");
 				}
+				else
+				{
+					String accessToken=tokens.generateToken(id);
+					session.setAttribute("ToDoAccessToken", accessToken);
+				}
+			}
+			else
+			{
+				String accessToken=tokens.generateToken(user.getId());
+				session.setAttribute("ToDoAccessToken", accessToken);
 			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
+		response.sendRedirect("http://localhost:8080/ToDoApp/#!/socialLogin");
 		return ResponseEntity.status(HttpStatus.OK).body("new Registered");
+		
+	}
+	
+	@RequestMapping(value="/getToken",method = RequestMethod.GET )
+	public ResponseEntity<Response> getSocialLoginToken(HttpSession session)
+	{
+		String token=(String) session.getAttribute("ToDoAccessToken");
+		response.setMessage(token);
+		System.out.println("social token "+ token);
+		if(token!=null)
+		{
+			return ResponseEntity.status(HttpStatus.OK).body(response);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(response);
 		
 	}
 }

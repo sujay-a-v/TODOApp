@@ -28,13 +28,13 @@ toDoApp.factory('homeService',function($http){
 	}
 	
 	/*******  Update Note ********/
-	notes.updateNote=function(note){
+	/*notes.updateNote=function(note){
 		return $http({
 			method:'PUT',
 			url:'notesUpdate/' + note.id ,
 			data:note
 		});
-	}
+	}*/
 	
 	
 	/******** Home Service ********/

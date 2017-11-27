@@ -152,22 +152,20 @@ public class NotesController {
 	@RequestMapping(value="/update/{id}",method = RequestMethod.POST)
 	public ResponseEntity<Response> inTrash(@PathVariable ("id") int id,@RequestBody Notes note, HttpSession session,HttpServletRequest request )
 	{
-		
+		Date date=new Date();
+		note.setModifiedDate(date);
 		
         int uid=tokens.validateToken(request.getHeader("token"));
         
 		User user=userService.retrieveById(uid);
 		note.setUser(user);
-		System.out.println("line 1");
-		System.out.println(note);
-		System.out.println("line 2");
 		Notes currentNote=noteService.fetchById(id);
 		if(currentNote==null)
 		{
 			response.setMessage("Notes not found for id ");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
-		//currentNote.setDeleteStatus("true");
+		currentNote.setModifiedDate(note.getModifiedDate());
 		noteService.modifiedNotes(id, note);
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 		

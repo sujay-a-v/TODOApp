@@ -5,7 +5,7 @@ toDoApp.controller('registerController',function($scope,$state,registerService){
 		var a=registerService.registerUser($scope.user,$scope.response,$scope.error);
 		a.then(function(response){
 			console.log("Register success");
-			$state.go('login');
+			$state.go('user');
 		},function(error){
 			$scope.errorMessage=error.data.message;
 			$state.go('/');

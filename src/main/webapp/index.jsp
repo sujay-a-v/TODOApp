@@ -1,11 +1,14 @@
 <html>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+	
 	
 	<link rel="stylesheet" href="styleCSS/TopNavBar.css">
 	<link rel="stylesheet" href="styleCSS/SideNavBar.css">
 	<link rel="stylesheet" href="styleCSS/homePage.css">
 	<link rel="stylesheet" href="styleCSS/AddNote.css">
+	<!-- <link rel="stylesheet" href="styleCSS/EditNote.css"> -->
 	
 	<!-- <link rel="stylesheet" href="styleCSS/login.css"> -->
 
@@ -28,6 +31,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-sanitize.js" type="text/javascript"></script>
 
@@ -35,6 +40,8 @@
 <script  src="bower_components/angular-animate/angular-animate.js" type="text/javascript"></script>
 <script  src="bower_components/angular-ui-router/release/angular-ui-router.js" type="text/javascript"></script>
 <script  src="bower_components/angular-aria/angular-aria.js" type="text/javascript"></script> -->
+
+<!-- <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script> -->
 
 <script src="script/app.js" type="text/javascript"></script>
 
@@ -44,10 +51,12 @@
 <script src="controller/registerController.js" type="text/javascript"></script>
 <script src="controller/homeController.js" type="text/javascript"></script>
 <script src="directives/homeDirective.js" type="text/javascript"></script>
+<script src="controller/socialLoginController.js" type="text/javascript"></script>
 
 <script src="service/loginService.js" type="text/javascript"></script>
 <script src="service/passwordService.js" type="text/javascript"></script>
 <script src="service/setPasswordService.js" type="text/javascript"></script>
 <script src="service/registerService.js" type="text/javascript"></script>
 <script src="service/homeService.js" type="text/javascript"></script>
+<script src="service/socialLoginService.js" type="text/javascript"></script>
 </html>

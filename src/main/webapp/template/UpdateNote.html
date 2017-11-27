@@ -1,8 +1,89 @@
-<div class="model-content">
-	<div class="model-body">
+<!-- <div class="model-content">
+	<div id="editNoteModal" style="height: 120px;
+    margin-right: 8px;">
 		<b><div id="noteTitle" contenteditable="true"  >{{note.title}}</div></b>
-		<div id="noteDescription" contenteditable="true" >{{note.description}}</div>
+		<div id="noteDescription" contenteditable="true" >{{note.description}}</div><br>
 		
-		<div role="button" ng-click="updateNote(note)" class="btn btn-done pull-right inline" data-dismiss="model">UPDATE</div>
+		<div ng-click="updateNote(note)" class="btn btn-done pull-right inline" data-dismiss="model">DONE</div>
+		<div role="button">
+			<div>
+				<div class="dropdown" style="float: right">
+					<div class="btn-group dropup colorDiv"></div>
+					<span ng-click="editNote(note)">DONE</span>
+				</div>
+			</div>
+		</div>
 	</div>
-</div >
+</div> -->
+
+
+
+<div id="editNoteModal" style="height: 150px;
+    margin-right: 8px;  background-color: {{EditNoteColor}}">
+		<div style="float: right">
+			<span style="cursor: pointer" ng-click="note.pin=!note.pin"> 
+			<img ng-hide="note.pin" style="height: 17px" alt="pin" src="images/pin.png"><img ng-show="note.pin" style="height: 17px" alt="pin" src="images/pin.png">
+			</span>
+		</div>
+		<div>
+		<b><div id="title" contenteditable="true"  style="margin: 8px">{{note.title}}</div></b>
+		<div id="description" contenteditable="true" style="margin: 8px" >{{note.description}}</div><br>
+		<br>
+		<div style="float: right">Edited : {{note.modifiedDate}}</div><br>
+		</div>
+		<div>
+
+							<div style="float: left">
+								<img alt="reminder" src="images/reminder.svg" height="20px" style="margin: 8px">
+								<img alt="colaburator" src="images/colaburator.png" height="20px" style="margin: 8px">
+								<div class="btn-group dropup colorDiv" uib-dropdown >
+									<img id="dropdown" class="dropdown-toggle"
+										data-toggle="dropdown" alt="color"
+										src="images/ic_color_lens_black_24px.svg" uib-dropdown-toggle height="20px">
+									<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+										aria-labelledby="btn-append-to-body"
+										style="background-color: #f9fbff">
+										<a ng-repeat="color in colors" role="menuitem"> <img
+											ng-src="{{color.path}}" height="25px"
+											ng-click="addNoteColorChange(color.color)">
+										</a>
+									</ul>
+								</div>
+								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px" style="margin: 8px"> <span
+									ng-click="archiveNote(note)">
+									<img alt="archive"
+									src="images/ic_archive_black_24px.svg" height="20px" style="margin: 8px"></span>
+								<div style="float: right; margin: 8px">
+									<span class="btn dropdown-toggle" id="menu1"
+										data-toggle="dropdown"> <span
+										class="glyphicon glyphicon-option-vertical"></span>
+									</span>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="margin-left: 150px;">
+										<li><a ng-click="deleteNote(note)">Delete</a></li>
+										<li><a>Add Lable</a></li>
+										<li><a ng-click="copy(note)">Make a Copy</a></li>
+									</ul>
+								</div>
+							</div>
+						
+		
+		<!--  <div style="float: right">
+		<div class="btn-group dropup colorDiv" uib-dropdown>
+			<img id ="dropdown" class="dropdown-toggle" data-toggle="dropdown" alt="color" src="image/colorpallete.svg"  uib-dropdown-toggle height="20px">
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body" style="background-color: #000000">
+							<a ng-repeat="color in colors"   role="menuitem">
+								<img ng-src="{{color.path}}"  height="25px" ng-click="changeColorInModal(color.color)">
+							</a>
+					</ul>
+		</div> -->
+		
+		<!-- <span style="cursor: pointer" ng-click="archiveNote(note)"> 
+			<img ng-hide="note.archiveStatus" style="height: 17px" alt="pin" src="images/ic_archive_black_24px.svg"><img ng-show="note.archiveStatus" style="height: 17px" alt="pin" src="image/archive.svg">
+			</span> -->
+		 <div style="float: right">
+			<span  ng-click="editNote(note)">DONE</span>
+			
+		</div>
+		</div>
+
+</div> 

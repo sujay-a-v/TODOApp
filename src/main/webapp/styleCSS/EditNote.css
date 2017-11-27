@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+#edit {
+	float: right;
+	margin: -10px;
+}
+
+#editNoteModal{
+	padding: 20px;
+    position: absolute;
+    width: 135%;
+    margin-top: 157px;
+    margin-left: -99px;
+}
+
+
+#list-gride-View {
+	margin-top: 20px;
+}

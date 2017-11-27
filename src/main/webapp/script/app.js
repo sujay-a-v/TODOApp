@@ -1,17 +1,27 @@
-var toDoApp=angular.module('toDoApp',['ui.router','ngSanitize']);
+var toDoApp=angular.module('toDoApp',['ui.router','ngSanitize','ui.bootstrap']);
 
 toDoApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 	$stateProvider.state('login',{
-		
 		url:'/login',
 		templateUrl:'template/login.html',
 		controller:'loginController'
+	});
+	
+	$stateProvider.state('socialLogin',{
+		url:'/socialLogin',
+		templateUrl:'template/socialLogin.html',
+		controller:'socialLoginController'
 	});
 	
 	$stateProvider.state('register',{
 		url:'/register',
 		templateUrl:'template/register.html',
 		controller:'registerController'
+	});
+	
+	$stateProvider.state('user',{
+		url:'/user',
+		templateUrl:'template/user.html',
 	});
 	
 	$stateProvider.state('home',{

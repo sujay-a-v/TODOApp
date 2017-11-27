@@ -10,5 +10,12 @@ toDoApp.factory('loginService',function($http,$location){
 			data:user
 		});
 	}
+	
+	x.getToken=function(){
+		return $http({
+			method:"get",
+			url:'getToken'
+		});
+	}
 	return x;
 });

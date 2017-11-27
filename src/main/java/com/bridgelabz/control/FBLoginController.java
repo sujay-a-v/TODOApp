@@ -70,26 +70,26 @@ public class FBLoginController {
 				
 				if(id==-1)
 				{
-					response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
+					response.sendRedirect("http://localhost:8080/ToDoApp/#!/socialLogin");
 				}
 				else
 				{
-					/*String accessToken=tokens.generateToken(id);
-					session.setAttribute("ToDoAccessToken", accessToken);*/
+					String accessToken=tokens.generateToken(id);
+					session.setAttribute("ToDoAccessToken", accessToken);
 				}
 			}
 			else
 			{
-				/*String accessToken=tokens.generateToken(user.getId());
-				session.setAttribute("ToDoAccessToken", accessToken);*/
+				String accessToken=tokens.generateToken(user.getId());
+				session.setAttribute("ToDoAccessToken", accessToken);
 			}
-			response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
+			response.sendRedirect("http://localhost:8080/ToDoApp/#!/socialLogin");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
+			response.sendRedirect("http://localhost:8080/ToDoApp/#!/socialLogin");
 		}
-		response.sendRedirect("http://localhost:8080/ToDoApp/#!/login");
+		response.sendRedirect("http://localhost:8080/ToDoApp/#!/socialLogin");
 		return ResponseEntity.status(HttpStatus.OK).body("new Registered");
 		
 	}

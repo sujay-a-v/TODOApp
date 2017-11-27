@@ -13,4 +13,5 @@ toDoApp.controller('loginController',function($scope,loginService,$state){
 			$state.go('/');
 		});
 	}
+	
 });

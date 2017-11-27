@@ -11,8 +11,6 @@
 			<!-- ********************* End of Side Bar *************************** -->
 	</div>
 
-<!-- filter :{archiveStatus:'true',noteStatus:'false'} -->
-
 
 	<div class="col-sm-9" id="mainWrapper">
 		<br> <br>
@@ -20,39 +18,13 @@
 				ng-repeat="note in notes | orderBy : '-modifiedDate' | filter :{archiveStatus:'true', deleteStatus:'false'}">
 				<div id="moreOptions" style="float: right">
 					<span style="cursor: pointer"
-						ng-click="note.pin='true';note.archiveStatus='false' ;note.noteStatus='true'; updateNote(note)"> <img
+						ng-click="note.pin='false';note.archiveStatus='false' ; updateNote(note)"> <img
 						alt="pin" style="height: 17px" src="images/pin.png"></img>
 					</span>
 				</div>
 				<div style="margin: 8px"><b>{{note.title}}</b></div>
 				<div style="margin: 7px">{{note.description}}</div><br/>
 				<br>
-				<!-- <div id="moreOptions">
-					<div class="dropdown" style="float: right">
-						<img alt="reminder" src="images/reminder.svg" height="20px">
-						<img alt="colaburator" src="images/colaburator.png" height="20px"> 
-						<div class="btn-group dropup colorDiv" uib-dropdown>
-							<img id ="dropdown" class="dropdown-toggle" data-toggle="dropdown" alt="color" 
-										src="images/ic_color_lens_black_24px.svg"  uib-dropdown-toggle height="20px">
-									<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body" style="background-color: #f9fbff">
-										 <a ng-repeat="color in colors"   role="menuitem">
-											<img ng-src="{{color.path}}"  height="25px" ng-click="note.noteColor =color.color; changeColor(note)">
-										</a>
-									</ul>
-						</div>
-						<img alt="image" src="images/ic_photo_black_24px.svg" height="20px">
-						<span ng-click="unarchiveNote(note)"><img alt="unarchive" src="images/unarchive.svg" height="20px"></span> 
-						<span class="btn dropdown-toggle" id="menu1" data-toggle="dropdown">
-							<span class="glyphicon glyphicon-option-vertical"></span>
-						</span>
-						<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-							<li><a ng-click="deleteNote(note)">Delete</a></li>
-							<li><a>Add Lable</a></li>
-							<li><a ng-click="copy(note)">Make a Copy</a></li>
-						</ul>
-					</div>
-				</div> -->
-				
 				
 				<div id="moreOptions">
 
@@ -80,7 +52,7 @@
 										data-toggle="dropdown"> <span
 										class="glyphicon glyphicon-option-vertical"></span>
 									</span>
-									<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+									<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="margin-left: 150px;">
 										<li><a ng-click="deleteNote(note)">Delete</a></li>
 										<li><a>Add Lable</a></li>
 										<li><a ng-click="copy(note)">Make a Copy</a></li>

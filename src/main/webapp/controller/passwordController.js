@@ -5,7 +5,7 @@ toDoApp.controller('passwordController',function($scope,passwordService,$state){
 		var a=passwordService.forgetPassword($scope.user,$scope.error);
 		a.then(function(response){
 			localStorage.setItem('token',response.data.message);
-			$state.go('login');
+			$state.go('user');
 		},function(error){
 			$scope.errorMessage=error.data.message;
 			$state.go('/');

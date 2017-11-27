@@ -1,6 +1,6 @@
 var toDoApp=angular.module('toDoApp');
 
-toDoApp.controller('homeController',function($scope,homeService,$state){
+toDoApp.controller('homeController',function($scope,homeService ,$state, $uibModal){
 	$scope.AddNoteBox=false;
 	$scope.ShowAddNote=function(){
 		$scope.AddNoteBox= true;
@@ -27,8 +27,21 @@ var getNotes=function(){
 }
 
 /************  Toggle side bar   ********/
+
+$scope.showSideBar = true;
+/*$scope.toggleSideBar = function() {
+	if($scope.showSideBar){
+		$scope.showSideBar=false;
+		document.getElementById("sideToggle").style.paddingLeft = "200px";
+	}
+	else{
+		$scope.showSideBar = true;
+		document.getElementById("sideToggle").style.paddingLeft = "70px";
+	}
+}*/
+
+
 $scope.toggleSideBar = function() {
-	console.log('hello');
 	var width = $('#sideToggle').width();
 	if (width == '250') {
 		document.getElementById("sideToggle").style.width = "0px";
@@ -59,8 +72,6 @@ $scope.showSideBar=true;
 		/**********  Delete Note  ***************/
 		$scope.deleteNote=function(note){
 			note.deleteStatus = "true";
-			note.pin="false";
-			note.reminderStatus="false";
 			var url = 'update/' + note.id;
 			var method = 'POST';
 			var token = localStorage.getItem('token');
@@ -89,8 +100,10 @@ $scope.showSideBar=true;
 		
 		/**********  Restore Note  ***************/
 		$scope.restoreNote=function(note){
-			note.deleteStatus = "false";
-			note.pin="false";
+			note.deleteStatus = "false";/******* PopUp **********/
+			$scope.popup=function(note){
+				
+			}
 			var url = 'update/' + note.id;
 			var method = 'POST';
 			var token = localStorage.getItem('token');
@@ -106,8 +119,7 @@ $scope.showSideBar=true;
 		/**********  Archive Note  ***************/
 		$scope.archiveNote=function(note){
 			note.archiveStatus= "true";
-			$scope.note.pin = "false";
-			$scope.note.noteStatus = "false";
+			modalInstance.close('resetmodel');
 			var url = 'update/' + note.id;
 			var method = 'POST';
 			var token = localStorage.getItem('token');
@@ -124,7 +136,6 @@ $scope.showSideBar=true;
 		/**********  Unarchive Note  ***************/
 		$scope.unarchiveNote=function(note){
 			note.archiveStatus = "false";
-			note.pin="false";
 			var url = 'update/' + note.id;
 			var method = 'POST';
 			var token = localStorage.getItem('token');
@@ -138,15 +149,23 @@ $scope.showSideBar=true;
 		}
 		
 		
-		/******* PopUp **********/
-		$scope.popup=function(note){
-			
-		}
+		/*********** Open a model *************/
+		$scope.open = function (note) {
+		$scope.note = note;
+		modalInstance = $uibModal.open({
+			templateUrl: 'template/UpdateNote.html',
+			scope : $scope
+			});
+		};
 		
 		/***********  Update Note  **************/
 		$scope.updateNote=function(note){
-			console.log("inside update controller");
-			var notes=homeService.updateNote(note);
+			console.log("inside update controller   " + note);
+			console.log("inside update controller SSSSSSSSSS  " + note);
+			var url = 'update/' + note.id;
+			var method = 'POST';
+			var token = localStorage.getItem('token');
+			var notes=homeService.service(url,method,note,token);
 			notes.then(function(respons){
 				getNotes();
 			},function(response){
@@ -155,10 +174,32 @@ $scope.showSideBar=true;
 			});
 		}
 		
+		/***********  Edit Note  **************/
+		$scope.editNote=function(note){
+			console.log("inside update controller   " + note);
+			note.title=document.getElementById("title").innerHTML;
+			note.description=document.getElementById("description").innerHTML;
+			modalInstance.close('resetmodel');
+			var url = 'update/' + note.id;
+			var method = 'POST';
+			var token = localStorage.getItem('token');
+			var notes=homeService.service(url,method,note,token);
+			notes.then(function(respons){
+				getNotes();
+			},function(response){
+				getNotes();
+				$scope.error=response.data.message;
+			});
+		}
 		
+		/****************  Note Color *************/
+		$scope.AddNoteColor="#ffffff";
 		
+		$scope.addNoteColorChange=function(color){
+			$scope.AddNoteColor=color;
+		}
 		
-		$scope.colors=[/*"#fff","#f1c40f","#280275"*/
+		$scope.colors=[
 			
 			{
 				"color":'#ffffff',
@@ -166,7 +207,7 @@ $scope.showSideBar=true;
 			},
 			{
 				"color":'#e74c3c',
-				"path":'images/red.png'
+				"path":'images/Red.png'
 			},
 			{
 				"color":'#ff8c1a',
@@ -174,11 +215,11 @@ $scope.showSideBar=true;
 			},
 			{
 				"color":'#fcff77',
-				"path":'images/lightYellow.jpg'
+				"path":'images/yellow.png'
 			},
 			{
 				"color":'#80ff80',
-				"path":'images/green.jpg'
+				"path":'images/green.png'
 			},
 			{
 				"color":'#99ffff',
@@ -190,7 +231,7 @@ $scope.showSideBar=true;
 			},
 			{
 				"color":'#1a53ff',
-				"path":'images/darkBlue.png'
+				"path":'images/darkblue.png'
 			},
 			{
 				"color":'#9966ff',
@@ -241,6 +282,25 @@ $scope.showSideBar=true;
 			});
 		}
 		
+		/**********  Copy Note  ***************/
+		$scope.copy=function(note){
+			note.pin = "true";
+			note.noteStatus = "true";
+			note.reminderStatus= "true";
+			note.archiveStatus= "false";
+			note.deleteStatus = "false";
+			var url = 'notesCreate';
+			var method = 'POST';
+			var token = localStorage.getItem('token');
+			var notes=homeService.service(url,method,note,token);
+			notes.then(function(response){
+				getNotes();
+			},function(response){
+				getNotes();
+				$scope.error=response.data;
+			});
+		}
+		
 
 		/******  Adding Note  **************/
 		
@@ -254,7 +314,7 @@ $scope.showSideBar=true;
 			$scope.note.reminderStatus= "true";
 			$scope.note.archiveStatus= "false";
 			$scope.note.deleteStatus = "false";
-			/*$scope.note.noteColor=$scope.AddNoteColor;*/
+			$scope.note.noteColor=$scope.AddNoteColor;
 			var note=$scope.note;
 			
 			var url = 'notesCreate';
