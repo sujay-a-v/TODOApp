@@ -100,10 +100,7 @@ $scope.showSideBar=true;
 		
 		/**********  Restore Note  ***************/
 		$scope.restoreNote=function(note){
-			note.deleteStatus = "false";/******* PopUp **********/
-			$scope.popup=function(note){
-				
-			}
+			note.deleteStatus = "false";
 			var url = 'update/' + note.id;
 			var method = 'POST';
 			var token = localStorage.getItem('token');
@@ -119,7 +116,8 @@ $scope.showSideBar=true;
 		/**********  Archive Note  ***************/
 		$scope.archiveNote=function(note){
 			note.archiveStatus= "true";
-			modalInstance.close('resetmodel');
+			note.pin="true";
+			//modalInstance.close('resetmodel');
 			var url = 'update/' + note.id;
 			var method = 'POST';
 			var token = localStorage.getItem('token');
@@ -136,6 +134,7 @@ $scope.showSideBar=true;
 		/**********  Unarchive Note  ***************/
 		$scope.unarchiveNote=function(note){
 			note.archiveStatus = "false";
+			note.pin="true";
 			var url = 'update/' + note.id;
 			var method = 'POST';
 			var token = localStorage.getItem('token');
@@ -160,9 +159,21 @@ $scope.showSideBar=true;
 		
 		/***********  Update Note  **************/
 		$scope.updateNote=function(note){
-			console.log("inside update controller   " + note);
-			console.log("inside update controller SSSSSSSSSS  " + note);
 			var url = 'update/' + note.id;
+			var method = 'POST';
+			var token = localStorage.getItem('token');
+			var notes=homeService.service(url,method,note,token);
+			notes.then(function(respons){
+				getNotes();
+			},function(response){
+				getNotes();
+				$scope.error=response.data.message;
+			});
+		}
+		
+		/***********  Change Note Color **************/
+		$scope.changeColor=function(note){
+			var url = 'updateColor/' + note.id;
 			var method = 'POST';
 			var token = localStorage.getItem('token');
 			var notes=homeService.service(url,method,note,token);

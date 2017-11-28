@@ -14,7 +14,7 @@
 
 	<div class="col-sm-9" id="mainWrapper">
 		<br> <br>
-			<div class="card" style=" width:30% ;"
+			<div class="card" style=" width:30% ; background-color: {{note.noteColor}}"
 				ng-repeat="note in notes | orderBy : '-modifiedDate' | filter :{archiveStatus:'true', deleteStatus:'false'}">
 				<div id="moreOptions" style="float: right">
 					<span style="cursor: pointer"
@@ -35,14 +35,14 @@
 									<img id="dropdown" class="dropdown-toggle"
 										data-toggle="dropdown" alt="color"
 										src="images/ic_color_lens_black_24px.svg" uib-dropdown-toggle height="20px">
-									<!-- <ul class="dropdown-menu" uib-dropdown-menu role="menu"
+									<ul class="dropdown-menu" uib-dropdown-menu role="menu"
 										aria-labelledby="btn-append-to-body"
 										style="background-color: #f9fbff">
 										<a ng-repeat="color in colors" role="menuitem"> <img
 											ng-src="{{color.path}}" height="25px"
-											ng-click="note.noteColor =color.color;addNoteColorChange(color.color)">
+											ng-click="note.noteColor =color.color;changeColor(note)">
 										</a>
-									</ul> -->
+									</ul>
 								</div>
 								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px"> <span
 									ng-click="unarchiveNote(note)"><img alt="archive"

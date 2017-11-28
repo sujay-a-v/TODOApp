@@ -18,10 +18,10 @@
 
 
 
-<div id="editNoteModal" style="height: 150px;
-    margin-right: 8px;  background-color: {{EditNoteColor}}">
-		<div style="float: right">
-			<span style="cursor: pointer" ng-click="note.pin=!note.pin"> 
+<div id="editNoteModal" style="height: 160px;
+    margin-top: -8px;   background-color: {{note.noteColor}}">
+		<div style="float: right ;margin-right: 7px; margin-top: 8px;">
+			<span style="cursor: pointer" ng-click="note.pin=!note.pin" > 
 			<img ng-hide="note.pin" style="height: 17px" alt="pin" src="images/pin.png"><img ng-show="note.pin" style="height: 17px" alt="pin" src="images/pin.png">
 			</span>
 		</div>
@@ -45,7 +45,7 @@
 										style="background-color: #f9fbff">
 										<a ng-repeat="color in colors" role="menuitem"> <img
 											ng-src="{{color.path}}" height="25px"
-											ng-click="addNoteColorChange(color.color)">
+											ng-click="note.noteColor =color.color;changeColor(note)">
 										</a>
 									</ul>
 								</div>

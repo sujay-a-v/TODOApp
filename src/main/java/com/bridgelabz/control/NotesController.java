@@ -150,7 +150,7 @@ public class NotesController {
 	}
 	
 	@RequestMapping(value="/update/{id}",method = RequestMethod.POST)
-	public ResponseEntity<Response> inTrash(@PathVariable ("id") int id,@RequestBody Notes note, HttpSession session,HttpServletRequest request )
+	public ResponseEntity<Response> update(@PathVariable ("id") int id,@RequestBody Notes note, HttpSession session,HttpServletRequest request )
 	{
 		Date date=new Date();
 		note.setModifiedDate(date);
@@ -166,6 +166,24 @@ public class NotesController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
 		currentNote.setModifiedDate(note.getModifiedDate());
+		noteService.modifiedNotes(id, note);
+		return ResponseEntity.status(HttpStatus.OK).body(response);
+		
+	}
+	
+	@RequestMapping(value="/updateColor/{id}",method = RequestMethod.POST)
+	public ResponseEntity<Response> updateColor(@PathVariable ("id") int id,@RequestBody Notes note, HttpSession session,HttpServletRequest request )
+	{
+        int uid=tokens.validateToken(request.getHeader("token"));
+        
+		User user=userService.retrieveById(uid);
+		note.setUser(user);
+		Notes currentNote=noteService.fetchById(id);
+		if(currentNote==null)
+		{
+			response.setMessage("Notes not found for id ");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
 		noteService.modifiedNotes(id, note);
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 		
