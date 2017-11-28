@@ -1,54 +1,48 @@
-var toDoApp=angular.module('toDoApp',['ui.router','ngSanitize','ui.bootstrap']);
+var toDoApp=angular.module('toDoApp',['ui.router','ngSanitize','ui.bootstrap','ui.bootstrap.datepicker']);
+
+/*,'toastr'*/
 
 toDoApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
 	$stateProvider.state('login',{
 		url:'/login',
 		templateUrl:'template/login.html',
 		controller:'loginController'
-	});
-	
-	$stateProvider.state('socialLogin',{
+	})
+	.state('socialLogin',{
 		url:'/socialLogin',
 		templateUrl:'template/socialLogin.html',
 		controller:'socialLoginController'
-	});
-	
-	$stateProvider.state('register',{
+	})
+	.state('register',{
 		url:'/register',
 		templateUrl:'template/register.html',
 		controller:'registerController'
-	});
-	
-	$stateProvider.state('user',{
+	})
+	.state('user',{
 		url:'/user',
 		templateUrl:'template/user.html',
-	});
-	
-	$stateProvider.state('home',{
+	})
+	.state('home',{
 		url:'/home',
 		templateUrl:'template/home.html',
 		controller:'homeController'
-	});
-	
-	$stateProvider.state('forgetPassword',{
+	})
+	.state('forgetPassword',{
 		url:'/forgetPassword',
 		templateUrl:'template/forgetPassword.html',
 		controller:'passwordController'
-	});
-	
-	$stateProvider.state('setPassword',{
+	})
+	.state('setPassword',{
 		url:'/setPassword',
 		templateUrl:'template/setPassword.html',
 		controller:'setPasswordController'
-	});
-	
-	$stateProvider.state('Trash',{
+	})
+	.state('Trash',{
 		url:'/Trash',
 		templateUrl:'template/Trash.html',
 		controller:'homeController'
-	});
-	
-	$stateProvider.state('Archive',{
+	})
+	.state('Archive',{
 		url:'/Archive',
 		templateUrl:'template/Archive.html',
 		controller:'homeController'

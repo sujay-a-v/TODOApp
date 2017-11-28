@@ -22,8 +22,8 @@
 						alt="pin" style="height: 17px" src="images/pin.png"></img>
 					</span>
 				</div>
-				<div style="margin: 8px"><b>{{note.title}}</b></div>
-				<div style="margin: 7px">{{note.description}}</div><br/>
+				<b><div style="margin: 8px" ng-bind-html="note.title"></div></b>
+				<div style="margin: 7px" ng-bind-html="note.description"></div><br/>
 				<br>
 				
 				<div id="moreOptions">
@@ -45,7 +45,7 @@
 									</ul>
 								</div>
 								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px"> <span
-									ng-click="unarchiveNote(note)"><img alt="archive"
+									ng-click="archiveNote(note)"><img alt="archive"
 									src="images/unarchive.svg" height="20px"></span>
 								<div style="float: right">
 									<span class="btn dropdown-toggle" id="menu1"

@@ -1,11 +1,13 @@
 var toDoApp=angular.module('toDoApp');
 
-toDoApp.controller('homeController',function($scope,homeService ,$state, $uibModal){
+toDoApp.controller('homeController',function($scope,homeService ,$state, $uibModal, $interval){
 	$scope.AddNoteBox=false;
 	$scope.ShowAddNote=function(){
 		$scope.AddNoteBox= true;
 	}
   
+	/*,toastr*/
+	
 	/*$scope.moreList=false;
 	$scope.more=function(){
 		$scope.moreList=true;
@@ -28,30 +30,30 @@ var getNotes=function(){
 
 /************  Toggle side bar   ********/
 
-$scope.showSideBar = true;
-/*$scope.toggleSideBar = function() {
+$scope.showSideBar = false;
+$scope.toggleSideBar = function() {
 	if($scope.showSideBar){
 		$scope.showSideBar=false;
-		document.getElementById("sideToggle").style.paddingLeft = "200px";
+		document.getElementById("sideToggle").style.paddingLeft = "150px";
 	}
 	else{
 		$scope.showSideBar = true;
-		document.getElementById("sideToggle").style.paddingLeft = "70px";
+		document.getElementById("sideToggle").style.paddingLeft = "01px";
 	}
-}*/
+}
 
 
-$scope.toggleSideBar = function() {
+/*$scope.toggleSideBar = function() {
 	var width = $('#sideToggle').width();
 	if (width == '250') {
 		document.getElementById("sideToggle").style.width = "0px";
 	} else {
 		document.getElementById("sideToggle").style.width = "250px";
 	}
-}
+}*/
 
 /******************** Top Navigation bar heading        *******/
-$scope.showSideBar=true;
+//$scope.showSideBar=true;
 			if($state.current.name=="home"){
 				$scope.navBarColor= "#ffbb33";
 				$scope.navBarHeading="Fundoo Keep";
@@ -69,9 +71,17 @@ $scope.showSideBar=true;
 				$scope.navBarHeading="Archive";
 			}
 		
-		/**********  Delete Note  ***************/
+		/**********  Delete & Restore Note  ***************/
 		$scope.deleteNote=function(note){
-			note.deleteStatus = "true";
+			if(note.deleteStatus == "true")
+				{
+				note.deleteStatus = "false";
+				}
+			else
+				{
+				note.deleteStatus = "true";
+				}
+			//note.deleteStatus = "true";
 			var url = 'update/' + note.id;
 			var method = 'POST';
 			var token = localStorage.getItem('token');
@@ -99,7 +109,7 @@ $scope.showSideBar=true;
 		}
 		
 		/**********  Restore Note  ***************/
-		$scope.restoreNote=function(note){
+		/*$scope.restoreNote=function(note){
 			note.deleteStatus = "false";
 			var url = 'update/' + note.id;
 			var method = 'POST';
@@ -111,11 +121,19 @@ $scope.showSideBar=true;
 				getNotes();
 				$scope.error=response.data;
 			});
-		}
+		}*/
 		
-		/**********  Archive Note  ***************/
+		/**********  Archive &  Unarchive Note  ***************/
 		$scope.archiveNote=function(note){
-			note.archiveStatus= "true";
+			if(note.archiveStatus== "true")
+				{
+				note.archiveStatus= "false";
+				}
+			else
+				{
+				note.archiveStatus= "true";
+				}
+			//note.archiveStatus= "true";
 			note.pin="true";
 			//modalInstance.close('resetmodel');
 			var url = 'update/' + note.id;
@@ -130,9 +148,8 @@ $scope.showSideBar=true;
 			});
 		}
 		
-		
 		/**********  Unarchive Note  ***************/
-		$scope.unarchiveNote=function(note){
+		/*$scope.unarchiveNote=function(note){
 			note.archiveStatus = "false";
 			note.pin="true";
 			var url = 'update/' + note.id;
@@ -145,7 +162,7 @@ $scope.showSideBar=true;
 				getNotes();
 				$scope.error=response.data;
 			});
-		}
+		}*/
 		
 		
 		/*********** Open a model *************/
@@ -171,19 +188,6 @@ $scope.showSideBar=true;
 			});
 		}
 		
-		/***********  Change Note Color **************/
-		$scope.changeColor=function(note){
-			var url = 'updateColor/' + note.id;
-			var method = 'POST';
-			var token = localStorage.getItem('token');
-			var notes=homeService.service(url,method,note,token);
-			notes.then(function(respons){
-				getNotes();
-			},function(response){
-				getNotes();
-				$scope.error=response.data.message;
-			});
-		}
 		
 		/***********  Edit Note  **************/
 		$scope.editNote=function(note){
@@ -262,6 +266,20 @@ $scope.showSideBar=true;
 			}
 		];
 		
+		/***********  Change Note Color **************/
+		$scope.changeColor=function(note){
+			var url = 'updateColor/' + note.id;
+			var method = 'POST';
+			var token = localStorage.getItem('token');
+			var notes=homeService.service(url,method,note,token);
+			notes.then(function(respons){
+				getNotes();
+			},function(response){
+				getNotes();
+				$scope.error=response.data.message;
+			});
+		}
+		
 		
 		/******* Pin  *****************/ 
 		$scope.pinStatus =false;
@@ -291,6 +309,42 @@ $scope.showSideBar=true;
 				getAllNotes();
 			}, function(response) {
 			});
+		}
+		
+		/******** Remainder ********/
+		/*$scope.openReminder=function(note){
+			
+			$('#datepicker').datetimepicker();
+			$scope.timecheck=$("#datepicker").val();
+			console.log($scope.timecheck);
+		}*/
+		
+		
+		$scope.AddReminder='';
+		$scope.openAddReminder=function(){
+		   	$('#datepicker').datetimepicker();
+		   	$scope.AddReminder= $('#datepicker').val();
+	}
+		
+		
+		
+		
+		$scope.reminder ="";
+		$scope.openReminder=function(note){
+			   	$('.reminder').datetimepicker();
+			   	 var id = '#datepicker' + note.id;
+			   	$scope.reminder = $(id).val();
+			   	//note.reminderStatus=$scope.reminder;
+			   	if($scope.reminder === "" || $scope.reminder === undefined){
+			   		console.log(note);
+			   		console.log($scope.reminder);
+			   	}
+			   	else{
+			   		console.log($scope.reminder);
+			   		note.reminderStatus=$scope.reminder;
+			   		$scope.updateNote(note);
+			   		$scope.reminder="";
+			   }
 		}
 		
 		/**********  Copy Note  ***************/

@@ -43,10 +43,11 @@
 			
 			
 			<!--************* Pinned Notes ******************-->
-			<div style="margin-top: 20px;"><p style="margin-bottom: -6px;">Pinned</p>
+			<div style="margin-top: 20px;">
+			<h4 ng-show="pinnedAll.length">Pinned</h4>
 				<div layout="row" layout-wrap flex>
 					<div class="card" style="padding: 2px 16px ; background-color: {{note.noteColor}}" ng-click="popup(note)" 
-					 ng-repeat="note in notes | orderBy:'-modifiedDate'| filter :{pin:'false', archiveStatus:'false' , noteStatus:'true' , deleteStatus:'false'}" >
+					 ng-repeat="note in notes | orderBy:'-modifiedDate'| filter :{pin:'false', archiveStatus:'false' , noteStatus:'true' , deleteStatus:'false'} as pinnedAll" >
 					 
 					 <div id="moreOptions" style="float: right">
 							<span style="cursor: pointer"
@@ -56,13 +57,20 @@
 						</div>
 					 
 						<div>
-								<div style="margin: 8px" ng-click="open(note)"><b>{{note.title}}</b></div>
-								<div style="margin: 7px" ng-click="open(note)">{{note.description}}</div><br/>
+								<b><div style="margin: 8px" ng-click="open(note)" ng-bind-html="note.title"></div></b>
+								<div style="margin: 7px" ng-click="open(note)" ng-bind-html="note.description"></div><br/>
 																					
 						<div id="moreOptions">
 
 							<div class="dropdown" style="float: left">
-								<img alt="reminder" src="images/reminder.svg" height="20px">
+							<span class="btn dropdown-toggle" id="menuRemind" data-toggle="dropdown">
+								<img alt="reminder" src="images/reminder.svg" height="20px"></span>
+								
+									<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
+									<li><input type="text" ng-attr-id="datepicker{{note.id}}" class="reminder" ng-click="openReminder(note)"></li>
+									<li><button ng-click="openReminder(note)"><span  class="glyphicon glyphicon-calendar"></span></button></li>
+									</ul>
+									
 								<img alt="colaburator" src="images/colaburator.png" height="20px">
 								<div class="btn-group dropup colorDiv" uib-dropdown>
 									<img id="dropdown" class="dropdown-toggle"
@@ -105,10 +113,11 @@
 			
 
 			<!--************* getting All Notes ******************-->
-			<div style="margin-top: 20px;"><p style="margin-bottom: -6px;">Others</p>
+			<div style="margin-top: 20px;">
+			<h4 ng-show="pinnedAll.length">Others</h4>
 				<div layout="row" layout-wrap flex>
 					<div class="card" style="padding: 2px 16px; background-color:{{note.noteColor}} " ng-click="popup(note)" 
-					 ng-repeat="note in notes | orderBy:'-modifiedDate'| filter :{pin:'true', archiveStatus:'false' , noteStatus:'true' , deleteStatus:'false'}" >
+					 ng-repeat="note in notes | orderBy:'-modifiedDate'| filter :{pin:'true', archiveStatus:'false' , noteStatus:'true' , deleteStatus:'false'} as OtherNotes" >
 					 
 					 <div id="moreOptions" style="float: right">
 							<span style="cursor: pointer"
@@ -118,13 +127,20 @@
 						</div>
 					 
 						<div>
-								<div style="margin: 8px" ng-click="open(note)"><b>{{note.title}}</b></div>
-								<div style="margin: 7px" ng-click="open(note)">{{note.description}}</div><br/>
+								<b><div style="margin: 8px" ng-click="open(note)" ng-bind-html="note.title"></div></b>
+								<div style="margin: 7px" ng-click="open(note)" ng-bind-html="note.description"></div><br/>
 																					
 						<div id="moreOptions">
 
 							<div class="dropdown" style="float: left">
-								<img alt="reminder" src="images/reminder.svg" height="20px">
+							<span class="btn dropdown-toggle" id="menuRemind" data-toggle="dropdown">
+								<img alt="reminder" src="images/reminder.svg" height="20px"></span>
+								
+									<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
+									<li><input type="text" ng-attr-id="datepicker{{note.id}}" class="reminder" ng-click="openReminder(note)"></li>
+									<li><button ng-click="openReminder(note)"><span  class="glyphicon glyphicon-calendar"></span></button></li>
+									</ul>
+								
 								<img alt="colaburator" src="images/colaburator.png" height="20px">
 								<div class="btn-group dropup colorDiv" uib-dropdown>
 									<img id="dropdown" class="dropdown-toggle"
@@ -165,4 +181,3 @@
 
 
 	</div>
-</div>

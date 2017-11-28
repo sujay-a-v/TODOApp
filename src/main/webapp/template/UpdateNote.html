@@ -18,7 +18,7 @@
 
 
 
-<div id="editNoteModal" style="height: 160px;
+<div id="editNoteModal" style="height: 180px;
     margin-top: -8px;   background-color: {{note.noteColor}}">
 		<div style="float: right ;margin-right: 7px; margin-top: 8px;">
 			<span style="cursor: pointer" ng-click="note.pin=!note.pin" > 
@@ -26,10 +26,10 @@
 			</span>
 		</div>
 		<div>
-		<b><div id="title" contenteditable="true"  style="margin: 8px">{{note.title}}</div></b>
-		<div id="description" contenteditable="true" style="margin: 8px" >{{note.description}}</div><br>
+		<b><div id="title" contenteditable="true"  style="margin: 8px" ng-bind-html="note.title"></div></b>
+		<div id="description" contenteditable="true" style="margin: 8px"  ng-bind-html="note.description"></div><br>
 		<br>
-		<div style="float: right">Edited : {{note.modifiedDate}}</div><br>
+		<div style="float: right; right;margin-right: 10px;">Edited : {{note.modifiedDate}}</div><br>
 		</div>
 		<div>
 
@@ -80,8 +80,8 @@
 		<!-- <span style="cursor: pointer" ng-click="archiveNote(note)"> 
 			<img ng-hide="note.archiveStatus" style="height: 17px" alt="pin" src="images/ic_archive_black_24px.svg"><img ng-show="note.archiveStatus" style="height: 17px" alt="pin" src="image/archive.svg">
 			</span> -->
-		 <div style="float: right">
-			<span  ng-click="editNote(note)">DONE</span>
+		 <div style="float: right;margin-right: 10px;">
+			<span  ng-click="editNote(note)" >DONE</span>
 			
 		</div>
 		</div>

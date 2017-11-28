@@ -16,7 +16,9 @@ toDoApp.factory('homeService',function($http){
 	
 	/*******  Common Service ********/
 	notes.service=function(url,method,note,token){
+		console.log('note is : '+note)
 		console.log("inside delete Service common service");
+		console.log(token);
 		return $http({
 			method:method,
 			url:url,
