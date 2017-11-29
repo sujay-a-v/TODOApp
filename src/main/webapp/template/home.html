@@ -6,7 +6,7 @@
 	<div class="row" id="homeId">
 		<div class="col-sm-3">
 			<!-- ************* Start of Side Bar ***************** -->
-			<side-nav-bar></side-nav-bar>
+			<side-nav-bar ></side-nav-bar >
 			<!-- ********************* End of Side Bar *************************** -->
 		</div>
 
@@ -137,7 +137,7 @@
 								<img alt="reminder" src="images/reminder.svg" height="20px"></span>
 								
 									<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
-									<li><input type="text" ng-attr-id="datepicker{{note.id}}" class="reminder" ng-click="openReminder(note)"></li>
+									<li><input type="text" ng-attr-id="datepicker{{note.id}}" class="reminder" ng-click="openReminder(note)" ng-model="note.reminderStatus"></li>
 									<li><button ng-click="openReminder(note)"><span  class="glyphicon glyphicon-calendar"></span></button></li>
 									</ul>
 								
@@ -167,6 +167,7 @@
 										<li><a ng-click="deleteNote(note)">Delete</a></li>
 										<li><a>Add Lable</a></li>
 										<li><a ng-click="copy(note)">Make a Copy</a></li>
+										<li><a ng-click="socialShare(note)">Social Share(fb)</a></li>
 									</ul>
 								</div>
 							</div>

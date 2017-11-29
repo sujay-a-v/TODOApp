@@ -54,9 +54,7 @@ public class Notes {
 		return deleteStatus;
 	}
 
-	public String getReminderStatus() {
-		return reminderStatus;
-	}
+
 
 	public String getNoteStatus() {
 		return noteStatus;
@@ -81,8 +79,13 @@ public class Notes {
 		this.deleteStatus = deleteStatus;
 	}
 
+
+	public String getReminderStatus() {
+		return reminderStatus;
+	}
+
 	public void setReminderStatus(String reminderStatus) {
-		if(reminderStatus.equals("true") || reminderStatus.equals("false"))
+		//if(reminderStatus.equals("true") || reminderStatus.equals("false"))
 		this.reminderStatus = reminderStatus;
 	}
 

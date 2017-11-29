@@ -28,6 +28,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
+<script src="https://connect.facebook.net/enUS/all.js"></script>
 
 
 

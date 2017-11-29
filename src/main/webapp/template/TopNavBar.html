@@ -19,7 +19,8 @@
 			<li>
 				<div class="dropdown">
 					<span class="btn dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
-						<span class="glyphicon glyphicon-user"></span>
+						<!-- <span class="glyphicon glyphicon-user"></span> -->
+						<img alt="{{User.userName.charAt(0)}}" class="img-circle" ng-src="{{User.profile}}" height="35px"><span class="glyphicon glyphicon-user"></span>
 					</span>
 					<ul class="dropdown-menu" role="menu" style="background-color: white; padding-left: 10px" aria-labelledby="menu1">
 						<li ng-click="logout()">logout</li>
@@ -29,3 +30,31 @@
 		</ul>
 	</div>
 </nav>
+
+<!-- <li>
+				<div class="imagedropdown">
+					<span class="btn dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
+						
+						<img alt="{{User.userName.charAt(0)}}" class="img-circle" ng-src="{{User.profile}}" height="35px">
+					</span>
+					
+					<ul class="dropdown-menu" role="menu" style="background-color: white; padding-left: 10px" aria-labelledby="menu1">
+						<li     style="height: 150px;width: 200px;">
+						
+						<img alt="{{User.firstName.charAt(0)}}" title="{{User.firstName.charAt(0)}}" class="img-circle" ng-src="{{User.profile}}" height="100px" width="100px">
+						
+						<img alt="ChangeProfile" ng-click="openImageUploader('user')" src="" height="20px">
+						
+						 <input id="imageuploader" ng-show="false"  type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+						
+						{{User.firstName}}
+						{{User.email}}
+						
+						</li>
+						<button style="float: right">
+						<li ng-click="logout()">logout</li>
+						</button>
+						
+					</ul>
+				</div>
+			</li> -->

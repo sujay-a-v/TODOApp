@@ -23,7 +23,7 @@ var getNotes=function(){
 		notes=response.data;
 		$scope.notes=notes;
 	},function(response){
-		$scope.error=response.data;
+		$scope.logout();
 	});
 	
 }
@@ -188,6 +188,12 @@ $scope.toggleSideBar = function() {
 			});
 		}
 		
+		/*********** LogOut *******/
+		$scope.logout = function() {
+			localStorage.removeItem('token');
+			$state.go('login');
+		}
+		
 		
 		/***********  Edit Note  **************/
 		$scope.editNote=function(note){
@@ -208,7 +214,7 @@ $scope.toggleSideBar = function() {
 		}
 		
 		/****************  Note Color *************/
-		$scope.AddNoteColor="#ffffff";
+		//$scope.AddNoteColor="#ffffff";
 		
 		$scope.addNoteColorChange=function(color){
 			$scope.AddNoteColor=color;
@@ -311,6 +317,33 @@ $scope.toggleSideBar = function() {
 			});
 		}
 		
+		/****** Social Share ***********/
+		$scope.socialShare = function(note) {
+			FB.init({
+				appId : '155180495087574',
+				status : true,
+				cookie : true,
+				xfbml : true,
+				version : 'v2.4'
+			});
+
+			FB.ui({
+				method : 'share_open_graph',
+				action_type : 'og.likes',
+				action_properties : JSON.stringify({
+					object : {
+						'og:title' : note.title,
+						'og:description' :note.description
+					}
+				})
+			}, function(response) {
+				alert('Posting completed.');
+			},function(error){
+				alert('Somthing Wrong.');
+			});
+		};
+
+		
 		/******** Remainder ********/
 		/*$scope.openReminder=function(note){
 			
@@ -342,6 +375,8 @@ $scope.toggleSideBar = function() {
 			   	else{
 			   		console.log($scope.reminder);
 			   		note.reminderStatus=$scope.reminder;
+			   		console.log(note.reminderStatus);
+			   		console.log(note);
 			   		$scope.updateNote(note);
 			   		$scope.reminder="";
 			   }
@@ -379,7 +414,7 @@ $scope.toggleSideBar = function() {
 			$scope.note.reminderStatus= "true";
 			$scope.note.archiveStatus= "false";
 			$scope.note.deleteStatus = "false";
-			$scope.note.noteColor=$scope.AddNoteColor;
+			$scope.note.noteColor="#ffffff";
 			var note=$scope.note;
 			
 			var url = 'notesCreate';

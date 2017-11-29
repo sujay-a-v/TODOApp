@@ -63,6 +63,9 @@ public class FBLoginController {
 				fbUser.setUserEmail(email);
 				String firstName=mapper.readTree(fbProfileInfo).get("first_name").asText();
 				fbUser.setUserName(firstName);
+				//user.setProfile(profile.get("picture").get("data").get("url").asText());
+				String picture=mapper.readTree(fbProfileInfo).get("picture").get("data").get("url").asText();
+				fbUser.setProfile(picture);
 	
 				fbUser.setActive(true);
 				userService.saveUserData(fbUser);

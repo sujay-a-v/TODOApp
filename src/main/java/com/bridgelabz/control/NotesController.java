@@ -137,7 +137,7 @@ public class NotesController {
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Response> update(@PathVariable("id") int id, @RequestBody Notes note,
 			HttpSession session, HttpServletRequest request) {
-		System.out.println("inside update : " + id);
+		System.out.println("inside update : " +note.getReminderStatus());
 		
 		Date date = new Date();
 		note.setModifiedDate(date);

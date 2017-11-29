@@ -21,6 +21,10 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 } */
 
+.SideNavigation ul{
+	margin-left: -140px;
+}
+
 .container {
     padding: 4px 16px;
 }
