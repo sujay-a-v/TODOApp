@@ -14,6 +14,16 @@ toDoApp.factory('homeService',function($http){
 		});
 	}
 	
+	notes.getUser=function(){
+		return $http({
+			method : "POST",
+			url : 'currentUser',
+			headers: {
+				'token':localStorage.getItem('token')
+			}
+		});
+	}
+	
 	/*******  Common Service ********/
 	notes.service=function(url,method,note,token){
 		console.log('note is : '+note)

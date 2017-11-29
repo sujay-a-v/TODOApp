@@ -97,6 +97,7 @@
 										<li><a ng-click="deleteNote(note)">Delete</a></li>
 										<li><a>Add Lable</a></li>
 										<li><a ng-click="copy(note)">Make a Copy</a></li>
+										<li><a ng-click="socialShare(note)">Social Share(fb)</a></li>
 									</ul>
 								</div>
 							</div>
@@ -111,12 +112,12 @@
 			
 			
 			
-
+<!-- ng-click="popup(note)"  -->
 			<!--************* getting All Notes ******************-->
 			<div style="margin-top: 20px;">
 			<h4 ng-show="pinnedAll.length">Others</h4>
 				<div layout="row" layout-wrap flex>
-					<div class="card" style="padding: 2px 16px; background-color:{{note.noteColor}} " ng-click="popup(note)" 
+					<div class="card" style="padding: 2px 16px; background-color:{{note.noteColor}} " 
 					 ng-repeat="note in notes | orderBy:'-modifiedDate'| filter :{pin:'true', archiveStatus:'false' , noteStatus:'true' , deleteStatus:'false'} as OtherNotes" >
 					 
 					 <div id="moreOptions" style="float: right">
@@ -129,6 +130,9 @@
 						<div>
 								<b><div style="margin: 8px" ng-click="open(note)" ng-bind-html="note.title"></div></b>
 								<div style="margin: 7px" ng-click="open(note)" ng-bind-html="note.description"></div><br/>
+								
+								<div ng-if="note.reminderStatus"><button ng-click="deleteReminder(note)" style="background-color:{{note.noteColor}}">{{note.reminderStatus}}</button>
+								</div>
 																					
 						<div id="moreOptions">
 

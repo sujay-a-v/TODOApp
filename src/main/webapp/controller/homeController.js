@@ -1,6 +1,6 @@
 var toDoApp=angular.module('toDoApp');
 
-toDoApp.controller('homeController',function($scope,homeService ,$state, $uibModal, $interval){
+toDoApp.controller('homeController',function($scope,homeService ,$state, $uibModal, $interval,$filter){
 	$scope.AddNoteBox=false;
 	$scope.ShowAddNote=function(){
 		$scope.AddNoteBox= true;
@@ -58,7 +58,7 @@ $scope.toggleSideBar = function() {
 				$scope.navBarColor= "#ffbb33";
 				$scope.navBarHeading="Fundoo Keep";
 			}
-			else if($state.current.name=="reminder"){
+			else if($state.current.name=="Reminder"){
 				$scope.navBarColor="#607D8B"
 				$scope.navBarHeading="Reminder";
 			}
@@ -107,6 +107,19 @@ $scope.toggleSideBar = function() {
 				$scope.error=response.data;
 			});
 		}
+		
+		
+		/****** Get current user ********/
+		/*getUser();
+
+		function getUser() {
+			var a = homePageService.getUser();
+			a.then(function(response) {
+				$scope.User = response.data;
+			}, function(response) {
+
+			});
+		}*/
 		
 		/**********  Restore Note  ***************/
 		/*$scope.restoreNote=function(note){
@@ -382,11 +395,17 @@ $scope.toggleSideBar = function() {
 			   }
 		}
 		
+		/******** Detele Reminder *********/
+		$scope.deleteReminder=function(note){
+			note.reminderStatus="";
+			$scope.updateNote(note);
+		}
+		
 		/**********  Copy Note  ***************/
 		$scope.copy=function(note){
 			note.pin = "true";
 			note.noteStatus = "true";
-			note.reminderStatus= "true";
+			note.reminderStatus= "";
 			note.archiveStatus= "false";
 			note.deleteStatus = "false";
 			var url = 'notesCreate';
@@ -411,7 +430,7 @@ $scope.toggleSideBar = function() {
 			$scope.note.description=document.getElementById("description").innerHTML;
 			$scope.note.pin = "true";
 			$scope.note.noteStatus = "true";
-			$scope.note.reminderStatus= "true";
+			$scope.note.reminderStatus= "";
 			$scope.note.archiveStatus= "false";
 			$scope.note.deleteStatus = "false";
 			$scope.note.noteColor="#ffffff";

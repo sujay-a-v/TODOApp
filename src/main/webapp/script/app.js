@@ -37,6 +37,11 @@ toDoApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$u
 		templateUrl:'template/setPassword.html',
 		controller:'setPasswordController'
 	})
+	.state('Reminder',{
+		url:'/Reminder',
+		templateUrl:'template/Reminder.html',
+		controller:'homeController'
+	})
 	.state('Trash',{
 		url:'/Trash',
 		templateUrl:'template/Trash.html',
