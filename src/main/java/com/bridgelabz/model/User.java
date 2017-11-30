@@ -113,6 +113,13 @@ public class User {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", userName=" + userName + ", userMobile=" + userMobile + ", userEmail=" + userEmail
+				+ ", userPassword=" + userPassword + ", confirmPasswod=" + confirmPasswod + ", isActive=" + isActive
+				+ ", profile=" + profile + ", notes=" + notes + "]";
+	}
 	
 	
 
