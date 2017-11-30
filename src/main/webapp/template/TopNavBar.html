@@ -15,12 +15,11 @@
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right">
-		<li ng-click="listGrideView()"><img ng-if="!ListView" height="30px" alt="gride" src="images/gridView.svg">
+		<li ng-click="ListViewToggle()"><img ng-if="!ListView" height="30px" alt="gride" src="images/gridView.svg">
 		<img ng-if="ListView" height="30px" alt="list" src="images/listView.svg"></li>
 			<li>
 				<div class="dropdown">
 					<span class="btn dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
-						<!-- <span class="glyphicon glyphicon-user"></span> -->
 						<img alt="{{User.userName.charAt(0)}}" class="img-circle" ng-src="{{User.profile}}" height="35px"><!-- <span class="glyphicon glyphicon-user"></span> -->
 					</span>
 					<ul class="dropdown-menu" role="menu" style="background-color: white; padding-left: 10px" aria-labelledby="menu1">

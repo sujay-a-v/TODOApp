@@ -55,8 +55,8 @@
 								</div>
 								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px"> 
 								<span ng-click="archiveNote(note)">
-									<img alt="archive" src="images/ic_archive_black_24px.svg" height="20px"><img alt="archive"
-									src="images/unarchive.svg" height="20px"></span>
+									<img ng-if="!archiveStatus" alt="archive" src="images/ic_archive_black_24px.svg" height="20px">
+									<img ng-if="archiveStatus" alt="unarchive" src="images/unarchive.svg" height="20px"></span>
 								<div style="float: right">
 									<span class="btn dropdown-toggle" id="menu1"
 										data-toggle="dropdown"> <span

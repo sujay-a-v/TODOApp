@@ -29,6 +29,7 @@ var getNotes=function(){
 	});	
 }
 
+
 /****** Get current user ********/
 	var getUser=function(){
 	var token=localStorage.getItem('token');
@@ -39,6 +40,28 @@ var getNotes=function(){
 			$scope.logout();
 		});
 	}
+	
+	/****** List and Grid *******/
+
+	$scope.ListView = true;
+
+	$scope.ListViewToggle = function() {
+		if ($scope.ListView == true) {
+			$scope.ListView = false;
+			var element = document.getElementsByClassName('card');
+			for (var i = 0; i < element.length; i++) {
+				element[i].style.width = "800px";
+			}
+		}
+		else {
+			$scope.ListView = true;
+			var element = document.getElementsByClassName('card');
+			for (var i = 0; i < element.length; i++) {
+				element[i].style.width = "250px";
+			}
+		}
+	}
+
 	
 	/******** Image Upload **********/
 	$scope.uploadFile=function(note){
