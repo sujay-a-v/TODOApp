@@ -6,6 +6,8 @@ toDoApp.controller('homeController',function($scope,homeService ,$state, $uibMod
 		$scope.AddNoteBox= true;
 	}
   
+	/*, fileReader*/
+	
 	/*,toastr*/
 	
 	/*$scope.moreList=false;
@@ -16,7 +18,7 @@ toDoApp.controller('homeController',function($scope,homeService ,$state, $uibMod
 /**********	Getting All notes   ********/
 var getNotes=function(){
 	var token=localStorage.getItem('token');
-	
+	console.log("inside get User ")
 	var notes=homeService.getNotes(token);
 	notes.then(function(response){
 		console.log(response.data);
@@ -24,12 +26,31 @@ var getNotes=function(){
 		$scope.notes=notes;
 	},function(response){
 		$scope.logout();
-	});
-	
+	});	
 }
 
-/************  Toggle side bar   ********/
+/****** Get current user ********/
+	var getUser=function(){
+	var token=localStorage.getItem('token');
+		var user=homeService.getCurrentUser(token);
+		user.then(function(response){
+			$scope.User=response.data;
+		},function(response){
+			$scope.logout();
+		});
+	}
+	
+	/******** Image Upload **********/
+	$scope.uploadFile=function(note){
+		$scope.note=noe;
+		$('#imageuploader').trigger('click');
+	}
+	
+	$scope.$on("fileProgress", function(e, progress) {
+		$scope.progress = progress.loaded / progress.total;
+	});
 
+/************  Toggle side bar   ********/
 $scope.showSideBar = false;
 $scope.toggleSideBar = function() {
 	if($scope.showSideBar){
@@ -108,18 +129,6 @@ $scope.toggleSideBar = function() {
 			});
 		}
 		
-		
-		/****** Get current user ********/
-		/*getUser();
-
-		function getUser() {
-			var a = homePageService.getUser();
-			a.then(function(response) {
-				$scope.User = response.data;
-			}, function(response) {
-
-			});
-		}*/
 		
 		/**********  Restore Note  ***************/
 		/*$scope.restoreNote=function(note){

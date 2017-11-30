@@ -59,7 +59,9 @@
 						<div>
 								<b><div style="margin: 8px" ng-click="open(note)" ng-bind-html="note.title"></div></b>
 								<div style="margin: 7px" ng-click="open(note)" ng-bind-html="note.description"></div><br/>
-																					
+								
+					<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
+													
 						<div id="moreOptions">
 
 							<div class="dropdown" style="float: left">
@@ -67,11 +69,12 @@
 								<img alt="reminder" src="images/reminder.svg" height="20px"></span>
 								
 									<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
-									<li><input type="text" ng-attr-id="datepicker{{note.id}}" class="reminder" ng-click="openReminder(note)"></li>
+									<li><input type="text" ng-attr-id="datepicker{{note.id}}" class="reminder" ng-click="openReminder(note)" ng-model="note.reminderStatus"></li>
 									<li><button ng-click="openReminder(note)"><span  class="glyphicon glyphicon-calendar"></span></button></li>
 									</ul>
 									
-								<img alt="colaburator" src="images/colaburator.png" height="20px">
+								<img alt="collaborator" src="images/collaborator.png" height="20px">
+								
 								<div class="btn-group dropup colorDiv" uib-dropdown>
 									<img id="dropdown" class="dropdown-toggle"
 										data-toggle="dropdown" alt="color"
@@ -131,8 +134,7 @@
 								<b><div style="margin: 8px" ng-click="open(note)" ng-bind-html="note.title"></div></b>
 								<div style="margin: 7px" ng-click="open(note)" ng-bind-html="note.description"></div><br/>
 								
-								<div ng-if="note.reminderStatus"><button ng-click="deleteReminder(note)" style="background-color:{{note.noteColor}}">{{note.reminderStatus}}</button>
-								</div>
+						<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
 																					
 						<div id="moreOptions">
 
@@ -145,7 +147,8 @@
 									<li><button ng-click="openReminder(note)"><span  class="glyphicon glyphicon-calendar"></span></button></li>
 									</ul>
 								
-								<img alt="colaburator" src="images/colaburator.png" height="20px">
+								<img alt="collaborator" src="images/collaborator.png" height="20px">
+								
 								<div class="btn-group dropup colorDiv" uib-dropdown>
 									<img id="dropdown" class="dropdown-toggle"
 										data-toggle="dropdown" alt="color"
@@ -159,8 +162,9 @@
 										</a>
 									</ul>
 								</div>
-								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px"> <span
-									ng-click="archiveNote(note)"><img alt="archive"
+								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px" ng-click="uploadFile(note)">
+								
+								<span ng-click="archiveNote(note)"><img alt="archive"
 									src="images/ic_archive_black_24px.svg" height="20px"></span>
 								<div style="float: right">
 									<span class="btn dropdown-toggle" id="menu1"

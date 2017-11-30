@@ -117,11 +117,14 @@ public class LoginController {
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 	
-	@RequestMapping(value = "/currentUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/currentUser", method = RequestMethod.GET)
 	public ResponseEntity<User> currrentUser(HttpServletRequest request) throws IOException {
 		System.out.println("Inside    @@@    ");
 		int id = tokens.validateToken(request.getHeader("token"));
 		User user = userService.retrieveById(id);
-		return ResponseEntity.ok(user);
+		if (user == null) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
 }

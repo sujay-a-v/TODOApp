@@ -86,7 +86,6 @@ public class FBLoginController {
 				String accessToken=tokens.generateToken(user.getId());
 				session.setAttribute("ToDoAccessToken", accessToken);
 			}
-			response.sendRedirect("http://localhost:8080/ToDoApp/#!/socialLogin");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -94,6 +93,5 @@ public class FBLoginController {
 		}
 		response.sendRedirect("http://localhost:8080/ToDoApp/#!/socialLogin");
 		return ResponseEntity.status(HttpStatus.OK).body("new Registered");
-		
 	}
 }

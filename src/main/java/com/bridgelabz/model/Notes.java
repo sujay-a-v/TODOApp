@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -42,6 +43,20 @@ public class Notes {
 	@Column(name="NOTE_COLOR")
 	private String noteColor;
 	
+	@Lob
+	@Column(columnDefinition="LONGBLOB")
+	private String image;
+	
+	
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	public String getPin() {
 		return pin;
 	}
@@ -156,9 +171,9 @@ public class Notes {
 		return "Notes [id=" + id + ", createDate=" + createDate + ", modifiedDate=" + modifiedDate + ", title=" + title
 				+ ", description=" + description + ", pin=" + pin + ", archiveStatus=" + archiveStatus
 				+ ", deleteStatus=" + deleteStatus + ", reminderStatus=" + reminderStatus + ", noteStatus=" + noteStatus
-				+ ", noteColor=" + noteColor + ", user=" + user + "]";
+				+ ", noteColor=" + noteColor + ", image=" + image + ", user=" + user + "]";
 	}
-	
 
+	
 	
 }
