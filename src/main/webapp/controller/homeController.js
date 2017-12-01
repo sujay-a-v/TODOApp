@@ -37,6 +37,8 @@ function getUser(){
 		var user=homeService.getCurrentUser(token);
 		user.then(function(response){
 			$scope.User=response.data;
+			$scope.ListView=response.data.listView;
+			console.log("@@@@@@@@    $$$$$$"+$scope.ListView);
 		},function(response){
 			$scope.logout();
 		});
@@ -44,9 +46,11 @@ function getUser(){
 	
 	/****** List and Grid *******/
 
-	$scope.ListView = true;
+	/*$scope.ListView = true;*/
 
-	$scope.ListViewToggle = function() {
+	$scope.ListViewToggle = function(list) {
+		$scope.ListView=list;
+		$scope.user={};
 		if ($scope.ListView == true) {
 			$scope.ListView = false;
 			var notes = document.getElementsByClassName('card');
@@ -61,13 +65,42 @@ function getUser(){
 				notes[i].style.width = "250px";
 			}
 		}
+		$scope.user.listView=$scope.ListView;
+		var url = 'listAndGrid';
+		var method = 'POST';
+		var token = localStorage.getItem('token');
+		var user=$scope.user;
+		console.log(user);
+		var notes=homeService.service(url,method,user,token);
+		notes.then(function(response){
+		ListView=response.data;
+		console.log(ListView);
+		},function(response){
+			
+		});
 	}
+	
+	
+	/*console.log("Grid list ");
+	$scope.user.listView=ListView;
+	var url = 'listAndGrid';
+	var method = 'POST';
+	var token = localStorage.getItem('token');
+	var user=$scope.user;
+	console.log(user);
+	var notes=homeService.service(url,method,user,token);
+	notes.then(function(response){
+		getNotes();
+	},function(response){
+		getNotes();
+		$scope.error=response.data;
+	});*/
 
 	
 	/******** Image Upload **********/
 	
-	/*$scope.uploadFile=function(note){
-		$scope.type=note;
+	/*$scope.uploadFile=function(noteOrUser){
+		$scope.noteOrUser=noteOrUser;
 		$('#imageuploader').trigger('click');
 	}
 	
@@ -75,21 +108,21 @@ function getUser(){
 		$scope.progress = progress.loaded / progress.total;
 	});
 	
-	$scope.type={};
-	$scope.type.image='';
+	$scope.noteOrUser={};
+	$scope.noteOrUser.image='';
 	$scope.$watch('imageSrc',function(newImage,oldImage){
 		if($scope.imageSrc!='')
 			{
-				if($scope.type==='input'){
+				if($scope.noteOrUser==='input'){
 					$scope.addimg=$scope.imageSrc;
 				}
-				else if($scope.type==='user'){
+				else if($scope.noteOrUser==='user'){
 					console.log("inside User Profile");
 					
 				}
 				else{
 					console.log("inside note image add");
-					$scope.type.image = $scope.imageSrc;
+					$scope.noteOrUser.image = $scope.imageSrc;
 					console.log("inside note image added");
 					$scope.updateNote($scope.type);
 				}
@@ -457,6 +490,44 @@ $scope.toggleSideBar = function() {
 			note.reminderStatus="";
 			$scope.updateNote(note);
 		}
+		
+		/*****  Collaborator  *******/
+		$scope.openCollboarate=function(note,user,index){
+			console.log(" $$$  Collaborate  @@@@");
+			$scope.note=note;
+			$scope.user=user;
+			$scope.indexOfNote=index;
+			modalInstance = $uibModal.open({
+				templateUrl: 'template/Collborate.html',
+				scope : $scope
+				});	
+		}
+		
+		$scope.collborate=function(note,user){
+			modalInstance.close('resetmodel');
+			console.log("Collll @@@@   note");
+			console.log("note in collaborator    _------- "+note);
+			console.log(document.getElementById("searchbox").innerHTML);
+			var object={};
+			object.noteId=note;
+			object.sharedId=$scope.shareWith;
+			object.ownerId=user;
+			var elmt=$scope.shareWith;
+			console.log("element    ###   "+elmt);
+			
+			var url='collaborate';
+			var method='POST';
+			var token = localStorage.getItem('token');
+			var collaborateUser=homeService.service(url,method,note,token);
+			collaborateUser.then(function(response){
+				console.log("Added");
+			},function(response){
+				console.log("Not done");
+			});
+		}
+		
+		
+		
 		
 		/**********  Copy Note  ***************/
 		$scope.copy=function(note){

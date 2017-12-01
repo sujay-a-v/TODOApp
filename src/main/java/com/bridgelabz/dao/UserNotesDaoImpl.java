@@ -11,6 +11,7 @@ import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.bridgelabz.model.Collaborator;
 import com.bridgelabz.model.Notes;
 import com.bridgelabz.model.User;
 
@@ -26,11 +27,6 @@ public class UserNotesDaoImpl implements UserNotesDao {
 		Transaction transaction=session.beginTransaction();
 		try
 		{
-			/*notes.setPin("true");
-			notes.setArchiveStatus("false");
-			notes.setDeleteStatus("false");
-			notes.setNoteStatus("true");
-			notes.setReminderStatus("true");*/
 			session.save(notes);
 			transaction.commit();
 			session.close();
@@ -55,13 +51,15 @@ public class UserNotesDaoImpl implements UserNotesDao {
 			query.setParameter("id", id);
 			query.executeUpdate();
 			transaction.commit();
-			session.close();
 		}
 		catch (Exception e) {
 			if(transaction!=null)
 				transaction.rollback();
 			
 			e.printStackTrace();
+		}
+		finally {
+			session.close();
 		}
 		
 	}
@@ -86,7 +84,6 @@ public class UserNotesDaoImpl implements UserNotesDao {
 
 	@Override
 	public List<Notes> fetchAllNotes(User user) {
-		System.out.println("inside Retrieve All");
 		Session session=sessionFactory.openSession();
 		try
 		{
@@ -98,7 +95,9 @@ public class UserNotesDaoImpl implements UserNotesDao {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		finally {
+			session.close();
+		}
 		return null;
 	}
 
@@ -117,6 +116,90 @@ public class UserNotesDaoImpl implements UserNotesDao {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public void addCollaborator(Collaborator collaborate) {
+		Session session=sessionFactory.openSession();
+		Transaction transaction=session.beginTransaction();
+		try
+		{
+			session.save(collaborate);
+			transaction.commit();
+			session.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			transaction.rollback();
+			session.close();
+		}
+		
+	}
+
+	@Override
+	public List<User> getUserList(int noteId) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.openSession();
+		try
+		{
+			Criteria criteria=session.createCriteria(Collaborator.class);
+			criteria.add(Restrictions.eq("noteId", noteId));
+			List<User> userList=criteria.list();
+			return userList;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Notes> getCollaboratedNotes(int userId) {
+		// TODO Auto-generated method stub
+		Session session=sessionFactory.openSession();
+		try
+		{
+			Criteria criteria=session.createCriteria(Collaborator.class);
+			criteria.add(Restrictions.eq("userId", userId));
+			List<Notes> noteList=criteria.list();
+			return noteList;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		return null;
+	}
+
+	@Override
+	public int removeUser(int userId, int noteId) {
+		Session session=sessionFactory.openSession();
+		Transaction transaction=null;
+		try
+		{
+			transaction=session.beginTransaction();
+			String sql="delete Collaborator where userId=:userId and noteId=:noteId";
+			Query query=session.createQuery(sql);
+			query.setParameter("userId", userId);
+			query.setParameter("noteId", noteId);
+			int status=query.executeUpdate();
+			transaction.commit();
+			return status;
+		}
+		catch (Exception e) {
+			if(transaction!=null)
+				transaction.rollback();
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		return 0;
 	}
 
 }

@@ -44,7 +44,7 @@
 .card{
 	 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
 	min-height: 40px;
-	width:350px;
+	/* width:350px; */
 	padding:10px;
 	padding-bottom: 10px;
 	margin-top:10px;
@@ -55,13 +55,15 @@
 }
 
 .card:hover{
-	 box-shadow: 6px 6px 3px 1px #0A0A0A;
+	 box-shadow:4px 6px 5px #ff66ff;
 }
 
 .card:hover #moreOptions{
 	visibility:visible;
 }
-
+.list{
+	width:800px;
+}
 .card li{
 	background-color: white;
 	text-align :center;

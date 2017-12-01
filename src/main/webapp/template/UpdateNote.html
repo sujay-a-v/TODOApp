@@ -29,13 +29,22 @@
 		<b><div id="title" contenteditable="true"  style="margin: 8px" ng-bind-html="note.title"></div></b>
 		<div id="description" contenteditable="true" style="margin: 8px"  ng-bind-html="note.description"></div><br>
 		<br>
+	<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
+		<br/>
 		<div style="float: right; right;margin-right: 10px;">Edited : {{note.modifiedDate}}</div><br>
 		</div>
 		<div>
 
 							<div style="float: left">
-								<img alt="reminder" src="images/reminder.svg" height="20px" style="margin: 8px">
-								<img alt="colaburator" src="images/colaburator.png" height="20px" style="margin: 8px">
+								<span class="btn dropdown-toggle" id="menuRemind" data-toggle="dropdown">
+								<img alt="reminder" src="images/reminder.svg" height="20px"></span>
+								
+									<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
+									<li><input type="text" ng-attr-id="datepicker{{note.id}}" class="reminder" ng-click="openReminder(note)" ng-model="note.reminderStatus"></li>
+									<li><button ng-click="openReminder(note)"><span  class="glyphicon glyphicon-calendar"></span></button></li>
+									</ul>
+									
+								<img alt="collaborator" src="images/collaborator.png" height="20px" style="margin: 8px">
 								<div class="btn-group dropup colorDiv" uib-dropdown >
 									<img id="dropdown" class="dropdown-toggle"
 										data-toggle="dropdown" alt="color"

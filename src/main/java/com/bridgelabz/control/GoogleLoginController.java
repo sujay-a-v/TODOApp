@@ -70,6 +70,8 @@ public class GoogleLoginController {
 				String name=mapper.readTree(googleProfile).get("given_name").asText();
 				googleUser.setUserName(name);
 				System.out.println("Google User name : "+name);
+				String picture=mapper.readTree(googleProfile).get("picture").asText();
+				googleUser.setProfile(picture);
 				googleUser.setActive(true);
 				userService.saveUserData(googleUser);
 				int id=googleUser.getId();

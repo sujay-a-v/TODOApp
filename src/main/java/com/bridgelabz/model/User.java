@@ -32,6 +32,7 @@ public class User {
 	private String confirmPasswod;
 	
 	private boolean isActive;
+	private boolean listView;
 	
 	@Lob
 	@Column(name="PROFILE",columnDefinition="LONGBLOB")
@@ -114,13 +115,19 @@ public class User {
 		this.profile = profile;
 	}
 
+	public boolean isListView() {
+		return listView;
+	}
+
+	public void setListView(boolean listView) {
+		this.listView = listView;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", userMobile=" + userMobile + ", userEmail=" + userEmail
 				+ ", userPassword=" + userPassword + ", confirmPasswod=" + confirmPasswod + ", isActive=" + isActive
-				+ ", profile=" + profile + ", notes=" + notes + "]";
+				+ ", listView=" + listView + ", profile=" + profile + ", notes=" + notes + "]";
 	}
-	
-	
 
 }

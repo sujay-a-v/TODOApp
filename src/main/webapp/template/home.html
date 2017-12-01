@@ -73,7 +73,7 @@
 									<li><button ng-click="openReminder(note)"><span  class="glyphicon glyphicon-calendar"></span></button></li>
 									</ul>
 									
-								<img alt="collaborator" src="images/collaborator.png" height="20px">
+								<img alt="collaborator" src="images/collaborator.png" height="20px" ng-click="openCollboarate(note,User,$index)">
 								
 								<div class="btn-group dropup colorDiv" uib-dropdown>
 									<img id="dropdown" class="dropdown-toggle"
@@ -116,7 +116,7 @@
 			<div style="margin-top: 20px;">
 			<h4 ng-show="pinnedAll.length">Others</h4>
 				<div layout="row" layout-wrap flex>
-					<div class="card" style="padding: 2px 16px; background-color:{{note.noteColor}} " 
+					<div class="card" style="padding: 2px 16px; background-color:{{note.noteColor}} "  id="listAndGrid"
 					 ng-repeat="note in notes | orderBy:'-modifiedDate'| filter :{pin:'true', archiveStatus:'false' , noteStatus:'true' , deleteStatus:'false'} as OtherNotes" >
 					 
 					 <div id="moreOptions" style="float: right">
@@ -136,14 +136,14 @@
 
 							<div class="dropdown" style="float: left">
 							<span class="btn dropdown-toggle" id="menuRemind" data-toggle="dropdown">
-								<img alt="reminder" src="images/reminder.svg" height="20px"></span>
+								<img alt="reminder" src="images/reminder.svg" height="20px" style="margin-left: -30px"></span>
 								
 									<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
 									<li><input type="text" ng-attr-id="datepicker{{note.id}}" class="reminder" ng-click="openReminder(note)" ng-model="note.reminderStatus"></li>
 									<li><button ng-click="openReminder(note)"><span  class="glyphicon glyphicon-calendar"></span></button></li>
 									</ul>
 								
-								<img alt="collaborator" src="images/collaborator.png" height="20px">
+								<img alt="collaborator" src="images/collaborator.png" height="20px" style="margin-left: -20px" ng-click="openCollboarate(note,User,$index)">
 								
 								<div class="btn-group dropup colorDiv" uib-dropdown>
 									<img id="dropdown" class="dropdown-toggle"

@@ -1,9 +1,13 @@
 package com.bridgelabz.model;
 
+import java.util.List;
+
 public class Response {
 	
 	String message;
 	int status;
+	List<Notes> notes;
+	
 	public String getMessage() {
 		return message;
 	}
@@ -16,7 +20,11 @@ public class Response {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
-	
+	public List<Notes> getNotes() {
+		return notes;
+	}
+	public void setNotes(List<Notes> notes) {
+		this.notes = notes;
+	}
 
 }
