@@ -2,8 +2,8 @@ package com.bridgelabz.dao;
 
 import java.util.List;
 
-import org.hibernate.query.Query;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -137,14 +137,17 @@ public class UserNotesDaoImpl implements UserNotesDao {
 	}
 
 	@Override
-	public List<User> getUserList(int noteId) {
+	public List<User> getUserList(Notes noteId) {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.openSession();
 		try
 		{
-			Criteria criteria=session.createCriteria(Collaborator.class);
+			Query query=session.createQuery("select c.sharedId From Collaborator c where c.noteId=:noteId");
+			query.setParameter("noteId", noteId);
+			/*Criteria criteria=session.createCriteria(Collaborator.class);
 			criteria.add(Restrictions.eq("noteId", noteId));
-			List<User> userList=criteria.list();
+			List<User> userList=criteria.list();*/
+			List<User> userList=query.list();
 			return userList;
 		}
 		catch (Exception e) {
@@ -157,14 +160,17 @@ public class UserNotesDaoImpl implements UserNotesDao {
 	}
 
 	@Override
-	public List<Notes> getCollaboratedNotes(int userId) {
+	public List<Notes> getCollaboratedNotes(User userId) {
 		// TODO Auto-generated method stub
 		Session session=sessionFactory.openSession();
 		try
 		{
-			Criteria criteria=session.createCriteria(Collaborator.class);
-			criteria.add(Restrictions.eq("userId", userId));
-			List<Notes> noteList=criteria.list();
+			Query query=session.createQuery("select c.noteId From Collaborator c where c.sharedId=:sharedId");
+			query.setParameter("sharedId", userId);
+			/*Criteria criteria=session.createCriteria(Collaborator.class);
+			criteria.add(Restrictions.eq("userId", user));
+			List<Notes> noteList=criteria.list();*/
+			List<Notes> noteList=query.list();
 			return noteList;
 		}
 		catch (Exception e) {
@@ -177,13 +183,13 @@ public class UserNotesDaoImpl implements UserNotesDao {
 	}
 
 	@Override
-	public int removeUser(int userId, int noteId) {
+	public int removeUser(User userId, Notes noteId) {
 		Session session=sessionFactory.openSession();
 		Transaction transaction=null;
 		try
 		{
 			transaction=session.beginTransaction();
-			String sql="delete Collaborator where userId=:userId and noteId=:noteId";
+			String sql="delete Collaborator c where c.sharedId=:userId and c.noteId=:noteId";
 			Query query=session.createQuery(sql);
 			query.setParameter("userId", userId);
 			query.setParameter("noteId", noteId);

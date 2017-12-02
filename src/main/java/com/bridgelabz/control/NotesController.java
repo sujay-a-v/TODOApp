@@ -1,5 +1,6 @@
 package com.bridgelabz.control;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.bridgelabz.model.Collaborator;
 import com.bridgelabz.model.Notes;
 import com.bridgelabz.model.Response;
 import com.bridgelabz.model.User;
@@ -98,7 +100,21 @@ public class NotesController {
 		if (notes == null) {
 			return new ResponseEntity<List<Notes>>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<List<Notes>>(notes, HttpStatus.OK);
+		//return new ResponseEntity<List<Notes>>(notes, HttpStatus.OK);
+		System.out.println("Line 1");
+		List<Notes> collaboratedNotes=noteService.getCollaboratedNotes(user);
+		System.out.println("Line 2");
+		
+		
+		List<Notes> allNotes=new ArrayList<Notes>();
+		System.out.println("Line 3");
+		for (int i = 0; i < notes.size(); i++) {
+			allNotes.add(notes.get(i));
+		}
+		for (int j = 0; j < collaboratedNotes.size(); j++) {
+			allNotes.add(collaboratedNotes.get(j));
+		}
+		return new ResponseEntity<List<Notes>>(allNotes, HttpStatus.OK);
 	}
 
 	// ********* Delete the Notes By Id ********//
@@ -172,5 +188,74 @@ public class NotesController {
 		noteService.modifiedNotes(id, note);
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 
+	}
+	
+	@RequestMapping(value="/collaborate",method = RequestMethod.POST)
+	public ResponseEntity<List<User>> collaborateNote(@RequestBody Collaborator collaborate,HttpServletRequest request) throws Exception{
+		
+		Collaborator collaborator=new Collaborator();
+		List<User> users=new ArrayList<User>();
+		
+		Notes note=(Notes)collaborate.getNoteId();
+		User owner=(User)collaborate.getOwnerId();
+		User sharedUser=(User)collaborate.getSharedId();
+		
+		sharedUser=userService.getByEmail(sharedUser.getUserEmail());
+		
+		int id = tokens.validateToken(request.getHeader("token"));
+		User user=userService.retrieveById(id);
+		
+		users=noteService.getUserList(note);
+		
+		if(user!=null)
+		{
+			if(sharedUser!=null && sharedUser.getId()!=owner.getId())
+			{
+				int i=0;
+				int flag=0;
+				while(users.size()>i)
+				{
+					if(users.get(i).getId()==sharedUser.getId())
+					{
+						flag=1;
+					}
+					i++;
+				}
+				if(flag==0)
+				{
+					collaborator.setNoteId(note);
+					collaborator.setOwnerId(owner);
+					collaborator.setSharedId(sharedUser);
+					noteService.addCollaborator(collaborator);
+					users.add(sharedUser);
+					return ResponseEntity.status(HttpStatus.OK).body(users);
+				}
+			}
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(users);
+	}
+	
+	
+	@RequestMapping(value="removeCollaborate",method = RequestMethod.POST)
+	public ResponseEntity<Response> removeCollaborate(@RequestBody Collaborator collaborate,HttpServletRequest request) throws Exception{
+		
+		User sharedId=collaborate.getSharedId();
+		Notes noteId=collaborate.getNoteId();
+		int id = tokens.validateToken(request.getHeader("token"));
+		User owner=userService.retrieveById(id);
+		
+		if(owner!=null)
+		{
+			if(owner.getId()!=sharedId.getId())
+			{
+				System.out.println("line 2 ");
+				int status=noteService.removeUser(sharedId, noteId);
+				response.setMessage("User deleted");
+				return ResponseEntity.status(HttpStatus.OK).body(response);
+			}
+		}
+		response.setMessage("Token expired");
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		
 	}
 }

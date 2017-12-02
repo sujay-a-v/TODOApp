@@ -49,19 +49,19 @@ public class NotesServiceImpl implements NotesService {
 	}
 
 	@Override
-	public List<User> getUserList(int noteId) {
+	public List<User> getUserList(Notes noteId) {
 		// TODO Auto-generated method stub
 		return userNotesDao.getUserList(noteId);
 	}
 
 	@Override
-	public List<Notes> getCollaboratedNotes(int userId) {
+	public List<Notes> getCollaboratedNotes(User user) {
 		// TODO Auto-generated method stub
-		return userNotesDao.getCollaboratedNotes(userId);
+		return userNotesDao.getCollaboratedNotes(user);
 	}
 
 	@Override
-	public int removeUser(int userId, int noteId) {
+	public int removeUser(User userId, Notes noteId) {
 		// TODO Auto-generated method stub
 		return userNotesDao.removeUser(userId, noteId);
 	}

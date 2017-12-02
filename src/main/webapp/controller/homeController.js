@@ -38,7 +38,6 @@ function getUser(){
 		user.then(function(response){
 			$scope.User=response.data;
 			$scope.ListView=response.data.listView;
-			console.log("@@@@@@@@    $$$$$$"+$scope.ListView);
 		},function(response){
 			$scope.logout();
 		});
@@ -47,12 +46,12 @@ function getUser(){
 	/****** List and Grid *******/
 
 	/*$scope.ListView = true;*/
-
-	$scope.ListViewToggle = function(list) {
-		$scope.ListView=list;
-		$scope.user={};
+$scope.ListView=localStorage.getItem('LISTGRID');
+	$scope.ListViewToggle = function() {
+		
 		if ($scope.ListView == true) {
 			$scope.ListView = false;
+			localStorage.setItem('LISTGRID',$scope.ListView);
 			var notes = document.getElementsByClassName('card');
 			for (var i = 0; i < notes.length; i++) {
 				notes[i].style.width = "800px";
@@ -60,24 +59,12 @@ function getUser(){
 		}
 		else {
 			$scope.ListView = true;
+			localStorage.setItem('LISTGRID',$scope.ListView);
 			var notes = document.getElementsByClassName('card');
 			for (var i = 0; i < notes.length; i++) {
 				notes[i].style.width = "250px";
 			}
 		}
-		$scope.user.listView=$scope.ListView;
-		var url = 'listAndGrid';
-		var method = 'POST';
-		var token = localStorage.getItem('token');
-		var user=$scope.user;
-		console.log(user);
-		var notes=homeService.service(url,method,user,token);
-		notes.then(function(response){
-		ListView=response.data;
-		console.log(ListView);
-		},function(response){
-			
-		});
 	}
 	
 	
@@ -492,38 +479,88 @@ $scope.toggleSideBar = function() {
 		}
 		
 		/*****  Collaborator  *******/
-		$scope.openCollboarate=function(note,user,index){
+		$scope.openCollaborate=function(note,user){
 			console.log(" $$$  Collaborate  @@@@");
 			$scope.note=note;
 			$scope.user=user;
-			$scope.indexOfNote=index;
+			/*$scope.indexOfNote=index;*/
 			modalInstance = $uibModal.open({
 				templateUrl: 'template/Collborate.html',
 				scope : $scope
 				});	
 		}
 		
-		$scope.collborate=function(note,user){
-			modalInstance.close('resetmodel');
+		var collborators = [];
+		$scope.getUserlist=function(note,user){
+			
 			console.log("Collll @@@@   note");
 			console.log("note in collaborator    _------- "+note);
-			console.log(document.getElementById("searchbox").innerHTML);
 			var object={};
 			object.noteId=note;
-			object.sharedId=$scope.shareWith;
+			object.sharedId={};
 			object.ownerId=user;
-			var elmt=$scope.shareWith;
-			console.log("element    ###   "+elmt);
 			
 			var url='collaborate';
 			var method='POST';
 			var token = localStorage.getItem('token');
-			var collaborateUser=homeService.service(url,method,note,token);
+			var collaborateUser=homeService.service(url,method,object,token);
 			collaborateUser.then(function(response){
-				console.log("Added");
-			},function(response){
-				console.log("Not done");
+				console.log("Inside collborator");
+				console.log(response.data);
+				$scope.users = response.data;
+				note.collabratorUsers = response.data;
+
+			}, function(response) {
+				$scope.users = {};
+				collborators = response.data;
+
 			});
+			console.log("Returned");
+			console.log(collborators);
+			return collborators;
+			
+		}
+		
+		$scope.collborate=function(note,user){
+			modalInstance.close('resetmodel');
+			var object={};
+			object.noteId=note;
+			object.sharedId=$scope.shareWith;
+			object.ownerId=user;
+			
+			var url='collaborate';
+			var method='POST';
+			var token = localStorage.getItem('token');
+			var collaborateUser=homeService.service(url,method,object,token);
+			collaborateUser.then(function(response){
+				$scope.users = response.data;
+				$scope.note.collabratorUsers = response.data;
+			}, function(response) {
+				$scope.users = {};
+			});
+		}
+		
+		
+		$scope.removeCollborator=function(note,user){
+			
+			var object={};
+			object.noteId=note;
+			object.sharedId=user;
+			object.ownerId={
+					'userEmail':''
+			};
+			
+			var url='removeCollaborate';
+			var method='POST';
+			var token = localStorage.getItem('token');
+			var collaborateUser=homeService.service(url,method,object,token);
+			collaborateUser.then(function(response){
+				console.log("Deleted  @#345353");
+				$scope.collborate(note,$scope.User);
+			},function(response){
+				console.log("@@  Leader  @@@@");
+			});
+			
 		}
 		
 		

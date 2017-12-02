@@ -15,13 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bridgelabz.model.Collaborator;
-import com.bridgelabz.model.ErrorMessage;
 import com.bridgelabz.model.Response;
 import com.bridgelabz.model.User;
 import com.bridgelabz.passwordencrypt.PasswordEncrypt;
 import com.bridgelabz.service.MailService;
-import com.bridgelabz.service.NotesService;
 import com.bridgelabz.service.Producer;
 import com.bridgelabz.service.UserService;
 import com.bridgelabz.tokens.Token;
@@ -54,9 +51,6 @@ public class UserController {
 	
 	@Autowired
 	private Producer producer;
-	
-	@Autowired
-	private NotesService noteService;
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<Response> doRegister(@RequestBody User user,
@@ -135,19 +129,5 @@ public class UserController {
 		user1.setListView(user.isListView());
 		userService.activateUser(id, user1);
 		return ResponseEntity.status(HttpStatus.OK).body(user1.isListView());
-	}
-	
-	@RequestMapping(value="/collaborate",method = RequestMethod.POST)
-	public ResponseEntity<Response> collaborate(@RequestBody Collaborator collaborate,HttpServletRequest request) throws Exception{
-		System.out.println("\n\n\n\n ##$#$   Success  \n\n");
-		System.out.println("Owner ----> "+collaborate.getOwnerId());
-		System.out.println("Owner ----> "+collaborate.getSharedId());
-		System.out.println("Owner ----> "+collaborate.getNoteId());
-		
-		noteService.addCollaborator(collaborate);
-		
-		response.setMessage("Added");
-		return ResponseEntity.status(HttpStatus.OK).body(response);
-		
 	}
 }

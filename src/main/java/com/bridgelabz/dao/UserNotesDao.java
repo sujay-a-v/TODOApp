@@ -20,10 +20,10 @@ public interface UserNotesDao {
 	/******* Many to many for collaborator **********/
 	public void addCollaborator(Collaborator collaborate);
 	
-	public List<User> getUserList(int noteId);
+	public List<User> getUserList(Notes noteId);
 	
-	public List<Notes> getCollaboratedNotes(int userId);
+	public List<Notes> getCollaboratedNotes(User user);
 	
-	public int removeUser(int userId,int noteId);
+	public int removeUser(User userId,Notes noteId);
 
 }
