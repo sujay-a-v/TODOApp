@@ -17,15 +17,15 @@ public class Collaborator {
 	private int collaboretorId;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="ownerId")
 	private User ownerId;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="sharedId")
 	private User sharedId;
 	
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="noteId")
 	private Notes noteId;
 
 	public int getCollaboretorId() {

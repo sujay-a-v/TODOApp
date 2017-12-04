@@ -27,8 +27,8 @@
 						<li     style="height: 150px;width: 200px;">
 						
 						 <img alt="{{User.userName.charAt(0)}}" title="{{User.userName.charAt(0)}}" class="img-circle" ng-src="{{User.profile}}" height="100px" width="100px">
-						<!--<button ng-click="uploadFile('user')">Change Profile</button>
-						<img alt="ChangeProfile" ng-click="uploadFile('user')" src="" height="20px">
+						<!--<button ng-click="openImageUploader('user')">Change Profile</button>
+						<img alt="ChangeProfile" ng-click="openImageUploader('user')" src="" height="20px">
 						
 						 <input id="imageuploader" ng-show="false"  type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc"> -->
 					<br/>
@@ -36,7 +36,7 @@
 						{{User.userEmail}}
 						
 						</li>
-						
+						<li><button ng-click="openImageUploader('user')" style="background-color: blue; color: white">Change Profile</button></li>
 						<li ng-click="logout()">logout</li>
 					</ul>
 				</div>

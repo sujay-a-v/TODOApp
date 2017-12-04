@@ -15,7 +15,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-6" id="addNoteForm"
-						style="background-color: rgb(250, 250, 250);">
+						style="background-color: {{AddNoteColor}}">
 						<div class="form-group">
 							<b><div ng-show="AddNoteBox" data-text="Title"
 								contentEditable="true" id="title"></div></b>
@@ -23,17 +23,98 @@
 							<div contentEditable="true" data-text="Take a note..."
 								ng-click="ShowAddNote()" id="description" style="margin-bottom: 5px"></div>
 							<br>
+							<div ng-show="AddNoteBox">{{AddReminder}}</div>
 							<div role="button">
-								<div ng-show="AddNoteBox" style="float: right">
-									<div>
-										<div class="dropdown" style="float: right">
-											<div class="btn-group dropup colorDiv"></div>
-											<span ng-click="addNote()">DONE</span>
-										</div>
-									</div>
+								<!-- <div ng-show="AddNoteBox" class="dropdown" style="float: right"> -->
+									
+										
+										<div class="dropdown" ng-show="AddNoteBox" >
+						
+						<div class="btn-group dropup colorDiv" uib-dropdown>
+						
+							<div style="float: left">	<img id="dropdown" class="dropdown-toggle" data-toggle="dropdown" alt="color" src="images/ic_color_lens_black_24px.svg" uib-dropdown-toggle height="20px">
+								
+									<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body" style="background-color: #000000">
+									
+										<a ng-repeat="color in colors" role="menuitem">
+											<img ng-src="{{color.path}}" height="25px" ng-click="addNoteColorChange(color.color)">
+										</a>
+									</ul>
+						</div>
+
+							<span class="btn dropdown-toggle" id="menu1" data-toggle="dropdown">
+								<img alt="reminder" src="images/reminder.svg" height="15px">
+							</span>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+								<li><input type="text" id="datepicker" class="reminder" ng-click="openAddReminder()"></li>
+								<li><button ng-click="openAddReminder()">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</button></li>
+							</ul>
+
+							<img alt="image" ng-click="openImageUploader('input')" src="images/ic_photo_black_24px.svg" height="20px">
+							
+							<input id="imageuploader" ng-show="false" type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+
+							<span ng-click="addArchiveNote()">
+								<img alt="archive" src="images/ic_archive_black_24px.svg" height="20px">
+							</span></div>
+							
+							<div style="float: right"><span ng-click="addNote()">DONE</span></div>
+										
+										
+										
+										
+										
+										
+										<!-- 	<div class="btn-group dropup colorDiv"></div>
+											<span ng-click="addNote()">DONE</span> -->
+									
 								</div>
 
 							</div>
+							
+							
+							<!-- 
+							<div ng-show="AddNoteBox">{{AddReminder}}</div>
+				
+					<div class="dropdown" ng-show="AddNoteBox" style="float: right">
+						
+						<div class="btn-group dropup colorDiv" uib-dropdown>
+						
+								<img id="dropdown" class="dropdown-toggle" data-toggle="dropdown" alt="color" src="image/colorpallete.svg" uib-dropdown-toggle height="20px">
+								
+									<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body" style="background-color: #000000">
+									
+										<a ng-repeat="color in colors" role="menuitem">
+											<img ng-src="{{color.path}}" height="25px" ng-click="addNoteColorChange(color.color)">
+										</a>
+									</ul>
+						</div>
+
+							<span class="btn dropdown-toggle" id="menu1" data-toggle="dropdown">
+								<img alt="reminder" src="image/reminder.svg" height="15px">
+							</span>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+								<li><input type="text" id="datepicker" class="reminder" ng-click="openAddReminder()"></li>
+								<li><button ng-click="openAddReminder()">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</button></li>
+							</ul>
+
+							<img alt="image" ng-click="openImageUploader('input')" src="image/image.svg" height="20px">
+							
+							<input id="imageuploader" ng-show="false" type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+
+							<span ng-click="addArchiveNote()">
+								<img alt="archive" src="image/archive.svg" height="20px">
+							</span>
+							
+							<button ng-click="addNote()">DONE</button>
+							
+							 -->
+							
+							
 						</div>
 					</div>
 
@@ -130,6 +211,9 @@
 								<b><div style="margin: 8px" ng-click="open(note)" ng-bind-html="note.title"></div></b>
 								<div style="margin: 7px" ng-click="open(note)" ng-bind-html="note.description"></div><br/>
 								
+						<img ng-if="note.image!=''" ng-click="open(note)" style="height: 200px;" ng-src="{{note.image}}"/>
+								
+								
 						<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
 																					
 						<div id="moreOptions">
@@ -158,7 +242,10 @@
 										</a>
 									</ul>
 								</div>
-								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px" ng-click="uploadFile(note)">
+								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px" ng-click="openImageUploader(note)">
+								
+								<input id="imageuploader" ng-show="false" type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+								
 								
 								<span ng-click="archiveNote(note)"><img alt="archive"
 									src="images/ic_archive_black_24px.svg" height="20px"></span>

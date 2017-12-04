@@ -117,6 +117,23 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Id");
 	}
 	
+	
+	@RequestMapping(value="/profileChange",method = RequestMethod.PUT)
+	public ResponseEntity<Response> profileChange(@RequestBody User user,HttpServletRequest request) throws Exception
+	{
+		int id = tokens.validateToken(request.getHeader("token"));
+		User user1 = userService.retrieveById(id);
+		if (user1 == null) {
+			response.setMessage("Invalid Id");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+		user1.setProfile(user.getProfile());
+		userService.activateUser(id, user1);
+		response.setMessage("Profile updated");
+		return ResponseEntity.status(HttpStatus.OK).body(response);
+		
+	}
+	
 	@RequestMapping(value="/listAndGrid", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> listGrid(@RequestBody User user,HttpServletRequest request) throws Exception
 	{

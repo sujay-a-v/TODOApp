@@ -12,7 +12,7 @@
 	<div class="col-sm-9" id="mainWrapper">
 		<br> <br>
 			
-			<div class="card" style=" width:27% ;background-color:{{note.noteColor}}"
+			<div class="{{card}}" id="card" style=" width:27% ;background-color:{{note.noteColor}}" 
 				ng-repeat="note in notes | orderBy : '-modifiedDate' | filter :{deleteStatus:'true'}">
 				
 				<b><div style="margin: 8px" ng-bind-html="note.title"></div></b>

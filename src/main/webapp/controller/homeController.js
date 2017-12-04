@@ -1,6 +1,6 @@
 var toDoApp=angular.module('toDoApp');
 
-toDoApp.controller('homeController',function($scope,homeService ,$state, $uibModal, $interval,$filter){
+toDoApp.controller('homeController',function($scope,homeService ,$state, $uibModal, fileReader, $interval,$filter){
 	$scope.AddNoteBox=false;
 	$scope.ShowAddNote=function(){
 		$scope.AddNoteBox= true;
@@ -61,7 +61,7 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 		else {
 			$scope.ListView = true;
 			localStorage.setItem('LISTGRID',$scope.ListView);
-			$scope.card="col-md-12 col-sm-12 col-xs-12 col-lg-3";
+			$scope.card="col-md-6 col-sm-12 col-xs-12 col-lg-4";
 			/*var notes = document.getElementsByClassName('card');
 			for (var i = 0; i < notes.length; i++) {
 				notes[i].style.width = "250px";
@@ -69,26 +69,9 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 		}
 	}
 	
-	
-	/*console.log("Grid list ");
-	$scope.user.listView=ListView;
-	var url = 'listAndGrid';
-	var method = 'POST';
-	var token = localStorage.getItem('token');
-	var user=$scope.user;
-	console.log(user);
-	var notes=homeService.service(url,method,user,token);
-	notes.then(function(response){
-		getNotes();
-	},function(response){
-		getNotes();
-		$scope.error=response.data;
-	});*/
-
-	
 	/******** Image Upload **********/
 	
-	$scope.uploadFile=function(noteOrUser){
+	/*$scope.uploadFile=function(noteOrUser){
 		$scope.noteOrUser=noteOrUser;
 		$('#imageuploader').trigger('click');
 	}
@@ -113,10 +96,63 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 					console.log("inside note image add");
 					$scope.noteOrUser.image = $scope.imageSrc;
 					console.log("inside note image added");
-					$scope.updateNote($scope.type);
+					$scope.updateNote($scope.noteOrUser);
 				}
 			}
-	})
+	})*/
+	
+	
+	
+	$scope.imageSrc = "";
+
+	$scope.$on("fileProgress", function(e, progress) {
+		$scope.progress = progress.loaded / progress.total;
+	});
+
+	/*check from image upload type(add note, present note, user profile)*/
+	$scope.openImageUploader = function(type) {
+		$scope.type = type;
+		console.log("Select image");
+		$('#imageuploader').trigger('click');
+	}
+	
+	
+	
+	$scope.type = {};
+	$scope.type.image = '';
+
+	$scope.$watch('imageSrc', function(newimg, oldimg) {
+		if ($scope.imageSrc != '') {
+			if ($scope.type === 'input') {
+				$scope.adding = $scope.imageSrc;
+			} 
+			else if($scope.type === 'user'){
+				$scope.User.profile=$scope.imageSrc;
+				console.log("USERRRRR");
+				$scope.changeProfile($scope.User);
+			}
+			else {
+				console.log();
+				$scope.type.image = $scope.imageSrc;
+				console.log("NOTE #$#@##$$");
+				$scope.updateNote($scope.type);
+			}
+		}
+
+	});
+	
+	$scope.changeProfile=function(user){
+		var token = localStorage.getItem('token');
+		var method = 'PUT';
+		var url = 'profileChange';
+		var a = homeService.service(url,method,user,token);
+		a.then(function(response) {
+		
+			},function(response){
+			
+		});
+	}
+
 
 /************  Toggle side bar   ********/
 $scope.showSideBar = false;
@@ -168,7 +204,7 @@ $scope.toggleSideBar = function() {
 				}
 			else
 				{
-				note.deleteStatus = "true";
+				note.deleteStatus = "true";var token = localStorage.getItem('token');
 				}
 			//note.deleteStatus = "true";
 			$scope.updateNote(note);
@@ -180,7 +216,7 @@ $scope.toggleSideBar = function() {
 				getNotes();
 			},function(response){
 				getNotes();
-				$scope.error=response.data;
+				$scope.error=response.data;var token = localStorage.getItem('token');
 			});*/
 		}
 		
@@ -309,7 +345,7 @@ $scope.toggleSideBar = function() {
 		}
 		
 		/****************  Note Color *************/
-		//$scope.AddNoteColor="#ffffff";
+		$scope.AddNoteColor="#ffffff";
 		
 		$scope.addNoteColorChange=function(color){
 			$scope.AddNoteColor=color;
@@ -581,7 +617,7 @@ $scope.toggleSideBar = function() {
 		$scope.copy=function(note){
 			note.pin = "true";
 			note.noteStatus = "true";
-			note.reminderStatus= "";
+			note.reminderStatus= "";"#ffffff"
 			note.archiveStatus= "false";
 			note.deleteStatus = "false";
 			var url = 'notesCreate';
@@ -609,7 +645,7 @@ $scope.toggleSideBar = function() {
 			$scope.note.reminderStatus= "";
 			$scope.note.archiveStatus= "false";
 			$scope.note.deleteStatus = "false";
-			$scope.note.noteColor="#ffffff";
+			$scope.note.noteColor=$scope.AddNoteColor;
 			var note=$scope.note;
 			
 			var url = 'notesCreate';
