@@ -230,6 +230,10 @@ public class NotesController {
 					users.add(sharedUser);
 					return ResponseEntity.status(HttpStatus.OK).body(users);
 				}
+				else
+				{
+					return new ResponseEntity(HttpStatus.NOT_FOUND);
+				}
 			}
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(users);
@@ -257,5 +261,19 @@ public class NotesController {
 		response.setMessage("Token expired");
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		
+	}
+	
+	@RequestMapping(value="getOwner",method = RequestMethod.POST)
+	public ResponseEntity<User> getOwner(@RequestBody Notes note,HttpServletRequest request)
+	{
+		Notes getNote=noteService.fetchById(note.getId());
+		int id = tokens.validateToken(request.getHeader("token"));
+		User user=userService.retrieveById(id);
+		if(user!=null)
+		{
+			User owner=getNote.getUser();
+			return new  ResponseEntity<User>(owner,HttpStatus.OK);
+		}
+		return new ResponseEntity(HttpStatus.NOT_FOUND);
 	}
 }

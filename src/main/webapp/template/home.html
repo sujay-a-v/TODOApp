@@ -46,7 +46,7 @@
 			<div style="margin-top: 20px;">
 			<h4 ng-show="pinnedAll.length">Pinned</h4>
 				<div layout="row" layout-wrap flex>
-					<div class="card" style="padding: 2px 16px ; background-color: {{note.noteColor}}" ng-click="popup(note)" 
+					<div class="{{card}}" style="padding: 2px 16px ; background-color: {{note.noteColor}}" ng-click="popup(note)" id="card" 
 					 ng-repeat="note in notes | orderBy:'-modifiedDate'| filter :{pin:'false', archiveStatus:'false' , noteStatus:'true' , deleteStatus:'false'} as pinnedAll" >
 					 
 					 <div id="moreOptions" style="float: right">
@@ -116,7 +116,7 @@
 			<div style="margin-top: 20px;">
 			<h4 ng-show="pinnedAll.length">Others</h4>
 				<div layout="row" layout-wrap flex>
-					<div class="card" style="padding: 2px 16px; background-color:{{note.noteColor}} "  id="listAndGrid"
+					<div class="{{card}}" style="padding: 2px 16px; background-color:{{note.noteColor}};" id="card" 
 					 ng-repeat="note in notes | orderBy:'-modifiedDate'| filter :{pin:'true', archiveStatus:'false' , noteStatus:'true' , deleteStatus:'false'} as OtherNotes" >
 					 
 					 <div id="moreOptions" style="float: right">
@@ -177,7 +177,7 @@
 							</div>
 						</div>
 							</div>
-						
+						<br>
 					</div>
 				
 				</div>

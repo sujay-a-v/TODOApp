@@ -4,10 +4,10 @@
 		<div class="row">
 
 	<div class="col-sm-2">
-	<img ng-src="{{User.profile}}" class="img-circle"   height="50" width="50"/>
+	<img ng-src="{{owner.profile}}" class="img-circle"   height="50" width="50"/>
 	</div>
 	
-	<div class="col-sm-8" ng-init="getOwner(note)"><font size="4px">{{User.userName}}<i class="pull-right">(owner)</i></font><br>{{User.userEmail}}</div>
+	<div class="col-sm-8" ng-init="getOwner(note)"><font size="4px">{{owner.userName}}<i class="pull-right">(owner)</i></font><br>{{owner.userEmail}}</div>
 	</div><br>
 	
 	<div ng-repeat="user in users">
@@ -29,11 +29,12 @@
 	<div class="row">
 	<input type="text" class="col-sm-12" id="searchbox" ng-model="$parent.shareWith.userEmail" placeholder="Enter Collborator Email">
 	</div>
+	<p id="err" ng-bind="errorMsg" style="color:red"></p>
 	</div>
 	
 	<div class="modal-footer">
 	
-	    <div role="button" ng-click="collborate(note,User)"
+	    <div role="button" ng-click="collborate(note,owner)"
 				class="btn btn-done pull-right inline" data-dismiss="modal">DONE</div>
 	</div>
 

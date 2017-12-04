@@ -1,24 +1,6 @@
-<!-- <div class="model-content">
-	<div id="editNoteModal" style="height: 120px;
-    margin-right: 8px;">
-		<b><div id="noteTitle" contenteditable="true"  >{{note.title}}</div></b>
-		<div id="noteDescription" contenteditable="true" >{{note.description}}</div><br>
-		
-		<div ng-click="updateNote(note)" class="btn btn-done pull-right inline" data-dismiss="model">DONE</div>
-		<div role="button">
-			<div>
-				<div class="dropdown" style="float: right">
-					<div class="btn-group dropup colorDiv"></div>
-					<span ng-click="editNote(note)">DONE</span>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> -->
 
-
-
-<div id="editNoteModal" style="height: 180px;
+<div class="container">
+<div id="editNoteModal" 
     margin-top: -8px;   background-color: {{note.noteColor}}">
 		<div style="float: right ;margin-right: 7px; margin-top: 8px;">
 			<span style="cursor: pointer" ng-click="note.pin=!note.pin" > 
@@ -31,7 +13,7 @@
 		<br>
 	<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
 		<br/>
-		<div style="float: right; right;margin-right: 10px;">Edited : {{note.modifiedDate}}</div><br>
+		<div id="reminder" style="float: right; right;margin-right: 10px;">Edited : {{note.modifiedDate}}</div><br>
 		</div>
 		<div>
 
@@ -62,7 +44,7 @@
 									ng-click="archiveNote(note)">
 									<img alt="archive"
 									src="images/ic_archive_black_24px.svg" height="20px" style="margin: 8px"></span>
-								<div style="float: right; margin: 8px">
+								<div style="float: right; margin-right: 290px;">
 									<span class="btn dropdown-toggle" id="menu1"
 										data-toggle="dropdown"> <span
 										class="glyphicon glyphicon-option-vertical"></span>
@@ -73,26 +55,11 @@
 										<li><a ng-click="copy(note)">Make a Copy</a></li>
 									</ul>
 								</div>
+								<div><span  ng-click="editNote(note)" style="margin-left: 500px;">DONE</span></div>
+						</div>
+						<div style="float: right;margin-right: 10px;">
+						<span  ng-click="editNote(note)" >DONE</span>
 							</div>
-						
-		
-		<!--  <div style="float: right">
-		<div class="btn-group dropup colorDiv" uib-dropdown>
-			<img id ="dropdown" class="dropdown-toggle" data-toggle="dropdown" alt="color" src="image/colorpallete.svg"  uib-dropdown-toggle height="20px">
-					<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body" style="background-color: #000000">
-							<a ng-repeat="color in colors"   role="menuitem">
-								<img ng-src="{{color.path}}"  height="25px" ng-click="changeColorInModal(color.color)">
-							</a>
-					</ul>
-		</div> -->
-		
-		<!-- <span style="cursor: pointer" ng-click="archiveNote(note)"> 
-			<img ng-hide="note.archiveStatus" style="height: 17px" alt="pin" src="images/ic_archive_black_24px.svg"><img ng-show="note.archiveStatus" style="height: 17px" alt="pin" src="image/archive.svg">
-			</span> -->
-		 <div style="float: right;margin-right: 10px;">
-			<span  ng-click="editNote(note)" >DONE</span>
-			
 		</div>
-		</div>
-
+</div>
 </div> 

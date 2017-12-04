@@ -52,18 +52,20 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 		if ($scope.ListView == true) {
 			$scope.ListView = false;
 			localStorage.setItem('LISTGRID',$scope.ListView);
-			var notes = document.getElementsByClassName('card');
+			$scope.card="col-md-12 col-sm-12 col-xs-12 col-lg-10";
+			/*var notes = document.getElementsByClassName('card');
 			for (var i = 0; i < notes.length; i++) {
 				notes[i].style.width = "800px";
-			}
+			}*/
 		}
 		else {
 			$scope.ListView = true;
 			localStorage.setItem('LISTGRID',$scope.ListView);
-			var notes = document.getElementsByClassName('card');
+			$scope.card="col-md-12 col-sm-12 col-xs-12 col-lg-3";
+			/*var notes = document.getElementsByClassName('card');
 			for (var i = 0; i < notes.length; i++) {
 				notes[i].style.width = "250px";
-			}
+			}*/
 		}
 	}
 	
@@ -86,7 +88,7 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 	
 	/******** Image Upload **********/
 	
-	/*$scope.uploadFile=function(noteOrUser){
+	$scope.uploadFile=function(noteOrUser){
 		$scope.noteOrUser=noteOrUser;
 		$('#imageuploader').trigger('click');
 	}
@@ -114,7 +116,7 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 					$scope.updateNote($scope.type);
 				}
 			}
-	})*/
+	})
 
 /************  Toggle side bar   ********/
 $scope.showSideBar = false;
@@ -505,7 +507,6 @@ $scope.toggleSideBar = function() {
 			var token = localStorage.getItem('token');
 			var collaborateUser=homeService.service(url,method,object,token);
 			collaborateUser.then(function(response){
-				console.log("Inside collborator");
 				console.log(response.data);
 				$scope.users = response.data;
 				note.collabratorUsers = response.data;
@@ -522,7 +523,7 @@ $scope.toggleSideBar = function() {
 		}
 		
 		$scope.collborate=function(note,user){
-			modalInstance.close('resetmodel');
+			
 			var object={};
 			object.noteId=note;
 			object.sharedId=$scope.shareWith;
@@ -535,14 +536,17 @@ $scope.toggleSideBar = function() {
 			collaborateUser.then(function(response){
 				$scope.users = response.data;
 				$scope.note.collabratorUsers = response.data;
+				modalInstance.close('resetmodel');
 			}, function(response) {
-				$scope.users = {};
+				//$scope.users = {};
+				$scope.errorMsg="User already exist";
 			});
+			
 		}
 		
 		
 		$scope.removeCollborator=function(note,user){
-			
+			modalInstance.close('resetmodel');
 			var object={};
 			object.noteId=note;
 			object.sharedId=user;
@@ -555,16 +559,23 @@ $scope.toggleSideBar = function() {
 			var token = localStorage.getItem('token');
 			var collaborateUser=homeService.service(url,method,object,token);
 			collaborateUser.then(function(response){
-				console.log("Deleted  @#345353");
-				$scope.collborate(note,$scope.User);
-			},function(response){
-				console.log("@@  Leader  @@@@");
+				
 			});
-			
 		}
 		
-		
-		
+		$scope.getOwner = function(note) {
+			var url = 'getOwner';
+			var method='POST';
+			var note=note;
+			var token = localStorage.getItem('token');
+			var collaborateUser=homeService.service(url,method,note,token);
+			collaborateUser.then(function(response){
+				$scope.owner = response.data;
+			}, function(response) {
+				$scope.users = {};
+			});
+		}
+
 		
 		/**********  Copy Note  ***************/
 		$scope.copy=function(note){

@@ -1,19 +1,42 @@
 @CHARSET "UTF-8";
 
-#edit {
+/* #edit {
 	float: right;
 	margin: -10px;
+} */
+
+div#editNoteModal{
+	margin-top: 10px;
+	margin-bottom: 25px;
+	margin-left: 15%;
+	 box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
 }
 
-#editNoteModal{
+/* #editNoteModal{
 	padding: 20px;
     position: absolute;
     width: 135%;
     margin-top: 157px;
     margin-left: -99px;
+} */
+
+
+div#description{
+	outline:none;
+	padding-top:5px;
+	word-break: break-all;
 }
 
+div#title{
+	outline:none;
+	padding-top:5px;
+	height: 28px;
+	word-break: break-all;
+}
 
-#list-gride-View {
-	margin-top: 20px;
+div#reminder{
+	outline:none;
+	padding-top:5px;
+	height: 28px;
+	word-break: break-all;
 }
