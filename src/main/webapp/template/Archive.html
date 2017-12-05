@@ -4,7 +4,7 @@
 	<!-- ************************************* End of Top Bar  ********************************************** -->
 
 	<div class="row" id="homeId" style="margin-top: 0px; ">
-	<div class="col-sm-3" id="sidebarWrapper" ng-show="showSideBar">
+	<div class="col-sm-2" id="sidebarWrapper" ng-show="showSideBar">
 		<!-- ************* Start of Side Bar ***************** -->
 			<div style="margin-left: 100px; "><side-nav-bar></side-nav-bar></div>
 			
@@ -12,7 +12,7 @@
 	</div>
 
 
-	<div class="col-sm-9" id="mainWrapper">
+	<div class="col-sm-10" id="mainWrapper">
 		<br> <br>
 			<div class="{{card}}" id="card" style=" width:32% ; background-color: {{note.noteColor}}"  
 				ng-repeat="note in notes | orderBy : '-modifiedDate' | filter :{archiveStatus:'true', deleteStatus:'false'}">
@@ -22,6 +22,9 @@
 						alt="pin" style="height: 17px" src="images/pin.png"></img>
 					</span>
 				</div>
+				<img ng-if="note.image!=''" ng-click="open(note)" style="height: 200px;" ng-src="{{note.image}}"/><br>
+		<span ng-click="removeImage(note)" > <img ng-if="note.image!=''" alt="delete" id="moreOptions" src="images/delete.svg" height="20px" style="float: right"></span>
+				
 				<b><div style="margin: 8px" ng-bind-html="note.title"></div></b>
 				<div style="margin: 7px" ng-bind-html="note.description"></div><br/>
 				<br>
@@ -52,7 +55,10 @@
 										</a>
 									</ul>
 								</div>
-								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px"> <span
+								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px" ng-click="openImageUploader(note)">
+								<input id="imageuploader" ng-show="false" type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+								
+								<span
 									ng-click="archiveNote(note)"><img alt="archive"
 									src="images/unarchive.svg" height="20px"></span>
 								<div style="float: right">
@@ -62,7 +68,7 @@
 									</span>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="margin-left: 150px;">
 										<li><a ng-click="deleteNote(note)">Delete</a></li>
-										<li><a>Add Lable</a></li>
+										<li><a>Add Label</a></li>
 										<li><a ng-click="copy(note)">Make a Copy</a></li>
 										<li><a ng-click="socialShare(note)">Social Share(fb)</a></li>
 									</ul>

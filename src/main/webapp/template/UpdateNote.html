@@ -8,12 +8,17 @@
 			</span>
 		</div>
 		<div>
+		<img ng-if="note.image!=''" contenteditable="true" style="height: 200px;" ng-src="{{note.image}}"/><br>
+	<span ng-click="removeImage(note)"  > <img contenteditable="true" ng-if="note.image!=''" alt="delete" ng-show="true" src="images/delete.svg" height="20px" style="float: right"></span>
 		<b><div id="title" contenteditable="true"  style="margin: 8px" ng-bind-html="note.title"></div></b>
 		<div id="description" contenteditable="true" style="margin: 8px"  ng-bind-html="note.description"></div><br>
+		
+				
+		
 		<br>
-	<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
+	<div ng-if="note.reminderStatus!=''" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
 		<br/>
-		<div id="reminder" style="float: right; right;margin-right: 10px;">Edited : {{note.modifiedDate}}</div><br>
+		<div  style="margin-left: 444px;">Edited : {{note.modifiedDate | date:'MMM dd'}}</div>
 		</div>
 		<div>
 
@@ -40,10 +45,12 @@
 										</a>
 									</ul>
 								</div>
-								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px" style="margin: 8px"> <span
-									ng-click="archiveNote(note)">
-									<img alt="archive"
-									src="images/ic_archive_black_24px.svg" height="20px" style="margin: 8px"></span>
+								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px" ng-click="openImageUploader(note)">
+								
+								<input id="imageuploader" ng-show="false" type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+								 
+								<span ng-click="archiveNote(note)">
+								<img alt="archive" src="images/ic_archive_black_24px.svg" height="20px" style="margin: 8px"></span>
 								<div style="float: right; margin-right: 290px;">
 									<span class="btn dropdown-toggle" id="menu1"
 										data-toggle="dropdown"> <span

@@ -5,16 +5,7 @@ toDoApp.controller('homeController',function($scope,homeService ,$state, $uibMod
 	$scope.ShowAddNote=function(){
 		$scope.AddNoteBox= true;
 	}
-  
-	/*, fileReader*/
-	
-	/*,toastr*/
-	
-	/*$scope.moreList=false;
-	$scope.more=function(){
-		$scope.moreList=true;
-	}
-*/
+ 
 /**********	Getting All notes   ********/
 var getNotes=function(){
 	var token=localStorage.getItem('token');
@@ -52,7 +43,7 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 		if ($scope.ListView == true) {
 			$scope.ListView = false;
 			localStorage.setItem('LISTGRID',$scope.ListView);
-			$scope.card="col-md-12 col-sm-12 col-xs-12 col-lg-10";
+			$scope.card="col-md-12 col-sm-12 col-xs-12 col-lg-12";
 			/*var notes = document.getElementsByClassName('card');
 			for (var i = 0; i < notes.length; i++) {
 				notes[i].style.width = "800px";
@@ -61,7 +52,7 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 		else {
 			$scope.ListView = true;
 			localStorage.setItem('LISTGRID',$scope.ListView);
-			$scope.card="col-md-6 col-sm-12 col-xs-12 col-lg-4";
+			$scope.card="col-md-6 col-sm-8 col-xs-12 col-lg-3";
 			/*var notes = document.getElementsByClassName('card');
 			for (var i = 0; i < notes.length; i++) {
 				notes[i].style.width = "250px";
@@ -70,39 +61,7 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 	}
 	
 	/******** Image Upload **********/
-	
-	/*$scope.uploadFile=function(noteOrUser){
-		$scope.noteOrUser=noteOrUser;
-		$('#imageuploader').trigger('click');
-	}
-	
-	$scope.$on("fileProgress", function(e, progress) {
-		$scope.progress = progress.loaded / progress.total;
-	});
-	
-	$scope.noteOrUser={};
-	$scope.noteOrUser.image='';
-	$scope.$watch('imageSrc',function(newImage,oldImage){
-		if($scope.imageSrc!='')
-			{
-				if($scope.noteOrUser==='input'){
-					$scope.addimg=$scope.imageSrc;
-				}
-				else if($scope.noteOrUser==='user'){
-					console.log("inside User Profile");
-					
-				}
-				else{
-					console.log("inside note image add");
-					$scope.noteOrUser.image = $scope.imageSrc;
-					console.log("inside note image added");
-					$scope.updateNote($scope.noteOrUser);
-				}
-			}
-	})*/
-	
-	
-	
+		
 	$scope.imageSrc = "";
 
 	$scope.$on("fileProgress", function(e, progress) {
@@ -112,11 +71,8 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 	/*check from image upload type(add note, present note, user profile)*/
 	$scope.openImageUploader = function(type) {
 		$scope.type = type;
-		console.log("Select image");
 		$('#imageuploader').trigger('click');
 	}
-	
-	
 	
 	$scope.type = {};
 	$scope.type.image = '';
@@ -128,13 +84,10 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 			} 
 			else if($scope.type === 'user'){
 				$scope.User.profile=$scope.imageSrc;
-				console.log("USERRRRR");
 				$scope.changeProfile($scope.User);
 			}
 			else {
-				console.log();
 				$scope.type.image = $scope.imageSrc;
-				console.log("NOTE #$#@##$$");
 				$scope.updateNote($scope.type);
 			}
 		}
@@ -151,6 +104,11 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 			},function(response){
 			
 		});
+	}
+	
+	$scope.removeImage=function(note){
+		note.image='';
+		$scope.updateNote(note);
 	}
 
 
@@ -206,18 +164,7 @@ $scope.toggleSideBar = function() {
 				{
 				note.deleteStatus = "true";var token = localStorage.getItem('token');
 				}
-			//note.deleteStatus = "true";
 			$scope.updateNote(note);
-			/*var url = 'update/' + note.id;
-			var method = 'POST';
-			var token = localStorage.getItem('token');
-			var notes=homeService.service(url,method,note,token);
-			notes.then(function(response){
-				getNotes();
-			},function(response){
-				getNotes();
-				$scope.error=response.data;var token = localStorage.getItem('token');
-			});*/
 		}
 		
 		/**********  Delete forever Note  ***************/
@@ -234,22 +181,6 @@ $scope.toggleSideBar = function() {
 			});
 		}
 		
-		
-		/**********  Restore Note  ***************/
-		/*$scope.restoreNote=function(note){
-			note.deleteStatus = "false";
-			var url = 'update/' + note.id;
-			var method = 'POST';
-			var token = localStorage.getItem('token');
-			var notes=homeService.service(url,method,note,token);
-			notes.then(function(response){
-				getNotes();
-			},function(response){
-				getNotes();
-				$scope.error=response.data;
-			});
-		}*/
-		
 		/**********  Archive &  Unarchive Note  ***************/
 		$scope.archiveNote=function(note){
 			if(note.archiveStatus== "true")
@@ -262,38 +193,9 @@ $scope.toggleSideBar = function() {
 				note.archiveStatus= "true";
 				$scope.Archive=true;
 				}
-			//note.archiveStatus= "true";
 			note.pin="true";
 			$scope.updateNote(note);
-			//modalInstance.close('resetmodel');
-			/*var url = 'update/' + note.id;
-			var method = 'POST';
-			var token = localStorage.getItem('token');
-			var notes=homeService.service(url,method,note,token);
-			notes.then(function(response){
-				getNotes();
-			},function(response){
-				getNotes();
-				$scope.error=response.data;
-			});*/
 		}
-		
-		/**********  Unarchive Note  ***************/
-		/*$scope.unarchiveNote=function(note){
-			note.archiveStatus = "false";
-			note.pin="true";
-			var url = 'update/' + note.id;
-			var method = 'POST';
-			var token = localStorage.getItem('token');
-			var notes=homeService.service(url,method,note,token);
-			notes.then(function(response){
-				getNotes();
-			},function(response){
-				getNotes();
-				$scope.error=response.data;
-			});
-		}*/
-		
 		
 		/*********** Open a model *************/
 		$scope.open = function (note) {
@@ -306,7 +208,6 @@ $scope.toggleSideBar = function() {
 		
 		/***********  Update Note  **************/
 		$scope.updateNote=function(note){
-			console.log("inside Update image updated");
 			var url = 'update/' + note.id;
 			var method = 'POST';
 			var token = localStorage.getItem('token');
@@ -332,16 +233,6 @@ $scope.toggleSideBar = function() {
 			note.description=document.getElementById("description").innerHTML;
 			modalInstance.close('resetmodel');
 			$scope.updateNote(note);
-			/*var url = 'update/' + note.id;
-			var method = 'POST';
-			var token = localStorage.getItem('token');
-			var notes=homeService.service(url,method,note,token);
-			notes.then(function(respons){
-				getNotes();
-			},function(response){
-				getNotes();
-				$scope.error=response.data.message;
-			});*/
 		}
 		
 		/****************  Note Color *************/
@@ -518,7 +409,6 @@ $scope.toggleSideBar = function() {
 		
 		/*****  Collaborator  *******/
 		$scope.openCollaborate=function(note,user){
-			console.log(" $$$  Collaborate  @@@@");
 			$scope.note=note;
 			$scope.user=user;
 			/*$scope.indexOfNote=index;*/
@@ -530,9 +420,6 @@ $scope.toggleSideBar = function() {
 		
 		var collborators = [];
 		$scope.getUserlist=function(note,user){
-			
-			console.log("Collll @@@@   note");
-			console.log("note in collaborator    _------- "+note);
 			var object={};
 			object.noteId=note;
 			object.sharedId={};
@@ -552,7 +439,6 @@ $scope.toggleSideBar = function() {
 				collborators = response.data;
 
 			});
-			console.log("Returned");
 			console.log(collborators);
 			return collborators;
 			
@@ -615,11 +501,6 @@ $scope.toggleSideBar = function() {
 		
 		/**********  Copy Note  ***************/
 		$scope.copy=function(note){
-			note.pin = "true";
-			note.noteStatus = "true";
-			note.reminderStatus= "";"#ffffff"
-			note.archiveStatus= "false";
-			note.deleteStatus = "false";
 			var url = 'notesCreate';
 			var method = 'POST';
 			var token = localStorage.getItem('token');
@@ -632,6 +513,14 @@ $scope.toggleSideBar = function() {
 			});
 		}
 		
+		/*********  Add archive function  *************/
+		$scope.archive="false";
+		$scope.addArchiveNote=function(){
+			$scope.archive="true";
+		}
+		
+		$scope.adding="";
+		
 
 		/******  Adding Note  **************/
 		
@@ -642,8 +531,9 @@ $scope.toggleSideBar = function() {
 			$scope.note.description=document.getElementById("description").innerHTML;
 			$scope.note.pin = "true";
 			$scope.note.noteStatus = "true";
-			$scope.note.reminderStatus= "";
-			$scope.note.archiveStatus= "false";
+			$scope.note.reminderStatus= $scope.AddReminder;
+			$scope.note.image= $scope.adding;
+			$scope.note.archiveStatus= $scope.archive;
 			$scope.note.deleteStatus = "false";
 			$scope.note.noteColor=$scope.AddNoteColor;
 			var note=$scope.note;

@@ -100,14 +100,8 @@ public class NotesController {
 		if (notes == null) {
 			return new ResponseEntity<List<Notes>>(HttpStatus.NOT_FOUND);
 		}
-		//return new ResponseEntity<List<Notes>>(notes, HttpStatus.OK);
-		System.out.println("Line 1");
 		List<Notes> collaboratedNotes=noteService.getCollaboratedNotes(user);
-		System.out.println("Line 2");
-		
-		
 		List<Notes> allNotes=new ArrayList<Notes>();
-		System.out.println("Line 3");
 		for (int i = 0; i < notes.size(); i++) {
 			allNotes.add(notes.get(i));
 		}

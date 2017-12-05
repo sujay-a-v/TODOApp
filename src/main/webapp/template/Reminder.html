@@ -22,6 +22,9 @@
 						alt="pin" style="height: 17px" src="images/pin.png"></img>
 					</span>
 				</div>
+				<img ng-if="note.image!=''" ng-click="open(note)" style="height: 200px;" ng-src="{{note.image}}"/><br>
+			<span ng-click="removeImage(note)" > <img ng-if="note.image!=''" alt="delete" id="moreOptions" src="images/delete.svg" height="20px" style="float: right"></span>
+				
 				<b><div style="margin: 8px" ng-bind-html="note.title"></div></b>
 				<div style="margin: 7px" ng-bind-html="note.description"></div><br/>
 				<br>
@@ -53,7 +56,9 @@
 										</a>
 									</ul>
 								</div>
-								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px"> 
+								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px" ng-click="openImageUploader(note)">
+								<input id="imageuploader" ng-show="false" type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+								 
 								<span ng-click="archiveNote(note)">
 									<img ng-if="!Archive" alt="archive" src="images/ic_archive_black_24px.svg" height="20px">
 									<img ng-if="Archive" alt="unarchive" src="images/unarchive.svg" height="20px"></span>
@@ -64,7 +69,7 @@
 									</span>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="margin-left: 150px;">
 										<li><a ng-click="deleteNote(note)">Delete</a></li>
-										<li><a>Add Lable</a></li>
+										<li><a>Add Label</a></li>
 										<li><a ng-click="copy(note)">Make a Copy</a></li>
 										<li><a ng-click="socialShare(note)">Social Share(fb)</a></li>
 									</ul>
