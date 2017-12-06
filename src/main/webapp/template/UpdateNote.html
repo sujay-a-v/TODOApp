@@ -1,7 +1,9 @@
 
 <div class="container">
 <div id="editNoteModal" 
-    margin-top: -8px;   background-color: {{note.noteColor}}">
+   style=" margin-top: -4px;
+    margin-left: -16px;
+    margin-right: 556px;   background-color: {{note.noteColor}}">
 		<div style="float: right ;margin-right: 7px; margin-top: 8px;">
 			<span style="cursor: pointer" ng-click="note.pin=!note.pin" > 
 			<img ng-hide="note.pin" style="height: 17px" alt="pin" src="images/pin.png"><img ng-show="note.pin" style="height: 17px" alt="pin" src="images/pin.png">
@@ -18,7 +20,7 @@
 		<br>
 	<div ng-if="note.reminderStatus!=''" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
 		<br/>
-		<div  style="margin-left: 444px;">Edited : {{note.modifiedDate | date:'MMM dd'}}</div>
+		<div  style="margin-left: 444px;">Edited : {{note.modifiedDate | date:'dd-MMM-yyyy'}}</div>
 		</div>
 		<div>
 
@@ -28,8 +30,10 @@
 								
 									<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
 									<li><input type="text" ng-attr-id="datepicker{{note.id}}" class="reminder" ng-click="openReminder(note)" ng-model="note.reminderStatus"></li>
-									<li><button ng-click="openReminder(note)"><span  class="glyphicon glyphicon-calendar"></span></button></li>
-									</ul>
+									<li><div ng-click="openReminder(note)"><span  >Pick Date & time</span></div></li>
+									<li><div ng-click="reminder(note,'today')"><span  >Later today</span></div></li>
+									<li><div ng-click="reminder(note,'tommorow')"><span  >Tommorow 8AM</span></div></li>
+									<li><div ng-click="reminder(note,'nextweek')"><span  >Next week</span></div></li>									</ul>
 									
 								<img alt="collaborator" src="images/collaborator.png" height="20px" style="margin: 8px">
 								<div class="btn-group dropup colorDiv" uib-dropdown >
@@ -64,9 +68,9 @@
 								</div>
 								<div><span  ng-click="editNote(note)" style="margin-left: 500px;">DONE</span></div>
 						</div>
-						<div style="float: right;margin-right: 10px;">
+						<!-- <div style="float: right;margin-right: 10px;">
 						<span  ng-click="editNote(note)" >DONE</span>
-							</div>
+							</div> -->
 		</div>
 </div>
 </div> 

@@ -160,4 +160,12 @@ public class UserDaoImplement implements UserDao {
 		}
 		return "Password not set";
 	}
+
+	@Override
+	public List<User> getAllEmail() {
+		Session session=sessionFactory.openSession();
+		Query query=session.createQuery("from User");
+		List<User> user=query.list(); 
+		return user;
+	}
 }

@@ -11,24 +11,14 @@
 
 	<div class="col-sm-9" id="mainWrapper">
 		<br> <br>
-			
+			<h1>IN Search page</h1>
 			<div class="{{card}}" id="card" style=" background-color:{{note.noteColor}}" 
-				ng-repeat="note in notes | orderBy : '-modifiedDate' | filter :{deleteStatus:'true'}">
+				ng-repeat="note in notes |  filter :searchText">
 				
 				<b><div style="margin: 8px" ng-bind-html="note.title"></div></b>
 				<div style="margin: 7px" ng-bind-html="note.description"></div>
 				<br>
-				<div id="moreOptions">
-					<div class="dropdown" style="float: left">
-						<span class="btn dropdown-toggle" id="menu1" data-toggle="dropdown">
-							<span class="glyphicon glyphicon-option-vertical"></span>
-						</span>
-						<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-							<li><a ng-click="deleteNoteForever(note)">Delete Forever</a></li>
-							<li><a ng-click="deleteNote(note)">Restore</a></li>
-						</ul>
-					</div>
-				</div>
+				
 			</div>
 
 	</div>

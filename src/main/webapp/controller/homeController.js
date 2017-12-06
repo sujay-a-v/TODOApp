@@ -25,7 +25,9 @@ var getNotes=function(){
 getUser();
 function getUser(){
 	var token=localStorage.getItem('token');
-		var user=homeService.getCurrentUser(token);
+	var url = 'currentUser';
+	var method = 'GET';
+		var user=homeService.getCurrentUser(url,method,token);
 		user.then(function(response){
 			$scope.User=response.data;
 			$scope.ListView=response.data.listView;
@@ -153,6 +155,15 @@ $scope.toggleSideBar = function() {
 				$scope.navBarColor= "#607D8B";
 				$scope.navBarHeading="Archive";
 			}
+			else if($state.current.name=="Search"){
+				$scope.navBarColor= "#0066ff";
+				$scope.navBarHeading="Fundoo Keep";
+			}
+			
+			/******  Search *****/
+			$scope.goToSearchPage=function(){
+				$state.go('Search');
+			}
 		
 		/**********  Delete & Restore Note  ***************/
 		$scope.deleteNote=function(note){
@@ -248,6 +259,23 @@ $scope.toggleSideBar = function() {
 				"color":'#ffffff',
 				"path":'images/white.png'
 			},
+			
+			{
+				"color":'#1a53ff',
+				"path":'images/darkblue.png'
+			},
+			{
+				"color":'#9966ff',
+				"path":'images/purple.png'
+			},
+			{
+				"color":'#ff99cc',
+				"path":'images/pink.png'
+			},
+			{
+				"color":'#d9b38c',
+				"path":'images/brown.png'
+			},
 			{
 				"color":'#e74c3c',
 				"path":'images/Red.png'
@@ -271,22 +299,6 @@ $scope.toggleSideBar = function() {
 			{
 				"color":'#0099ff',
 				"path":'images/blue.png'
-			},
-			{
-				"color":'#1a53ff',
-				"path":'images/darkblue.png'
-			},
-			{
-				"color":'#9966ff',
-				"path":'images/purple.png'
-			},
-			{
-				"color":'#ff99cc',
-				"path":'images/pink.png'
-			},
-			{
-				"color":'#d9b38c',
-				"path":'images/brown.png'
 			},
 			{
 				"color":'#bfbfbf',
@@ -401,6 +413,37 @@ $scope.toggleSideBar = function() {
 			   }
 		}
 		
+		/**** Tommorow , Next Week & Later Today reminder *******/
+		$scope.reminder=function(note,day){
+			$scope.day=day;
+			var date=new Date();
+			var month=date.getMonth()+1;
+			var year=date.getFullYear();
+			if($scope.day==='tommorow'){
+				var tommorow=date.getDate()+1;
+				var tommorowDate=(tommorow+"/"+month+"/"+year);
+				note.reminderStatus=tommorowDate+" 8:00AM";
+			}
+			else if($scope.day==='nextweek'){
+				var nextWeek=date.getDate()+7;
+				var nextWeekDate=(nextWeek+"/"+month+"/"+year);
+				note.reminderStatus=nextWeekDate;
+			}
+			else{
+				var time=date.getHours();
+				if(time<8){
+					note.reminderStatus="Today 8:00AM";
+				}
+				else if(time>8  &&  time<20){
+					note.reminderStatus="Today 8:00PM";
+				}
+				else{
+					note.reminderStatus="Tommorow 8:00AM";
+				}
+			}
+			$scope.updateNote(note);
+		}
+		
 		/******** Detele Reminder *********/
 		$scope.deleteReminder=function(note){
 			note.reminderStatus="";
@@ -459,6 +502,7 @@ $scope.toggleSideBar = function() {
 				$scope.users = response.data;
 				$scope.note.collabratorUsers = response.data;
 				modalInstance.close('resetmodel');
+				$scope.errorMsg="";
 			}, function(response) {
 				//$scope.users = {};
 				$scope.errorMsg="User already exist";
@@ -495,6 +539,18 @@ $scope.toggleSideBar = function() {
 				$scope.owner = response.data;
 			}, function(response) {
 				$scope.users = {};
+			});
+		}
+		
+		$scope.getAllEmail=function(){
+			var url = 'getAllEmail';
+			var method='GET';
+			var token = localStorage.getItem('token');
+			var user=homeService.getCurrentUser(url,method,token);
+			user.then(function(response){
+				$scope.emailList=response.data;
+				console.log(response.data);
+			},function(response){
 			});
 		}
 

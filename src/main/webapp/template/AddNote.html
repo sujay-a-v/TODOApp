@@ -34,8 +34,10 @@
 							</span>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 								<li><input type="text" id="datepicker" class="reminder" ng-click="openAddReminder()"></li>
-								<li><button ng-click="openAddReminder()">
-										<span class="glyphicon glyphicon-calendar"></span>
+								<li><div ng-click="openReminder(note)"><span  >Pick Date & time</span></div></li>
+									<li><div ng-click="reminder(note,'today')"><span  >Later today</span></div></li>
+									<li><div ng-click="reminder(note,'tommorow')"><span  >Tommorow 8AM</span></div></li>
+									<li><div ng-click="reminder(note,'nextweek')"><span  >Next week</span></div></li>
 									</button></li>
 							</ul>
 

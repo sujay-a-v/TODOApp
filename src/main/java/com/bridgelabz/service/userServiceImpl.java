@@ -1,5 +1,7 @@
 package com.bridgelabz.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bridgelabz.dao.UserDao;
@@ -45,5 +47,11 @@ public class userServiceImpl implements UserService {
 	@Override
 	public String passwordReset(User user) {
 		return userDao.passwordReset(user);
+	}
+
+	@Override
+	public List<User> getAllEmail() {
+		
+		return userDao.getAllEmail();
 	}
 }

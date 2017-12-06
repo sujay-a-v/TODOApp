@@ -1,5 +1,7 @@
 package com.bridgelabz.service;
 
+import java.util.List;
+
 import com.bridgelabz.model.User;
 
 public interface UserService {
@@ -17,4 +19,6 @@ public interface UserService {
 	public User getByEmail(String email);
 	
 	public String passwordReset(User user);
+	
+	public List<User> getAllEmail();
 }

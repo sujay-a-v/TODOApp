@@ -14,10 +14,10 @@ toDoApp.factory('homeService',function($http){
 		});
 	}
 	
-	notes.getCurrentUser=function(token){
+	notes.getCurrentUser=function(url,method,token){
 		return $http({
-			method : "GET",
-			url : 'currentUser',
+			method : method,
+			url : url,
 			headers: {
 				'token':token
 			}

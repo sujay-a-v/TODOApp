@@ -47,6 +47,11 @@ toDoApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$u
 		templateUrl:'template/Trash.html',
 		controller:'homeController'
 	})
+	.state('Search',{
+		url:'/Search',
+		templateUrl:'template/Search.html',
+		controller:'homeController'
+	})
 	.state('Archive',{
 		url:'/Archive',
 		templateUrl:'template/Archive.html',

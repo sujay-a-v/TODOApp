@@ -26,8 +26,12 @@
 	</div>
 	</div><br>
 	</div>
+	<div></div>
 	<div class="row">
-	<input type="text" class="col-sm-12" id="searchbox" ng-model="$parent.shareWith.userEmail" placeholder="Enter Collborator Email">
+	<input type="text" class="col-sm-12" id="searchbox" ng-model="$parent.shareWith.userEmail" placeholder="Enter Collborator Email" ng-focus="getAllEmail()">
+	<div ng-repeat="email in emailList">
+	<div ng-bind-html="email.userEmail" style="margin-left: 8px"></div>
+	</div>
 	</div>
 	<p id="err" ng-bind="errorMsg" style="color:red"></p>
 	</div>

@@ -1,6 +1,7 @@
 package com.bridgelabz.control;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -131,6 +132,19 @@ public class UserController {
 		userService.activateUser(id, user1);
 		response.setMessage("Profile updated");
 		return ResponseEntity.status(HttpStatus.OK).body(response);
+		
+	}
+	
+	@RequestMapping(value="getAllEmail", method = RequestMethod.GET)
+	public ResponseEntity<List<User>> getAllEmail()
+	{
+		System.out.println("\n\n @ get all emails\n\n");
+		List<User> users=userService.getAllEmail();
+		for (int i = 0; i < users.size(); i++) {
+			System.out.println(users.get(i).getUserEmail());
+			
+		}
+		return new ResponseEntity(users,HttpStatus.OK);
 		
 	}
 	
