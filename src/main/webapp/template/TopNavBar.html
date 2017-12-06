@@ -6,12 +6,13 @@
 			<li ng-click="toggleSideBar()">
 			<span style="font-size: 25px; cursor: pointer">&#9776;</span></li>
 			<li><h4>{{navBarHeading}}</h4></li>
+			<li><span style="padding-top: 10px" class="glyphicon glyphicon-search"></span></li>
 			<li>
-				<div class="form-group" role="search">
-					<input type="text" id="srch" ng-show="searching" class="form-control" placeholder="Search" ng-model="searchText">
+				<div class="form-group">
+				<input type="text" id="search" ng-show="searching" class="form-control" placeholder="Search" ng-model="searchText">
+						<button id="search" ng-hide="searching" ng-click="goToSearchPage()">Search</button>
 				</div>
 			</li>
-			<li><span style="padding-top: 10px" class="glyphicon glyphicon-search" id="srch" ng-hide="searching" ng-click="goToSearchPage()"></span></li>
 		</ul>
 
 		<ul class="nav navbar-nav navbar-right">

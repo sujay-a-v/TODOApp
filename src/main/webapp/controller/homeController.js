@@ -142,22 +142,32 @@ $scope.toggleSideBar = function() {
 			if($state.current.name=="home"){
 				$scope.navBarColor= "#ffbb33";
 				$scope.navBarHeading="Fundoo Keep";
+				$scope.contentable = true;
+				$scope.searching=false;
 			}
 			else if($state.current.name=="Reminder"){
 				$scope.navBarColor="#607D8B"
 				$scope.navBarHeading="Reminder";
+				$scope.contentable = true;
+				$scope.searching=false;
 			}
 			else if($state.current.name=="Trash"){
 				$scope.navBarHeading="Trash";
+				$scope.contentable = true;
+				$scope.searching=false;
 				$scope.navBarColor="#636363"
 			}
 			else if($state.current.name=="Archive"){
 				$scope.navBarColor= "#607D8B";
 				$scope.navBarHeading="Archive";
+				$scope.contentable = true;
+				$scope.searching=false;
 			}
 			else if($state.current.name=="Search"){
 				$scope.navBarColor= "#0066ff";
 				$scope.navBarHeading="Fundoo Keep";
+				$scope.contentable = true;
+				$scope.searching=true;
 			}
 			
 			/******  Search *****/

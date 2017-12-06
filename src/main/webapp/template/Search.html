@@ -11,8 +11,8 @@
 
 	<div class="col-sm-9" id="mainWrapper">
 		<br> <br>
-			<h1>IN Search page</h1>
-			<div class="{{card}}" id="card" style=" background-color:{{note.noteColor}}" 
+			<h4>IN Search page</h4>
+			<div class="{{card}}" id="card" style="width:300px; background-color:{{note.noteColor}}" 
 				ng-repeat="note in notes |  filter :searchText">
 				
 				<b><div style="margin: 8px" ng-bind-html="note.title"></div></b>

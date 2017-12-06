@@ -7,6 +7,15 @@ div#topNavigation{
     background-color:#ffbb33;
 } 
 
+#search{
+	text-align: left;
+    width: 818px;
+    border:none;
+    border-radius: 8px;
+    background-color: white;
+    height: 30px;
+}
+
 div#topNavigation li{
      margin-right: 20px;
      margin-top: 10px;
