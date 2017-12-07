@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bridgelabz.dao.UserDao;
+import com.bridgelabz.model.Label;
 import com.bridgelabz.model.User;
 
 public class userServiceImpl implements UserService {
@@ -53,5 +54,11 @@ public class userServiceImpl implements UserService {
 	public List<User> getAllEmail() {
 		
 		return userDao.getAllEmail();
+	}
+
+	@Override
+	public List<Label> getUserLabel(User use) {
+		// TODO Auto-generated method stub
+		return userDao.getUserLabel(use);
 	}
 }

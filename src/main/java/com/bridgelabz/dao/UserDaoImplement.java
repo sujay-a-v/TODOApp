@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import com.bridgelabz.model.Label;
 import com.bridgelabz.model.User;
 
 
@@ -167,5 +168,22 @@ public class UserDaoImplement implements UserDao {
 		Query query=session.createQuery("from User");
 		List<User> user=query.list(); 
 		return user;
+	}
+
+	@Override
+	public List<Label> getUserLabel(User use) {
+		Session session=sessionFactory.openSession();
+		try{
+			Query query=session.createQuery("from Label");
+			List<Label> label=query.list();
+			return label;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		return null;
 	}
 }

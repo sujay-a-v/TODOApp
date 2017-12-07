@@ -138,14 +138,8 @@ public class UserController {
 	@RequestMapping(value="getAllEmail", method = RequestMethod.GET)
 	public ResponseEntity<List<User>> getAllEmail()
 	{
-		System.out.println("\n\n @ get all emails\n\n");
 		List<User> users=userService.getAllEmail();
-		for (int i = 0; i < users.size(); i++) {
-			System.out.println(users.get(i).getUserEmail());
-			
-		}
 		return new ResponseEntity(users,HttpStatus.OK);
-		
 	}
 	
 	@RequestMapping(value="/listAndGrid", method = RequestMethod.POST)

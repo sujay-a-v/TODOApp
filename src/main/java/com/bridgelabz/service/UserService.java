@@ -2,6 +2,7 @@ package com.bridgelabz.service;
 
 import java.util.List;
 
+import com.bridgelabz.model.Label;
 import com.bridgelabz.model.User;
 
 public interface UserService {
@@ -21,4 +22,6 @@ public interface UserService {
 	public String passwordReset(User user);
 	
 	public List<User> getAllEmail();
+	
+	public List<Label> getUserLabel(User use);
 }

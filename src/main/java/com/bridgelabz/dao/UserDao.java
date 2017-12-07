@@ -2,6 +2,7 @@ package com.bridgelabz.dao;
 
 import java.util.List;
 
+import com.bridgelabz.model.Label;
 import com.bridgelabz.model.User;
 
 public interface UserDao {
@@ -19,5 +20,7 @@ public interface UserDao {
 	public String passwordReset(User user);
 	
 	public  List<User> getAllEmail();
+	
+	public List<Label> getUserLabel(User use);
 
 }

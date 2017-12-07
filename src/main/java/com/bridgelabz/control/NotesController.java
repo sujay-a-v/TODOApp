@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bridgelabz.model.Collaborator;
+import com.bridgelabz.model.Label;
 import com.bridgelabz.model.Notes;
 import com.bridgelabz.model.Response;
 import com.bridgelabz.model.User;
@@ -269,5 +270,33 @@ public class NotesController {
 			return new  ResponseEntity<User>(owner,HttpStatus.OK);
 		}
 		return new ResponseEntity(HttpStatus.NOT_FOUND);
+	}
+	
+	@RequestMapping(value="getUserLabels",method = RequestMethod.GET)
+	public ResponseEntity<List<Label>> getUserLabels(HttpServletRequest request){
+		int id = tokens.validateToken(request.getHeader("token"));
+		User user=userService.retrieveById(id);
+		List<Label> labels=userService.getUserLabel(user);
+		//return new ResponseEntity<List<Label>>(labels,HttpStatus.OK);
+		System.out.println("\n\n  end get labels");
+		for (int i = 0; i < labels.size(); i++) {
+			System.out.println(labels.get(i).getLabelName()+"\n");
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(labels);
+		
+	}
+	
+	@RequestMapping(value="addLabel",method = RequestMethod.POST)
+	public ResponseEntity<Response> addLabel(@RequestBody Label label,HttpServletRequest request){
+		int id = tokens.validateToken(request.getHeader("token"));
+		User user=userService.retrieveById(id);
+		Label label1=new Label();
+		label1.setLabelName(label.getLabelName());
+		label1.setUser(user);
+		label1.setNote(null);
+		noteService.addNewLabel(label1);
+		System.out.println("\n\nLabel addeed \n\n");
+		response.setMessage("label added successfully");
+		return new ResponseEntity<Response>(response,HttpStatus.OK);
 	}
 }

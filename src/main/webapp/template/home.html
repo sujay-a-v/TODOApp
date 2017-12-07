@@ -1,9 +1,9 @@
-<div class="mainHome">
+<div class="homeId" style=" width: 100%;height:100%; background-color:#e8e8e8;">
 	<!-- ************************************* Start of Top Bar ********************************************** -->
 	<top-nav-bar></top-nav-bar>
 	<!-- ************************************* End of Top Bar  ********************************************** -->
 
-	<div class="row" id="homeId">
+	<div class="row">
 		<div class="col-sm-3">
 			<!-- ************* Start of Side Bar ***************** -->
 			<side-nav-bar ></side-nav-bar >
@@ -98,7 +98,7 @@
 								<b><div style="margin: 8px" ng-click="open(note)" ng-bind-html="note.title"></div></b>
 								<div style="margin: 7px" ng-click="open(note)" ng-bind-html="note.description"></div><br/>
 								
-					<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
+					<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" id="moreOptions" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
 													
 						<div id="moreOptions">
 
@@ -176,8 +176,21 @@
 						<span ng-click="removeImage(note)" > <img ng-if="note.image!=''" alt="delete" id="moreOptions" src="images/delete.svg" height="20px" style="float: right"></span>
 								<b><div style="margin: 8px" ng-click="open(note)" ng-bind-html="note.title"></div></b>
 								<div style="margin: 7px" ng-click="open(note)" ng-bind-html="note.description"></div><br/>	
-						<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
-						</div>															
+						<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" id="moreOptions" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
+						</div>	
+						
+						<div ng-repeat="noteLabel in note.labels">
+							<div id="label" ng-if="label.labelName!=''"> {{noteLabel.labelName}}
+								<span class="closebtn" ng-click="deleteNoteLabel(note,label)">&#x274C;</span>
+							</div>
+						</div>
+						
+						<!-- <div class="row" ng-init="getUserlist(note,User)">
+						<div ng-repeat="user in users">
+						<div class="col-sm-2">
+						<img ng-src="{{user.profile}}" class="img-circle" height="25" width="25"/>
+						</div></div></div> -->
+																				
 						<div id="moreOptions">
 
 							<div class="dropdown" style="float: left">
@@ -215,21 +228,30 @@
 								<span ng-click="archiveNote(note)"><img alt="archive"
 									src="images/ic_archive_black_24px.svg" height="20px"></span>
 								<div style="float: right">
-									<span class="btn dropdown-toggle" id="menu1"
-										data-toggle="dropdown"> <span
+									<span class="btn dropdown-toggle" id="menu1" data-toggle="dropdown"> <span
 										class="glyphicon glyphicon-option-vertical"></span>
 									</span>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="margin-left: 150px;">
 										<li><a ng-click="deleteNote(note)">Delete</a></li>
-										<li><!-- <a>Add Label</a> -->
-										<span class="btn dropdown-toggle" id="menu2" data-toggle="dropdown">Add Lable</span>
-											<ul class="dropdown-menu" role="menu" aria-labelledby="menu2" style="margin-left: 150px;">
-												<li>Label</li>
-												<li><input type="text" id="label" name="label"></li>
-											</ul>
-										</li>
 										<li><a ng-click="copy(note)">Make a Copy</a></li>
 										<li><a ng-click="socialShare(note)">Social Share(fb)</a></li>
+										
+										<li class="dropdown-submenu">
+							                <a tabindex="-1">Add Label</a>
+							                <ul class="dropdown-menu">
+							                  <li ng-repeat="label in Listlabel">
+							                  <input type="checkbox"  ng-click="toggleLabel(note,label)" ng-checked="checkStatus(note,label)">{{label.labelName}}
+							                  </li>
+							                </ul>
+							              </li>
+										
+										<!-- <li class="btn dropdown-toggle" id="menu2" data-toggle="dropdown">
+										<a tabindex="-1">Add Label</a>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
+										<li ><input type="checkbox">ABCD</li>
+										<li>MMMM</li></ul>
+										</li> -->
+										
 									</ul>
 								</div>
 							</div>

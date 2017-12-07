@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bridgelabz.dao.UserNotesDao;
 import com.bridgelabz.model.Collaborator;
+import com.bridgelabz.model.Label;
 import com.bridgelabz.model.Notes;
 import com.bridgelabz.model.User;
 
@@ -64,6 +65,12 @@ public class NotesServiceImpl implements NotesService {
 	public int removeUser(User userId, Notes noteId) {
 		// TODO Auto-generated method stub
 		return userNotesDao.removeUser(userId, noteId);
+	}
+
+	@Override
+	public void addNewLabel(Label label) {
+		userNotesDao.addNewLabel(label);
+		
 	}
 
 }

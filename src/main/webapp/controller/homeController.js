@@ -12,7 +12,6 @@ var getNotes=function(){
 	console.log("inside get User ")
 	var notes=homeService.getNotes(token);
 	notes.then(function(response){
-		console.log(response.data);
 		notes=response.data;
 		$scope.notes=notes;
 	},function(response){
@@ -36,6 +35,20 @@ function getUser(){
 		});
 	}
 	
+/**** getting user labels *******/
+getUserLabels();
+function getUserLabels(){
+	var token=localStorage.getItem('token');
+	var url = 'getUserLabels';
+	var method = 'GET';
+		var labels=homeService.getCurrentUser(url,method,token);
+		labels.then(function(response){
+			$scope.Listlabel=response.data;
+		},function(response){
+			
+		});
+}
+
 	/****** List and Grid *******/
 
 	/*$scope.ListView = true;*/
@@ -112,7 +125,78 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 		note.image='';
 		$scope.updateNote(note);
 	}
-
+/******** Add Label***********/
+	
+	
+	$scope.openAddNewLabel=function(){
+		modalInstance = $uibModal.open({
+			templateUrl: 'template/AddLabel.html',
+			scope : $scope
+			});
+	}
+	
+	$scope.addLabel=function(){
+		var newLabel=document.getElementById("newLabal").value;
+		if(newLabel!=''){
+			var obj={};
+			obj.labelName=newLabel;
+			var url = 'addLabel';
+			var method = 'POST';
+			var token = localStorage.getItem('token');
+			var laBel=homeService.service(url,method,obj,token);
+			laBel.then(function(response){
+				console.log(response.data);
+			},function(response){
+				
+			});
+		}	
+	}
+	
+	
+	/******* Add and remove the labels from Note *******/
+	$scope.toggleLabel=function(note,label){
+		var index=-1;
+		for(var i=0;i<note.labels.length;i++){
+			if(note.labels[i].labelName == label.labelName){
+				index=i;
+			}
+		}
+		if(index == -1){
+			note.labels.push(label);
+		}
+		else{
+		note.labels.splice(index,1);
+		}
+		console.log("note lable");
+		 $scope.updateNote(note);
+		 
+	}
+	
+	$scope.checkStatus=function(note,label){
+		for(var i=0;i<note.labels.length;i++){
+			if(note.labels[i].labelName===label.labelName){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/***** Delete Note Label ******/
+	$scope.deleteNoteLabel=function(note,label){
+		console.log("delete note lable");
+		
+		$scope.note = note;
+    	var comparator = angular.equals;
+        if (angular.isArray($scope.note.labels)) {
+          for (var i = $scope.note.labels.length; i--;) {
+            if (comparator($scope.note.labels[i],label)) {
+            	$scope.note.labels.splice(i, 1);
+              break;
+            }
+          }
+        }
+        $scope.updateNote(note);
+	}
 
 /************  Toggle side bar   ********/
 $scope.showSideBar = false;
@@ -142,26 +226,18 @@ $scope.toggleSideBar = function() {
 			if($state.current.name=="home"){
 				$scope.navBarColor= "#ffbb33";
 				$scope.navBarHeading="Fundoo Keep";
-				$scope.contentable = true;
-				$scope.searching=false;
 			}
 			else if($state.current.name=="Reminder"){
 				$scope.navBarColor="#607D8B"
 				$scope.navBarHeading="Reminder";
-				$scope.contentable = true;
-				$scope.searching=false;
 			}
 			else if($state.current.name=="Trash"){
 				$scope.navBarHeading="Trash";
-				$scope.contentable = true;
-				$scope.searching=false;
 				$scope.navBarColor="#636363"
 			}
 			else if($state.current.name=="Archive"){
 				$scope.navBarColor= "#607D8B";
 				$scope.navBarHeading="Archive";
-				$scope.contentable = true;
-				$scope.searching=false;
 			}
 			else if($state.current.name=="Search"){
 				$scope.navBarColor= "#0066ff";

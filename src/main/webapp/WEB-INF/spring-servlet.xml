@@ -46,6 +46,7 @@
 				<value>com.bridgelabz.model.Notes</value>
 				<value>com.bridgelabz.model.User</value>
 				<value>com.bridgelabz.model.Collaborator</value>
+				<value>com.bridgelabz.model.Label</value>
 			</list>
 		</property>
 

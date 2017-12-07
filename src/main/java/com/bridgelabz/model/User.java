@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,6 +39,9 @@ public class User {
 	@Column(name="PROFILE",columnDefinition="LONGBLOB")
 	private String profile;
 
+	@OneToMany(mappedBy="user",fetch=FetchType.EAGER)
+	@JsonIgnore
+	private List<Label> labels;
 
 	@OneToMany(mappedBy="user")
 	@JsonIgnore
@@ -49,6 +53,16 @@ public class User {
 
 	public void setNotes(List<Notes> notes) {
 		this.notes = notes;
+	}
+
+	
+	
+	public List<Label> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(List<Label> labels) {
+		this.labels = labels;
 	}
 
 	public int getId() {
@@ -127,7 +141,8 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", userMobile=" + userMobile + ", userEmail=" + userEmail
 				+ ", userPassword=" + userPassword + ", confirmPasswod=" + confirmPasswod + ", isActive=" + isActive
-				+ ", listView=" + listView + ", profile=" + profile + ", notes=" + notes + "]";
+				+ ", listView=" + listView + ", profile=" + profile + ", labels=" + labels + ", notes=" + notes + "]";
 	}
 
+	
 }

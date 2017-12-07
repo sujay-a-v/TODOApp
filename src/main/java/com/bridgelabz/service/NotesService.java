@@ -3,6 +3,7 @@ package com.bridgelabz.service;
 import java.util.List;
 
 import com.bridgelabz.model.Collaborator;
+import com.bridgelabz.model.Label;
 import com.bridgelabz.model.Notes;
 import com.bridgelabz.model.User;
 
@@ -26,5 +27,9 @@ public interface NotesService {
 	public List<Notes> getCollaboratedNotes(User user);
 	
 	public int removeUser(User userId,Notes noteId);
+	
+	
+	/***** Label program ***********/
+	public void addNewLabel(Label label);
 
 }

@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bridgelabz.model.Collaborator;
+import com.bridgelabz.model.Label;
 import com.bridgelabz.model.Notes;
 import com.bridgelabz.model.User;
 
@@ -206,6 +207,24 @@ public class UserNotesDaoImpl implements UserNotesDao {
 			session.close();
 		}
 		return 0;
+	}
+
+	@Override
+	public void addNewLabel(Label label) {
+		Session session=sessionFactory.openSession();
+		Transaction transaction=null;
+		try{
+			transaction=session.beginTransaction();
+			session.save(label);
+			transaction.commit();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		
 	}
 
 }

@@ -9,11 +9,11 @@ div#topNavigation{
 
 #search{
 	text-align: left;
-    width: 818px;
+    width: 600px;
     border:none;
     border-radius: 8px;
     background-color: white;
-    height: 30px;
+    height: 35px;
 }
 
 div#topNavigation li{
