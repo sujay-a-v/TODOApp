@@ -39,7 +39,7 @@ public class User {
 	@Column(name="PROFILE",columnDefinition="LONGBLOB")
 	private String profile;
 
-	@OneToMany(mappedBy="user",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="user")
 	@JsonIgnore
 	private List<Label> labels;
 

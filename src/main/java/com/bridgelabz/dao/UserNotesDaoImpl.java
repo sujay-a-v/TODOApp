@@ -90,7 +90,9 @@ public class UserNotesDaoImpl implements UserNotesDao {
 		{
 			Criteria criteria=session.createCriteria(Notes.class);
 			criteria.add(Restrictions.eq("user", user));
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			List<Notes> list=criteria.list();
+			System.out.println(list.size());
 			return list;
 		}
 		catch (Exception e) {
@@ -166,7 +168,7 @@ public class UserNotesDaoImpl implements UserNotesDao {
 		Session session=sessionFactory.openSession();
 		try
 		{
-			Query query=session.createQuery("select c.noteId From Collaborator c where c.sharedId=:sharedId");
+			Query query=session.createQuery("select  distinct c.noteId From Collaborator c where c.sharedId=:sharedId");
 			query.setParameter("sharedId", userId);
 			/*Criteria criteria=session.createCriteria(Collaborator.class);
 			criteria.add(Restrictions.eq("userId", user));
@@ -225,6 +227,15 @@ public class UserNotesDaoImpl implements UserNotesDao {
 			session.close();
 		}
 		
+	}
+
+	@Override
+	public void deleteUserLabel(Label label) {
+		Session session=sessionFactory.openSession();
+		Transaction transaction=session.beginTransaction();
+		session.delete(label);
+		transaction.commit();
+		session.close();
 	}
 
 }

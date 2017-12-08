@@ -73,4 +73,10 @@ public class NotesServiceImpl implements NotesService {
 		
 	}
 
+	@Override
+	public void deleteUserLabel(Label label) {
+		userNotesDao.deleteUserLabel(label);
+		
+	}
+
 }

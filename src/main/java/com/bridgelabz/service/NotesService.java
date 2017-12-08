@@ -31,5 +31,7 @@ public interface NotesService {
 	
 	/***** Label program ***********/
 	public void addNewLabel(Label label);
+	
+	public void deleteUserLabel(Label label);
 
 }

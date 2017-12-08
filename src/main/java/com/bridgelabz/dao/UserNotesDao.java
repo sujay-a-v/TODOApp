@@ -29,5 +29,7 @@ public interface UserNotesDao {
 	
 	/***** Label Program *******/
 	public void addNewLabel(Label label);
+	
+	public void deleteUserLabel(Label label);
 
 }

@@ -156,8 +156,9 @@ public class NotesController {
 		int uid = tokens.validateToken(request.getHeader("token"));
 
 		User user = userService.retrieveById(uid);
-		note.setUser(user);
+		
 		Notes currentNote = noteService.fetchById(id);
+		note.setUser(currentNote.getUser());
 		if (currentNote == null) {
 			response.setMessage("Notes not found for id ");
 			return new ResponseEntity<Response>(response, HttpStatus.NOT_FOUND);
@@ -174,8 +175,8 @@ public class NotesController {
 		int uid = tokens.validateToken(request.getHeader("token"));
 
 		User user = userService.retrieveById(uid);
-		note.setUser(user);
 		Notes currentNote = noteService.fetchById(id);
+		note.setUser(currentNote.getUser());
 		if (currentNote == null) {
 			response.setMessage("Notes not found for id ");
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
@@ -277,11 +278,6 @@ public class NotesController {
 		int id = tokens.validateToken(request.getHeader("token"));
 		User user=userService.retrieveById(id);
 		List<Label> labels=userService.getUserLabel(user);
-		//return new ResponseEntity<List<Label>>(labels,HttpStatus.OK);
-		System.out.println("\n\n  end get labels");
-		for (int i = 0; i < labels.size(); i++) {
-			System.out.println(labels.get(i).getLabelName()+"\n");
-		}
 		return ResponseEntity.status(HttpStatus.OK).body(labels);
 		
 	}
@@ -295,8 +291,15 @@ public class NotesController {
 		label1.setUser(user);
 		label1.setNote(null);
 		noteService.addNewLabel(label1);
-		System.out.println("\n\nLabel addeed \n\n");
 		response.setMessage("label added successfully");
 		return new ResponseEntity<Response>(response,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="deleteUserLabel")
+	public ResponseEntity<Response> deleteUserLabel(@RequestBody Label label,HttpServletRequest request){
+		noteService.deleteUserLabel(label);
+		response.setMessage("lable deleted successfully");
+		return new ResponseEntity<Response>(response,HttpStatus.OK);
+		
 	}
 }

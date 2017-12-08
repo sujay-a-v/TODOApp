@@ -4,8 +4,11 @@
 	<font size="3px"><b>Edit Labels</b></font>
 		<div class="row">
 	<div class="col-sm-4">
-	<span><input type="text" id="newLabal" ng-model="userlabel"><span ng-click="addLabel()" >&#10004</span></span>
+	<input type="text" id="newLabal" ng-model="userlabel" placeholder="Create new label"><span ng-click="addLabel()"><img alt="delete" src="images/save.svg" height="20px" style="margin-right: 5px;"></span>
 	</div></div><br>
+	<div ng-repeat="label in Listlabel">
+	<div><span ng-click="deleteUserLabel(label)"><img alt="delete" src="images/delete.svg" height="20px" style="margin-right: 5px;"></span>{{label.labelName}}</div>
+	</div>
 	</div>
 	<div class="modal-footer">
 	    <div role="button" ng-click="addLabel()"

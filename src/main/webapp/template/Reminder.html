@@ -14,7 +14,7 @@
 
 	<div class="col-sm-9" id="mainWrapper">
 		<br> <br>
-			<div class="{{card}}" id="card" style="  background-color: {{note.noteColor}}"
+			<div class="{{card}}" id="card" style=" width:300px; background-color: {{note.noteColor}}"
 				ng-if="note.reminderStatus!=''" ng-repeat="note in notes | orderBy : '-modifiedDate' | filter :{ deleteStatus:'false'}">
 				<div id="moreOptions" style="float: right">
 					<span style="cursor: pointer"

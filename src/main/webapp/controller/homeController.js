@@ -35,7 +35,7 @@ function getUser(){
 		});
 	}
 	
-/**** getting user labels *******/
+/**** Getting User labels *******/
 getUserLabels();
 function getUserLabels(){
 	var token=localStorage.getItem('token');
@@ -58,7 +58,7 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 		if ($scope.ListView == true) {
 			$scope.ListView = false;
 			localStorage.setItem('LISTGRID',$scope.ListView);
-			$scope.card="col-md-12 col-sm-12 col-xs-12 col-lg-12";
+			$scope.card="col-md-12 col-sm-12 col-xs-12 col-lg-10";
 			/*var notes = document.getElementsByClassName('card');
 			for (var i = 0; i < notes.length; i++) {
 				notes[i].style.width = "800px";
@@ -74,9 +74,8 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 			}*/
 		}
 	}
-	
-	/******** Image Upload **********/
-		
+/**--------------------------------------Image & User Profile Upload-----------------------------------------------------------------------------*/	
+	/******** Image Upload **********/	
 	$scope.imageSrc = "";
 
 	$scope.$on("fileProgress", function(e, progress) {
@@ -125,9 +124,8 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 		note.image='';
 		$scope.updateNote(note);
 	}
+	/**----------------------------Label Program---------------------------------------------------------*/
 /******** Add Label***********/
-	
-	
 	$scope.openAddNewLabel=function(){
 		modalInstance = $uibModal.open({
 			templateUrl: 'template/AddLabel.html',
@@ -136,6 +134,7 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 	}
 	
 	$scope.addLabel=function(){
+		modalInstance.close();
 		var newLabel=document.getElementById("newLabal").value;
 		if(newLabel!=''){
 			var obj={};
@@ -146,14 +145,16 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 			var laBel=homeService.service(url,method,obj,token);
 			laBel.then(function(response){
 				console.log(response.data);
+				getNotes();
+				getUserLabels();
 			},function(response){
-				
+				getNotes();
 			});
 		}	
 	}
 	
 	
-	/******* Add and remove the labels from Note *******/
+	/******* Add and Remove the labels from Note *******/
 	$scope.toggleLabel=function(note,label){
 		var index=-1;
 		for(var i=0;i<note.labels.length;i++){
@@ -167,9 +168,7 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 		else{
 		note.labels.splice(index,1);
 		}
-		console.log("note lable");
-		 $scope.updateNote(note);
-		 
+		 $scope.updateNote(note); 
 	}
 	
 	$scope.checkStatus=function(note,label){
@@ -183,19 +182,37 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 	
 	/***** Delete Note Label ******/
 	$scope.deleteNoteLabel=function(note,label){
-		console.log("delete note lable");
-		
 		$scope.note = note;
-    	var comparator = angular.equals;
         if (angular.isArray($scope.note.labels)) {
           for (var i = $scope.note.labels.length; i--;) {
-            if (comparator($scope.note.labels[i],label)) {
+            if (angular.equals($scope.note.labels[i],label)) {
             	$scope.note.labels.splice(i, 1);
               break;
             }
           }
         }
         $scope.updateNote(note);
+	}
+	
+	/*** Delete User Label ****/
+	$scope.deleteUserLabel=function(label){
+		modalInstance.close();
+		var url="deleteUserLabel";
+		var method="POST";
+		var token = localStorage.getItem('token');
+		var abc=homeService.service(url,method,label,token);
+		abc.then(function(response){
+			console.log("return   "+response.data.message);
+			getNotes();
+			getUserLabels();
+		},function(responsr){
+			getNotes();
+		});
+	}
+	
+	/***** Label page***/
+	$scope.goToLabelPage=function(){
+		$state.go('LabelPage');
 	}
 
 /************  Toggle side bar   ********/
@@ -207,7 +224,7 @@ $scope.toggleSideBar = function() {
 	}
 	else{
 		$scope.showSideBar = true;
-		document.getElementById("sideToggle").style.paddingLeft = "01px";
+		document.getElementById("sideToggle").style.paddingLeft = "0px";
 	}
 }
 
@@ -239,6 +256,10 @@ $scope.toggleSideBar = function() {
 				$scope.navBarColor= "#607D8B";
 				$scope.navBarHeading="Archive";
 			}
+			else if($state.current.name=="LabelPage"){
+				$scope.navBarColor= "#607D8B";
+				$scope.navBarHeading="LabelPage";
+			}
 			else if($state.current.name=="Search"){
 				$scope.navBarColor= "#0066ff";
 				$scope.navBarHeading="Fundoo Keep";
@@ -246,7 +267,7 @@ $scope.toggleSideBar = function() {
 				$scope.searching=true;
 			}
 			
-			/******  Search *****/
+		/********  Search *************/
 			$scope.goToSearchPage=function(){
 				$state.go('Search');
 			}
@@ -323,12 +344,11 @@ $scope.toggleSideBar = function() {
 			$state.go('login');
 		}
 		
-		
 		/***********  Edit Note  **************/
 		$scope.editNote=function(note){
 			note.title=document.getElementById("title").innerHTML;
 			note.description=document.getElementById("description").innerHTML;
-			modalInstance.close('resetmodel');
+			modalInstance.close();
 			$scope.updateNote(note);
 		}
 		
@@ -406,7 +426,6 @@ $scope.toggleSideBar = function() {
 			});
 		}
 		
-		
 		/******* Pin  *****************//* 
 		$scope.pinStatus =false;
 		
@@ -463,7 +482,6 @@ $scope.toggleSideBar = function() {
 			});
 		};
 
-		
 		/******** Remainder ********/
 		/*$scope.openReminder=function(note){
 			
@@ -587,7 +605,7 @@ $scope.toggleSideBar = function() {
 			collaborateUser.then(function(response){
 				$scope.users = response.data;
 				$scope.note.collabratorUsers = response.data;
-				modalInstance.close('resetmodel');
+				modalInstance.close();
 				$scope.errorMsg="";
 			}, function(response) {
 				//$scope.users = {};
@@ -598,7 +616,7 @@ $scope.toggleSideBar = function() {
 		
 		
 		$scope.removeCollborator=function(note,user){
-			modalInstance.close('resetmodel');
+			modalInstance.close();
 			var object={};
 			object.noteId=note;
 			object.sharedId=user;
