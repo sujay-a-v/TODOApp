@@ -153,6 +153,26 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 		}	
 	}
 	
+	$scope.addNoteLabel=function(note){
+		var noteLabel=document.getElementById('noteLabel').value;
+		if(noteLabel!=''){
+			
+			var obj={};
+			obj.labelName=noteLabel;
+			var url = 'addLabel';
+			var method = 'POST';
+			var token = localStorage.getItem('token');
+			var laBel=homeService.service(url,method,obj,token);
+			laBel.then(function(response){
+				console.log(response.data);
+				/*$scope.toggleLabel(note,obj);*/
+				getNotes();
+				getUserLabels();
+			},function(response){
+				getNotes();
+			});
+		}
+	}
 	
 	/******* Add and Remove the labels from Note *******/
 	$scope.toggleLabel=function(note,label){
@@ -211,7 +231,10 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 	}
 	
 	/***** Label page***/
-	$scope.goToLabelPage=function(){
+	$scope.goToLabelPage=function(label){
+		$scope.displayLable=label.labelName;
+		$scope.navBarHeading=$scope.displayLable;
+		localStorage.setItem('LABEL',$scope.displayLable);
 		$state.go('LabelPage');
 	}
 
@@ -258,7 +281,8 @@ $scope.toggleSideBar = function() {
 			}
 			else if($state.current.name=="LabelPage"){
 				$scope.navBarColor= "#607D8B";
-				$scope.navBarHeading="LabelPage";
+				var LABEL = localStorage.getItem('LABEL');
+				$scope.navBarHeading=LABEL;
 			}
 			else if($state.current.name=="Search"){
 				$scope.navBarColor= "#0066ff";
@@ -280,7 +304,7 @@ $scope.toggleSideBar = function() {
 				}
 			else
 				{
-				note.deleteStatus = "true";var token = localStorage.getItem('token');
+				note.deleteStatus = "true";
 				}
 			$scope.updateNote(note);
 		}

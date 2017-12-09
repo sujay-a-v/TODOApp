@@ -1,0 +1,21 @@
+<div style="float: right">
+	<span class="btn dropdown-toggle" id="menu1" data-toggle="dropdown">
+		<span class="glyphicon glyphicon-option-vertical"></span>
+	</span>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
+		style="margin-left: 150px;">
+		<li><a ng-click="deleteNote(note)">Delete</a></li>
+		<li><a  ng-click="removeCollborator(note,user)" ng-show="note.owner.userEmail!=user.userEmail">Remove myself</a></li>
+		<li><a ng-click="copy(note)">Make a Copy</a></li>
+		<li><a ng-click="socialShare(note)">Social Share(fb)</a></li>
+
+		<li class="dropdown-submenu"><a tabindex="-1">Add Label</a>
+			<ul class="dropdown-menu">
+				<li ng-repeat="label in Listlabel"><input type="checkbox"
+					ng-click="toggleLabel(note,label)"
+					ng-checked="checkStatus(note,label)">{{label.labelName}}</li>
+			<li><input type="text" placeholder="Create new label" id="noteLabel" ng-model="userlabel"><span ng-click="addNoteLabel(note)">add</span></li>
+
+			</ul></li>
+	</ul>
+</div>

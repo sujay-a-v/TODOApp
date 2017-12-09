@@ -30,51 +30,29 @@
 				<br>
 				<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
 
+					<div ng-repeat="noteLabel in note.labels">
+							<div id="label" ng-if="label.labelName!=''"> {{noteLabel.labelName}}
+								<span class="closebtn" ng-click="deleteNoteLabel(note,noteLabel)">&#x274C;</span>
+							</div>
+						</div>
+
 				<div id="moreOptions">
 
 							<div class="dropdown" style="float: left">
-								<span class="btn dropdown-toggle" id="menuRemind" data-toggle="dropdown">
-								<img alt="reminder" src="images/reminder.svg" height="20px" style="padding: 0px;"></span>
-								
-									<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
-									<li><input type="text" ng-attr-id="datepicker{{note.id}}" class="reminder" ng-click="openReminder(note)" ng-model="note.reminderStatus"></li>
-									<li><div ng-click="openReminder(note)"><span  >Pick Date & time</span></div></li>
-									<li><div ng-click="reminder(note,'today')"><span  >Later today</span></div></li>
-									<li><div ng-click="reminder(note,'tommorow')"><span  >Tommorow 8AM</span></div></li>
-									<li><div ng-click="reminder(note,'nextweek')"><span  >Next week</span></div></li>									</ul>
 									
-								<img alt="collaborator" src="images/collaborator.png" height="20px" style="margin-left: -17px;">
-								<div class="btn-group dropup colorDiv" uib-dropdown>
-									<img id="dropdown" class="dropdown-toggle"
-										data-toggle="dropdown" alt="color"
-										src="images/ic_color_lens_black_24px.svg" uib-dropdown-toggle height="20px">
-									<ul class="dropdown-menu" uib-dropdown-menu role="menu"
-										aria-labelledby="btn-append-to-body"
-										style="background-color: #f9fbff">
-										<a ng-repeat="color in colors" role="menuitem"> <img
-											ng-src="{{color.path}}" height="25px"
-											ng-click="note.noteColor =color.color;changeColor(note)">
-										</a>
-									</ul>
-								</div>
+									<reminder-icon></reminder-icon>
+									
+								<img alt="collaborator" src="images/collaborator.png" height="20px" ng-click="openCollaborate(note,User)">
+								
+								<note-color></note-color>
+								
 								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px" ng-click="openImageUploader(note)">
 								<input id="imageuploader" ng-show="false" type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
 								
 								<span
 									ng-click="archiveNote(note)"><img alt="archive"
 									src="images/unarchive.svg" height="20px"></span>
-								<div style="float: right">
-									<span class="btn dropdown-toggle" id="menu1"
-										data-toggle="dropdown"> <span
-										class="glyphicon glyphicon-option-vertical"></span>
-									</span>
-									<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="margin-left: 150px;">
-										<li><a ng-click="deleteNote(note)">Delete</a></li>
-										<li><a>Add Label</a></li>
-										<li><a ng-click="copy(note)">Make a Copy</a></li>
-										<li><a ng-click="socialShare(note)">Social Share(fb)</a></li>
-									</ul>
-								</div>
+								<more-option></more-option>
 							</div>
 						</div>
 				

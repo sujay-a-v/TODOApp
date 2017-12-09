@@ -18,6 +18,24 @@ toDoApp.directive('addNote',function(){
 		templateUrl:'./template/AddNote.html'
 	}
 });
+toDoApp.directive('moreOption',function(){
+	return{
+		restrict:'E',
+		templateUrl:'./template/MoreOptions.html'
+	}
+})
+toDoApp.directive('noteColor',function(){
+	return{
+		restrict:'E',
+		templateUrl:'./template/NoteColor.html'
+	}
+})
+toDoApp.directive('reminderIcon',function(){
+	return{
+		restrict:'E',
+		templateUrl:'./template/ReminderIcon.html'
+	}
+})
 
 toDoApp.directive("ngFileSelect", function(fileReader, $timeout) {
     return {

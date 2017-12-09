@@ -1,0 +1,9 @@
+<span class="btn dropdown-toggle" id="menuRemind" data-toggle="dropdown">
+								<img alt="reminder" src="images/reminder.svg" height="20px" style="padding: 0px;"></span>
+								
+									<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
+									<li><input type="text" ng-attr-id="datepicker{{note.id}}" class="reminder" ng-click="openReminder(note)" ng-model="note.reminderStatus"></li>
+									<li><div ng-click="openReminder(note)"><span  >Pick Date & time</span></div></li>
+									<li><div ng-click="reminder(note,'today')"><span  >Later today</span></div></li>
+									<li><div ng-click="reminder(note,'tommorow')"><span  >Tommorow 8AM</span></div></li>
+									<li><div ng-click="reminder(note,'nextweek')"><span  >Next week</span></div></li>
