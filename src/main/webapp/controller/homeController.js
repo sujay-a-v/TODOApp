@@ -135,7 +135,7 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 	
 	$scope.addLabel=function(){
 		modalInstance.close();
-		var newLabel=document.getElementById("newLabal").value;
+		var newLabel=document.getElementById("newLabel").value;
 		if(newLabel!=''){
 			var obj={};
 			obj.labelName=newLabel;
@@ -237,6 +237,18 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 		localStorage.setItem('LABEL',$scope.displayLable);
 		$state.go('/LabelPage');
 	}
+	
+	
+	
+	
+	$(document).ready(function(){
+		  $('.dropdown-submenu a.test').on("click", function(e){
+		    $(this).next('ul').toggle();
+		    e.stopPropagation();
+		    e.preventDefault();
+		  });
+		});
+
 
 /************  Toggle side bar   ********/
 $scope.showSideBar = false;
@@ -739,5 +751,24 @@ $scope.toggleSideBar = function() {
 				$scope.error=response.data.message;
 			});
 		}
+		
+		$scope.checkURL=function(note){
+			var urlpattern=/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+			var regex = new RegExp(urlpattern);
+			var noteUrl=note.description;
+			
+			note.size=0;
+			
+			if(noteUrl!=null | noteUrl!=undefined && note.size<noteUrl.length){
+				alert("note url is not null");
+			}
+			
+			if(noteUrl.match(urlpattern)){
+				alert("Matched"+note.size);
+			}else{
+				alert("not matched");
+			}
+		}
+		
 		getNotes();
 		});

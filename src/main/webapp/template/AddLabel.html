@@ -1,17 +1,26 @@
 <div class="modal-content">
-<!-- <div class="modal-header"></div> -->
+	<!-- <div class="modal-header"></div> -->
 	<div class="modal-body">
-	<font size="3px"><b>Edit Labels</b></font>
+		<font size="3px"><b>Edit Labels</b></font>
 		<div class="row">
-	<div class="col-sm-4">
-	<input type="text" id="newLabal" ng-model="userlabel" placeholder="Create new label"><span ng-click="addLabel()"><img alt="delete" src="images/save.svg" height="20px" style="margin-right: 5px;"></span>
-	</div></div><br>
-	<div ng-repeat="label in Listlabel">
-	<div><span ng-click="deleteUserLabel(label)"><img alt="delete" src="images/delete.svg" height="20px" style="margin-right: 5px;"></span>{{label.labelName}}</div>
-	</div>
+			<div class="col-sm-4">
+				<input type="text" id="newLabel" ng-model="userlabel"
+					placeholder="Create new label"> <span ng-click="addLabel()">
+					<img alt="delete" src="images/save.svg" height="20px"
+					style="margin-right: 5px;">
+				</span>
+			</div>
+		</div>
+		<br>
+		<div ng-repeat="label in Listlabel">
+			<div>
+				<span ng-click="deleteUserLabel(label)"><img alt="delete"
+					src="images/delete.svg" height="20px" style="margin-right: 5px;"></span>{{label.labelName}}
+			</div>
+		</div>
 	</div>
 	<div class="modal-footer">
-	    <div role="button" ng-click="addLabel()"
-				class="btn btn-done pull-right inline" data-dismiss="modal">DONE</div>
+		<div role="button" ng-click="addLabel()"
+			class="btn btn-done pull-right inline" data-dismiss="modal">DONE</div>
 	</div>
 </div>

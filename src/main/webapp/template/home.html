@@ -88,7 +88,7 @@
 								<div style="margin: 7px" ng-click="open(note)" ng-bind-html="note.description"></div><br/>	
 						<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" id="moreOptions" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
 						</div>	
-						
+						<div ng-click="checkURL(note)">checkURL</div>
 						<div ng-repeat="noteLabel in note.labels">
 							<div id="label" ng-if="label.labelName!=''"> {{noteLabel.labelName}}
 								<span class="closebtn" ng-click="deleteNoteLabel(note,noteLabel)">&#x274C;</span>
