@@ -6,9 +6,15 @@
 		<li><a href="#!/Reminder">Reminder</a></li>
 		
 		<li style="margin-left: -20px;">Label <span ng-click="openAddNewLabel()" style="margin-left: 35px;">EDIT</span></li>
-		<li ng-repeat="label in Listlabel"><span ng-click="goToLabelPage(label)">
-		<img alt="delete" src="images/label.svg" height="20px" style="margin-right: 5px;">
-		</span>{{label.labelName}}</li>
+		<!-- <li ng-repeat="label in Listlabel"><span ng-click="goToLabelPage(label)">
+		<img alt="label" src="images/label.svg" height="20px" style="margin-right: 5px;">
+		{{label.labelName}}</span></li> -->
+		
+		
+		<li ng-repeat="label in Listlabel">
+		<!-- <img alt="label" src="images/label.svg" height="20px" style="margin-right: 5px;"> -->
+		<a ui-sref="LabelPage({labelName:label.labelName})">	{{label.labelName}}</a>
+		</li>
 		<li ng-click="openAddNewLabel()" style="margin-left: -20px;">Create new label</li>
 
 		<li><a href="#!/Trash">Trash</a></li>

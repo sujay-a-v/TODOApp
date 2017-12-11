@@ -40,14 +40,18 @@
 <!-- <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script> -->
 
 <script type="text/javascript" src="script/app.js" ></script>
+<script type="text/javascript" src="directives/homeDirective.js" ></script>
+<script type="text/javascript" src="directives/labelFilter.js"></script>
+
+<!--------------------- Controllers --------------------------------------->
 <script type="text/javascript" src="controller/loginController.js" ></script>
 <script type="text/javascript" src="controller/passwordController.js" ></script>
 <script type="text/javascript" src="controller/setPasswordController.js" ></script>
 <script type="text/javascript" src="controller/registerController.js" ></script>
 <script type="text/javascript" src="controller/homeController.js" ></script>
-<script type="text/javascript" src="directives/homeDirective.js" ></script>
 <script type="text/javascript" src="controller/socialLoginController.js" ></script>
 
+<!--------------------- Services --------------------------------------->
 <script type="text/javascript" src="service/loginService.js" ></script>
 <script type="text/javascript" src="service/passwordService.js" ></script>
 <script type="text/javascript" src="service/setPasswordService.js" ></script>

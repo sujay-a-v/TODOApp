@@ -53,7 +53,7 @@ toDoApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$u
 		controller:'homeController'
 	})
 	.state('LabelPage',{
-		url:'/LabelPage',
+		url:'/{labelName}',
 		templateUrl:'template/LabelPage.html',
 		controller:'homeController'
 	})

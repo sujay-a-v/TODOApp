@@ -1,6 +1,6 @@
 var toDoApp=angular.module('toDoApp');
 
-toDoApp.controller('homeController',function($scope,homeService ,$state, $uibModal, fileReader, $interval,$filter){
+toDoApp.controller('homeController',function($scope,$location,homeService ,$state, $uibModal, fileReader, $interval,$filter){
 	$scope.AddNoteBox=false;
 	$scope.ShowAddNote=function(){
 		$scope.AddNoteBox= true;
@@ -235,7 +235,7 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 		$scope.displayLable=label.labelName;
 		$scope.navBarHeading=$scope.displayLable;
 		localStorage.setItem('LABEL',$scope.displayLable);
-		$state.go('LabelPage');
+		$state.go('/LabelPage');
 	}
 
 /************  Toggle side bar   ********/
@@ -279,16 +279,22 @@ $scope.toggleSideBar = function() {
 				$scope.navBarColor= "#607D8B";
 				$scope.navBarHeading="Archive";
 			}
-			else if($state.current.name=="LabelPage"){
+			/*else if($state.current.name=="LabelPage"){
 				$scope.navBarColor= "#607D8B";
 				var LABEL = localStorage.getItem('LABEL');
 				$scope.navBarHeading=LABEL;
-			}
+			}*/
+			
 			else if($state.current.name=="Search"){
 				$scope.navBarColor= "#0066ff";
 				$scope.navBarHeading="Fundoo Keep";
 				$scope.contentable = true;
 				$scope.searching=true;
+			}
+			else {
+				$scope.displayLable=$location.path().substr(1) ;
+				$scope.navBarColor = "#607D8B";
+				$scope.navBarHeading =$scope.displayLable;
 			}
 			
 		/********  Search *************/
@@ -562,12 +568,10 @@ $scope.toggleSideBar = function() {
 				if(time<8){
 					note.reminderStatus="Today 8:00AM";
 				}
-				else if(time>8  &&  time<20){
+				else if(time>8  &&  time<19){
 					note.reminderStatus="Today 8:00PM";
 				}
-				else{
-					note.reminderStatus="Tommorow 8:00AM";
-				}
+				
 			}
 			$scope.updateNote(note);
 		}
