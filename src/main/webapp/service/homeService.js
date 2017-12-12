@@ -26,9 +26,6 @@ toDoApp.factory('homeService',function($http){
 	
 	/*******  Common Service ********/
 	notes.service=function(url,method,note,token){
-		console.log('note is : '+note)
-		console.log("inside common service");
-		console.log(token);
 		return $http({
 			method:method,
 			url:url,
@@ -38,6 +35,20 @@ toDoApp.factory('homeService',function($http){
 			}
 		});
 	}
+	
+	/****** Get URL *********/
+	notes.getUrl=function(url,method,noteUrl,token){
+		return $http({
+			method:method,
+			url:url,
+			headers:{
+				'noteUrl':noteUrl,
+				'token':token
+			}
+		});
+		
+	}
+	
 	
 	/*******  Update Note ********/
 	/*notes.updateNote=function(note){

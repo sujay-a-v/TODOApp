@@ -752,22 +752,57 @@ $scope.toggleSideBar = function() {
 			});
 		}
 		
+		/******** URL Check *****************/
 		$scope.checkURL=function(note){
-			var urlpattern=/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
-			var regex = new RegExp(urlpattern);
-			var noteUrl=note.description;
-			
-			note.size=0;
-			
-			if(noteUrl!=null | noteUrl!=undefined && note.size<noteUrl.length){
-				alert("note url is not null");
+			console.log(encodeURI(note.description));
+			if(note.description!=''){
+				
+				var urlpattern=/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+				var arrayOfUrlData=[];
+				var noteUrl=note.description;
+				
+				if(noteUrl.match(urlpattern)){
+					var urlArray=noteUrl.match(urlpattern);
+					var singleUrl=[];
+					for(var i=0; i<urlArray.length; i++){
+						singleUrl[i]=urlArray[i];
+						
+						var url='getImageUrl';
+						var method='POST';
+						var token=localStorage.getItem('token');
+						
+						var abc=homeService.getUrl(url,method,urlArray[i],token);
+						abc.then(function(response){
+							console.log("return Success");
+							
+							/*arrayOfUrlData[i]=response.data;
+							arrayOfUrlData[i].url=singleUrl[i];
+							console.log(i+"     "+arrayOfUrlData);
+							
+							arrayOfUrlData[i]={
+									title:arrayOfUrlData.title,
+									imageURL:arrayOfUrlData.imageURL,
+									domain:arrayOfUrlData.domain,
+									url:singleUrl[i]
+							}*/
+							 
+							$scope.urlData=response.data;
+							$scope.urlData.url=singleUrl[i];
+							
+						},function(error){
+							console.log("Error");
+						});
+					}
+					
+					
+				
+				}
+				
+				
+				
 			}
 			
-			if(noteUrl.match(urlpattern)){
-				alert("Matched"+note.size);
-			}else{
-				alert("not matched");
-			}
+			
 		}
 		
 		getNotes();

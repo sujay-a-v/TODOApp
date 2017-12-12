@@ -88,7 +88,7 @@
 								<div style="margin: 7px" ng-click="open(note)" ng-bind-html="note.description"></div><br/>	
 						<div ng-if="note.reminderStatus" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" id="moreOptions" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
 						</div>	
-						<div ng-click="checkURL(note)">checkURL</div>
+						
 						<div ng-repeat="noteLabel in note.labels">
 							<div id="label" ng-if="label.labelName!=''"> {{noteLabel.labelName}}
 								<span class="closebtn" ng-click="deleteNoteLabel(note,noteLabel)">&#x274C;</span>
@@ -100,6 +100,36 @@
 						<div class="col-sm-2">
 						<img ng-src="{{user.profile}}" class="img-circle" height="25" width="25"/>
 						</div></div></div> -->
+												
+							<div>
+							<span ng-init="checkURL(note)">
+							<!-- <div ng-repeat="urlData in arrayOfUrlData"> -->
+									<div ng-if="urlData.title">
+										<a ng-href="{{urlData.url}}" target="_black">
+											<div class="row"
+												style="background-color: #ffffff; margin-right: 0px; margin-left: 0px; border: 1px solid grey">
+
+												<div class="col-sm-4 col-md-4 col-xs-4" style="padding: 0px">
+													<img ng-src="{{urlData.imageURL}}" height="70" width="80">
+												</div>
+
+												<div class="col-sm-8 col-md-8 col-xs-8">
+													<div ng-bind="urlData.title"
+														style="font-size: 14px; color: black;"></div>
+													<div ng-bind="urlData.description"
+														style="font-size: 10px; color: grey;"></div>
+												</div>
+											</div>
+										</a>
+									</div>
+							<!-- </div> -->
+
+							
+							</span>
+							</div>
+							
+												
+												
 																				
 						<div id="moreOptions">
 
@@ -121,7 +151,11 @@
 									
 							</div>
 						</div>
-							</div>
+						
+						<!-- <div ng-click="checkURL(note)">checkURL</div> -->
+						
+
+						</div>
 						<br>
 					</div>
 				

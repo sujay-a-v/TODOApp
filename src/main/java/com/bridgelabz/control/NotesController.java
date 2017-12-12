@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.bridgelabz.model.Collaborator;
 import com.bridgelabz.model.Label;
+import com.bridgelabz.model.LinkScrapper;
 import com.bridgelabz.model.Notes;
 import com.bridgelabz.model.Response;
+import com.bridgelabz.model.UrlData;
 import com.bridgelabz.model.User;
 import com.bridgelabz.service.NotesService;
 import com.bridgelabz.service.UserService;
@@ -300,6 +302,22 @@ public class NotesController {
 		noteService.deleteUserLabel(label);
 		response.setMessage("lable deleted successfully");
 		return new ResponseEntity<Response>(response,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="getImageUrl",method = RequestMethod.POST)
+	public ResponseEntity<UrlData> getURL(HttpServletRequest request){
+		String url=request.getHeader("noteUrl");
+		System.out.println("inside url");
+		LinkScrapper link=new LinkScrapper();
+		UrlData urlData=null;
+		
+		try{
+			urlData=link.getUrlData(url);
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return new ResponseEntity<UrlData>(urlData,HttpStatus.OK);
 		
 	}
 }
