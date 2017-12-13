@@ -27,7 +27,7 @@
 	<mvc:resources location="/directives/" mapping="/directives/**"/>
 	<mvc:resources location="/images/" mapping="/images/**"/>
 	<mvc:resources location="/styleCSS/" mapping="/styleCSS/**"/>
-	<!-- <mvc:resources location="/bower_components/" mapping="/bower_components/**"/> -->
+	<mvc:resources location="/bower_components/" mapping="/bower_components/**"/>
 
 	<bean id="dataBase"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">

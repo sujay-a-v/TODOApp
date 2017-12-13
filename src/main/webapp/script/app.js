@@ -1,4 +1,4 @@
-var toDoApp=angular.module('toDoApp',['ui.router','ngSanitize','ui.bootstrap','ui.bootstrap.datepicker']);
+var toDoApp=angular.module('toDoApp',['ui.router','ngSanitize','ui.bootstrap','ui.bootstrap.datepicker','angular-img-cropper']);
 
 /*,'toastr'*/
 

@@ -307,7 +307,7 @@ public class NotesController {
 	@RequestMapping(value="getImageUrl",method = RequestMethod.POST)
 	public ResponseEntity<UrlData> getURL(HttpServletRequest request){
 		String url=request.getHeader("noteUrl");
-		System.out.println("inside url");
+		
 		LinkScrapper link=new LinkScrapper();
 		UrlData urlData=null;
 		

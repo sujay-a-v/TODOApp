@@ -1,66 +1,95 @@
 
-<div class="container" >
-<div id="editNoteModal" 
-   style=" margin-top: -4px;
-    margin-left: -16px;
-    margin-right: 556px;   background-color: {{note.noteColor}}">
-		<div style="float: right ;margin-right: 7px; margin-top: 8px;">
-			<span style="cursor: pointer" ng-click="note.pin=!note.pin" > 
-			<img ng-hide="note.pin" style="height: 17px" alt="pin" src="images/pin.png"><img ng-show="note.pin" style="height: 17px" alt="pin" src="images/pin.png">
+<div class="container">
+	<div id="editNoteModal"
+		style="margin-top: -4px; margin-left: -16px; margin-right: 556px; background-color: {{note.noteColor">
+		<div style="float: right; margin-right: 7px; margin-top: 8px;">
+			<span style="cursor: pointer" ng-click="note.pin=!note.pin">
+				<img ng-hide="note.pin" style="height: 17px" alt="pin"
+				src="images/pin.png"><img ng-show="note.pin"
+				style="height: 17px" alt="pin" src="images/pin.png">
 			</span>
 		</div>
 		<div>
-		<img ng-if="note.image!=''" contenteditable="true" style="height: 598px;" ng-src="{{note.image}}"/><br>
-	<span ng-click="removeImage(note)"  > <img contenteditable="true" ng-if="note.image!=''" alt="delete" ng-show="true" src="images/delete.svg" height="20px" style="float: right"></span>
-		<b><div id="title" contenteditable="true"  style="margin: 8px" ng-bind-html="note.title"></div></b>
-		<div id="description" contenteditable="true" style="margin: 8px"  ng-bind-html="note.description"></div><br>
-		
-				
-		
-		<br>
-	<div ng-if="note.reminderStatus!=''" >{{note.reminderStatus}}<span ng-click="deleteReminder(note)" style="margin-left: 10px; background-color:{{note.noteColor}};"><img alt="cancel" src="images/cancel.svg" height="20px"></span></div>
-		<br/>
-		<div  style="margin-left: 444px;">Edited : {{note.modifiedDate | date:'dd-MMM-yyyy'}}</div>
+			<img ng-if="note.image!=''" contenteditable="true"
+				style="height: 598px;" ng-src="{{note.image}}" /><br> <span
+				ng-click="removeImage(note)"> <img contenteditable="true"
+				ng-if="note.image!=''" alt="delete" ng-show="true"
+				src="images/delete.svg" height="20px" style="float: right"></span> <b><div
+					id="title" contenteditable="true" style="margin: 8px"
+					ng-bind-html="note.title"></div></b>
+			<div id="description" contenteditable="true" style="margin: 8px"
+				ng-bind-html="note.description"></div>
+			<br> <br>
+			<div ng-if="note.reminderStatus!=''">
+				{{note.reminderStatus}}<span ng-click="deleteReminder(note)"
+					style="margin-left: 10px; background-color: {{note.noteColor"><img
+					alt="cancel" src="images/cancel.svg" height="20px"></span>
+			</div>
+			<br />
+			<div style="margin-left: 444px;">Edited : {{note.modifiedDate |
+				date:'dd-MMM-yyyy'}}</div>
 		</div>
-		<div style="background-color: {{note.noteColor}}">
+		<div style="background-color: {{note.noteColor">
 
-							<div style="float: left ; background-color: {{note.noteColor}}">
-								<span class="btn dropdown-toggle" id="menuRemind" data-toggle="dropdown">
-								<img alt="reminder" src="images/reminder.svg" height="20px"></span>
-								
-									<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
-									<li><input type="text" ng-attr-id="datepicker{{note.id}}" class="reminder" ng-click="openReminder(note)" ng-model="note.reminderStatus"></li>
-									<li><div ng-click="openReminder(note)"><span  >Pick Date & time</span></div></li>
-									<li><div ng-click="reminder(note,'today')"><span  >Later today</span></div></li>
-									<li><div ng-click="reminder(note,'tommorow')"><span  >Tommorow 8AM</span></div></li>
-									<li><div ng-click="reminder(note,'nextweek')"><span  >Next week</span></div></li>									</ul>
-									
-								<img alt="collaborator" src="images/collaborator.png" height="20px" style="margin: 8px">
-								<div class="btn-group dropup colorDiv" uib-dropdown >
-									<img id="dropdown" class="dropdown-toggle" data-toggle="dropdown" alt="color"
-										src="images/ic_color_lens_black_24px.svg" uib-dropdown-toggle height="20px">
-									<ul class="dropdown-menu" uib-dropdown-menu role="menu"	aria-labelledby="btn-append-to-body"
-										style="background-color: #f9fbff">
-										<a ng-repeat="color in colors" role="menuitem"> 
-										<img ng-src="{{color.path}}" height="25px" ng-click="note.noteColor =color.color;changeColor(note)"></a>
-									</ul>
-								</div>
-								<img alt="image" src="images/ic_photo_black_24px.svg" height="20px" ng-click="openImageUploader(note)">
-								<input id="imageuploader" ng-show="false" type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
-								 
-								<span ng-click="archiveNote(note)">
-								<img alt="archive" src="images/ic_archive_black_24px.svg" height="20px" style="margin: 8px"></span>
-								<div style="float: right; margin-right: 290px;">
-								<span class="btn dropdown-toggle" id="menu1" data-toggle="dropdown"> <span
-										class="glyphicon glyphicon-option-vertical"></span></span>
-									<ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="margin-left: 150px;">
-										<li><a ng-click="deleteNote(note)">Delete</a></li>
-										<li><a>Add Lable</a></li>
-										<li><a ng-click="copy(note)">Make a Copy</a></li>
-									</ul>
-								</div>
-								<div><span  ng-click="editNote(note)" style="margin-left: 500px;">DONE</span></div>
-						</div>
+			<div style="float: left; background-color: {{note.noteColor">
+				<span class="btn dropdown-toggle" id="menuRemind"
+					data-toggle="dropdown"> <img alt="reminder"
+					src="images/reminder.svg" height="20px"></span>
+
+				<ul class="dropdown-menu" role="menu" aria-labelledby="menuRemind">
+					<li><input type="text" ng-attr-id="datepicker{{note.id}}"
+						class="reminder" ng-click="openReminder(note)"
+						ng-model="note.reminderStatus"></li>
+					<li><div ng-click="openReminder(note)">
+							<span>Pick Date & time</span>
+						</div></li>
+					<li><div ng-click="reminder(note,'today')">
+							<span>Later today</span>
+						</div></li>
+					<li><div ng-click="reminder(note,'tommorow')">
+							<span>Tommorow 8AM</span>
+						</div></li>
+					<li><div ng-click="reminder(note,'nextweek')">
+							<span>Next week</span>
+						</div></li>
+				</ul>
+
+				<img alt="collaborator" src="images/collaborator.png" height="20px"
+					style="margin: 8px">
+				<div class="btn-group dropup colorDiv" uib-dropdown>
+					<img id="dropdown" class="dropdown-toggle" data-toggle="dropdown"
+						alt="color" src="images/ic_color_lens_black_24px.svg"
+						uib-dropdown-toggle height="20px">
+					<ul class="dropdown-menu" uib-dropdown-menu role="menu"
+						aria-labelledby="btn-append-to-body"
+						style="background-color: #f9fbff">
+						<a ng-repeat="color in colors" role="menuitem"> <img
+							ng-src="{{color.path}}" height="25px"
+							ng-click="note.noteColor =color.color;changeColor(note)"></a>
+					</ul>
+				</div>
+				<img alt="image" src="images/ic_photo_black_24px.svg" height="20px"
+					ng-click="openImageUploader(note)"> <input id="imageuploader"
+					ng-show="false" type="file" ng-file-select="onFileSelect($files)"
+					ng-model="imageSrc"> <span ng-click="archiveNote(note)">
+					<img alt="archive" src="images/ic_archive_black_24px.svg"
+					height="20px" style="margin: 8px">
+				</span>
+				<div style="float: right; margin-right: 290px;">
+					<span class="btn dropdown-toggle" id="menu1" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-option-vertical"></span>
+					</span>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"
+						style="margin-left: 150px;">
+						<li><a ng-click="deleteNote(note)">Delete</a></li>
+						<li><a>Add Lable</a></li>
+						<li><a ng-click="copy(note)">Make a Copy</a></li>
+					</ul>
+				</div>
+				<div>
+					<span ng-click="editNote(note)" style="margin-left: 500px;">DONE</span>
+				</div>
+			</div>
 		</div>
+	</div>
 </div>
-</div> 

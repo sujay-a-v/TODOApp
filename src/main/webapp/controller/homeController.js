@@ -97,8 +97,11 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 				$scope.adding = $scope.imageSrc;
 			} 
 			else if($scope.type === 'user'){
-				$scope.User.profile=$scope.imageSrc;
-				$scope.changeProfile($scope.User);
+				$scope.ImageCrop=$scope.imageSrc;
+				$scope.imageCrop();
+				
+				/*$scope.User.profile=$scope.imageSrc;
+				$scope.changeProfile($scope.User);*/
 			}
 			else {
 				$scope.type.image = $scope.imageSrc;
@@ -118,6 +121,19 @@ $scope.ListView=localStorage.getItem('LISTGRID');
 			},function(response){
 			
 		});
+	}
+	
+	$scope.imageCrop=function(){
+		modalInstance = $uibModal.open({
+			templateUrl: 'template/ImageCropper.html',
+			scope : $scope
+			});
+	}
+	
+	$scope.updateProfilePic=function(){
+		modalInstance.close();
+		$scope.User.profile=$scope.croppedImage;
+		$scope.changeProfile($scope.User);
 	}
 	
 	$scope.removeImage=function(note){
@@ -758,7 +774,7 @@ $scope.toggleSideBar = function() {
 			if(note.description!=''){
 				
 				var urlpattern=/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
-				 $scope.arrayOfUrlData=[];
+				 note.arrayOfUrlData=[];
 				var noteUrl=note.description;
 				var count=0;
 				
@@ -772,9 +788,9 @@ $scope.toggleSideBar = function() {
 						var method='POST';
 						var token=localStorage.getItem('token');
 						
-						var abc=homeService.getUrl(url,method,urlArray[i],token);
-						abc.then(function(response){
-							$scope.arrayOfUrlData[count]={
+						var urldata=homeService.getUrl(url,method,urlArray[i],token);
+						urldata.then(function(response){
+							note.arrayOfUrlData[count]={
 									title:response.data.title,
 									imageURL:response.data.imageURL,
 									domain:response.data.domain,
@@ -792,6 +808,20 @@ $scope.toggleSideBar = function() {
 				}	
 			}
 		}
+		
+		
+		
+		
+		/*$scope.imagecrop=function(){
+			$scope.cropper={};
+			$scope.cropper.cropperImage=null;
+			$scope.bounds={};
+			$scope.bounds.left=0;
+			$scope.bounds.right=0;
+			$scope.bounds.top=0;
+			$scope.bounds.bottom=0;
+			
+		}*/
 		
 		getNotes();
 		});
