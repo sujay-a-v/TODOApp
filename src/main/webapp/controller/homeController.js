@@ -758,8 +758,9 @@ $scope.toggleSideBar = function() {
 			if(note.description!=''){
 				
 				var urlpattern=/[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
-				var arrayOfUrlData=[];
+				 $scope.arrayOfUrlData=[];
 				var noteUrl=note.description;
+				var count=0;
 				
 				if(noteUrl.match(urlpattern)){
 					var urlArray=noteUrl.match(urlpattern);
@@ -773,36 +774,23 @@ $scope.toggleSideBar = function() {
 						
 						var abc=homeService.getUrl(url,method,urlArray[i],token);
 						abc.then(function(response){
-							console.log("return Success");
+							$scope.arrayOfUrlData[count]={
+									title:response.data.title,
+									imageURL:response.data.imageURL,
+									domain:response.data.domain,
+									url:singleUrl[count]
+							}
+							count=count+1; 
 							
-							/*arrayOfUrlData[i]=response.data;
-							arrayOfUrlData[i].url=singleUrl[i];
-							console.log(i+"     "+arrayOfUrlData);
-							
-							arrayOfUrlData[i]={
-									title:arrayOfUrlData.title,
-									imageURL:arrayOfUrlData.imageURL,
-									domain:arrayOfUrlData.domain,
-									url:singleUrl[i]
-							}*/
-							 
-							$scope.urlData=response.data;
-							$scope.urlData.url=singleUrl[i];
+							/*$scope.urlData=response.data;
+							$scope.urlData.url=singleUrl[count];*/
 							
 						},function(error){
 							console.log("Error");
 						});
 					}
-					
-					
-				
-				}
-				
-				
-				
+				}	
 			}
-			
-			
 		}
 		
 		getNotes();

@@ -103,7 +103,7 @@
 												
 							<div>
 							<span ng-init="checkURL(note)">
-							<!-- <div ng-repeat="urlData in arrayOfUrlData"> -->
+							<div ng-repeat="urlData in arrayOfUrlData">
 									<div ng-if="urlData.title">
 										<a ng-href="{{urlData.url}}" target="_black">
 											<div class="row"
@@ -116,13 +116,13 @@
 												<div class="col-sm-8 col-md-8 col-xs-8">
 													<div ng-bind="urlData.title"
 														style="font-size: 14px; color: black;"></div>
-													<div ng-bind="urlData.description"
+													<div ng-bind="urlData.url"
 														style="font-size: 10px; color: grey;"></div>
 												</div>
 											</div>
 										</a>
 									</div>
-							<!-- </div> -->
+							</div>
 
 							
 							</span>
