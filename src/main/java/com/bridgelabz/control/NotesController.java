@@ -44,6 +44,12 @@ public class NotesController {
 	private Response response;
 
 	// ***** Adding the Notes ******///
+	/**
+	 * @param notes
+	 * @param request
+	 * @return response message (String)
+	 * @description creating the new note
+	 */
 	@RequestMapping(value = "/notesCreate", method = RequestMethod.POST)
 	public ResponseEntity<Response> addNotes(@RequestBody Notes notes, HttpServletRequest request) {
 		System.out.println(notes);
@@ -80,6 +86,11 @@ public class NotesController {
 	}
 
 	// *************** Retrieve the Notes By Id ********//
+	/**
+	 * @param id
+	 * @return note Object
+	 * @description retrieve the note by id
+	 */
 	@RequestMapping(value = "/notesRetrieve/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Notes> retrieveNotesById(@PathVariable("id") int id) {
 		Notes notes = noteService.fetchById(id);
@@ -90,6 +101,11 @@ public class NotesController {
 	}
 
 	// ********** Retrieve All the Notes *******//
+	/**
+	 * @param request
+	 * @return List note Object
+	 * @description retrieve all the notes of the user
+	 */
 	@RequestMapping(value = "/notesRetrieve", method = RequestMethod.GET)
 	public ResponseEntity<List<Notes>> retrieveAllNotes(HttpServletRequest request) {
 		String userToken = null;
@@ -115,6 +131,12 @@ public class NotesController {
 	}
 
 	// ********* Delete the Notes By Id ********//
+	/**
+	 * @param id
+	 * @param session
+	 * @return String
+	 * @description delete the particular note by note-id
+	 */
 	@RequestMapping(value = "/noteDelete/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Response> deleteNotesById(@PathVariable("id") int id, HttpSession session) {
 		Notes currentNote = noteService.fetchById(id);
@@ -128,6 +150,13 @@ public class NotesController {
 	}
 
 	// ******* Update the Notes by Id ********//
+	/**
+	 * @param id
+	 * @param notes
+	 * @param session
+	 * @return message (String)
+	 * @description update a note by note-id
+	 */
 	@RequestMapping(value = "/noteUpdate/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Response> updateNotes(@PathVariable("id") int id, @RequestBody Notes notes,
 			HttpSession session) {
@@ -147,6 +176,14 @@ public class NotesController {
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
+	/**
+	 * @param id
+	 * @param note
+	 * @param session
+	 * @param request
+	 * @return String(message)
+	 * @description update the user note by note-id
+	 */
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Response> update(@PathVariable("id") int id, @RequestBody Notes note,
 			HttpSession session, HttpServletRequest request) {
@@ -171,6 +208,14 @@ public class NotesController {
 
 	}
 
+	/**
+	 * @param id
+	 * @param note
+	 * @param session
+	 * @param request
+	 * @return String(message)
+	 * @description change the note color by note-id 
+	 */
 	@RequestMapping(value = "/updateColor/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Response> updateColor(@PathVariable("id") int id, @RequestBody Notes note,
 			HttpSession session, HttpServletRequest request) {
@@ -188,6 +233,13 @@ public class NotesController {
 
 	}
 	
+	/**
+	 * @param collaborate
+	 * @param request
+	 * @return List of collaborated Users 
+	 * @throws Exception
+	 * @description Add the new user of the note and returns all users of the note
+	 */
 	@RequestMapping(value="/collaborate",method = RequestMethod.POST)
 	public ResponseEntity<List<User>> collaborateNote(@RequestBody Collaborator collaborate,HttpServletRequest request) throws Exception{
 		
@@ -238,6 +290,13 @@ public class NotesController {
 	}
 	
 	
+	/**
+	 * @param collaborate
+	 * @param request
+	 * @return String(message)
+	 * @throws Exception
+	 * @description delete the user from the collaborated note
+	 */
 	@RequestMapping(value="removeCollaborate",method = RequestMethod.POST)
 	public ResponseEntity<Response> removeCollaborate(@RequestBody Collaborator collaborate,HttpServletRequest request) throws Exception{
 		
@@ -261,6 +320,12 @@ public class NotesController {
 		
 	}
 	
+	/**
+	 * @param note
+	 * @param request
+	 * @return Owner of the note(Object)
+	 * @description Get the owner of the note
+	 */
 	@RequestMapping(value="getOwner",method = RequestMethod.POST)
 	public ResponseEntity<User> getOwner(@RequestBody Notes note,HttpServletRequest request)
 	{
@@ -275,6 +340,11 @@ public class NotesController {
 		return new ResponseEntity(HttpStatus.NOT_FOUND);
 	}
 	
+	/**
+	 * @param request
+	 * @return List of user labels 
+	 * @description get labels of the user
+	 */
 	@RequestMapping(value="getUserLabels",method = RequestMethod.GET)
 	public ResponseEntity<List<Label>> getUserLabels(HttpServletRequest request){
 		int id = tokens.validateToken(request.getHeader("token"));
@@ -284,6 +354,12 @@ public class NotesController {
 		
 	}
 	
+	/**
+	 * @param label
+	 * @param request
+	 * @return String (message)
+	 * @description adding the new label to the user
+	 */
 	@RequestMapping(value="addLabel",method = RequestMethod.POST)
 	public ResponseEntity<Response> addLabel(@RequestBody Label label,HttpServletRequest request){
 		int id = tokens.validateToken(request.getHeader("token"));
@@ -297,6 +373,12 @@ public class NotesController {
 		return new ResponseEntity<Response>(response,HttpStatus.OK);
 	}
 	
+	/**
+	 * @param label
+	 * @param request
+	 * @return String (message)
+	 * @description delete the user label
+	 */
 	@RequestMapping(value="deleteUserLabel")
 	public ResponseEntity<Response> deleteUserLabel(@RequestBody Label label,HttpServletRequest request){
 		noteService.deleteUserLabel(label);
@@ -304,6 +386,11 @@ public class NotesController {
 		return new ResponseEntity<Response>(response,HttpStatus.OK);
 	}
 	
+	/**
+	 * @param request
+	 * @return url-data 
+	 * @description receive url and return the url data(Title, Image & domain of the URL)
+	 */
 	@RequestMapping(value="getImageUrl",method = RequestMethod.POST)
 	public ResponseEntity<UrlData> getURL(HttpServletRequest request){
 		String url=request.getHeader("noteUrl");

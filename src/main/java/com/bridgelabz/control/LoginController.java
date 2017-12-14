@@ -44,6 +44,13 @@ public class LoginController {
 	
 	public static int id;
 
+	/**
+	 * @param user
+	 * @param session
+	 * @return String(message)
+	 * @throws Exception
+	 * @description login by using user-Email and User-Password
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<Response> doLogin(@RequestBody User user, HttpSession session) throws Exception {
 		Response response=new Response();
@@ -67,6 +74,15 @@ public class LoginController {
 		}
 	}
 
+	/**
+	 * @param user
+	 * @param session
+	 * @param request
+	 * @return String
+	 * @throws Exception
+	 * @description send the url with token to the Email.
+	 * if the user email is registered. else return not registered message 
+	 */
 	@RequestMapping(value = "/forgetPassword", method = RequestMethod.POST)
 	public ResponseEntity<Response> getPassword(@RequestBody User user, HttpSession session, HttpServletRequest request)
 			throws Exception {
@@ -87,6 +103,14 @@ public class LoginController {
 		return new ResponseEntity<Response>(response,HttpStatus.OK);
 	}
 
+	/**
+	 * @param token
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 * @description checks the token.
+	 * if the token is valid then redirect to ResetPassword page, else send invalid token message to the user
+	 */
 	@RequestMapping(value="/setPassword/{Token:.+}", method = RequestMethod.GET)
 	public ResponseEntity<String> setPassword(@PathVariable("Token") String token, HttpServletResponse response) throws Exception
 	{
@@ -99,6 +123,14 @@ public class LoginController {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid token");
 	}
 	
+	/**
+	 * @param user
+	 * @param session
+	 * @param request
+	 * @return String(message)
+	 * @throws Exception
+	 * @description set the new password of the user
+	 */
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
 	public ResponseEntity<Response> setNewPassword(@RequestBody User user,
 			HttpSession session,HttpServletRequest request) throws Exception {
@@ -117,6 +149,12 @@ public class LoginController {
 			return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 	
+	/**
+	 * @param request
+	 * @return User Object
+	 * @throws IOException
+	 * @description return the details of the current login user
+	 */
 	@RequestMapping(value = "/currentUser", method = RequestMethod.GET)
 	public ResponseEntity<User> currrentUser(HttpServletRequest request) throws IOException {
 		int id = tokens.validateToken(request.getHeader("token"));

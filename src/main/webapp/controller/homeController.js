@@ -272,10 +272,12 @@ $scope.toggleSideBar = function() {
 	if($scope.showSideBar){
 		$scope.showSideBar=false;
 		document.getElementById("sideToggle").style.paddingLeft = "150px";
+		document.getElementById("noteToggle").style.paddingLeft = "150px";
 	}
 	else{
 		$scope.showSideBar = true;
 		document.getElementById("sideToggle").style.paddingLeft = "0px";
+		document.getElementById("noteToggle").style.paddingLeft = "0px";
 	}
 }
 

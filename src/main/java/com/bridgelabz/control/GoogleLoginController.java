@@ -34,6 +34,12 @@ public class GoogleLoginController {
 	@Autowired
 	private Response response;
 	
+	/**
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 * @description first get the login page URL and redirect to google login page
+	 */
 	@RequestMapping(value="/googleLogin")
 	public void googleLogin(HttpServletRequest request, HttpServletResponse response)throws Exception
 	{
@@ -46,6 +52,16 @@ public class GoogleLoginController {
 		}
 	}
 
+	/**
+	 * @param request
+	 * @param response
+	 * @param session
+	 * @return
+	 * @throws IOException
+	 * 
+	 * @description  get token by using code,
+	 * 				get the user profile using token (Profile=Email,name,Profile-picture) 
+	 */
 	@RequestMapping(value="/getGoogleLogin", method = RequestMethod.GET)
 	public ResponseEntity<String> getGoogleToken(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException
 	{
@@ -100,6 +116,11 @@ public class GoogleLoginController {
 		
 	}
 	
+	/**
+	 * @param session
+	 * @return String (message)
+	 * @description getting social login token
+	 */
 	@RequestMapping(value="/getToken",method = RequestMethod.GET )
 	public ResponseEntity<Response> getSocialLoginToken(HttpSession session)
 	{

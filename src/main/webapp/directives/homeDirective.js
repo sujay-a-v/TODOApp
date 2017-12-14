@@ -30,6 +30,12 @@ toDoApp.directive('noteColor',function(){
 		templateUrl:'./template/NoteColor.html'
 	}
 })
+toDoApp.directive('urlProgram',function(){
+	return{
+		restrict:'E',
+		templateUrl:'./template/urlProgram.html'
+	}
+})
 toDoApp.directive('reminderIcon',function(){
 	return{
 		restrict:'E',

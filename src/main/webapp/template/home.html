@@ -1,22 +1,24 @@
-<div class="mainHome" style=" width: 100%;height:100%; background-color:#e8e8e8;">
+<div class="mainHome" style=" background-color:#e8e8e8;">
 	<!-- ************************************* Start of Top Bar ********************************************** -->
 	<top-nav-bar></top-nav-bar>
 	<!-- ************************************* End of Top Bar  ********************************************** -->
 
-	<div class="row" style=" width: 100%;height:100%; background-color:#e8e8e8;">
+	<div class="row" style="height:300%;  background-color:#e8e8e8;">
 		<div class="col-sm-3">
 			<!-- ************* Start of Side Bar ***************** -->
 			<side-nav-bar ></side-nav-bar >
 			<!-- ********************* End of Side Bar *************************** -->
 		</div>
+		
+		<div id="noteToggle">
 
-		<div class="col-sm-9">
+		<div class="col-sm-12 col-xs-12 col-lg-9">
 			<add-note></add-note>
 			
 			<!--************* Pinned Notes ******************-->
 			<div style="margin-top: 20px;">
 			<h4 ng-show="pinnedAll.length">Pinned</h4>
-				<div layout="row" layout-wrap flex>
+				<!-- <div layout="row" layout-wrap flex> -->
 					<div class="{{card}}" style="padding: 2px 16px ; background-color: {{note.noteColor}}" ng-click="popup(note)" id="card" 
 					 ng-repeat="note in notes | orderBy:'-modifiedDate'| filter :{pin:'false', archiveStatus:'false' , noteStatus:'true' , deleteStatus:'false'} as pinnedAll" >
 					 
@@ -40,7 +42,9 @@
 								<span class="closebtn" ng-click="deleteNoteLabel(note,noteLabel)">&#x274C;</span>
 							</div>
 						</div>
-													
+								<div>
+								<url-program></url-program>
+								</div>					
 						<div id="moreOptions">
 
 							<div class="dropdown" style="float: left">
@@ -64,10 +68,11 @@
 						
 					</div>
 				
-				</div>
+				<!-- </div> -->
 			</div>
 			<br>
 			<!--************* getting All Notes ******************-->
+			
 			<div style="margin-top: 20px;">
 			<h4 ng-show="pinnedAll.length">Others</h4>
 				<div layout="row" layout-wrap flex>
@@ -102,7 +107,9 @@
 						</div></div></div>
 												
 							<div>
-							<span ng-init="checkURL(note)">
+							
+							<url-program></url-program>
+							<!-- <span ng-init="checkURL(note)">
 							<div ng-repeat="urlData in note.arrayOfUrlData">
 									<div ng-if="urlData.title">
 										<a ng-href="{{urlData.url}}" target="_black">
@@ -123,7 +130,7 @@
 										</a>
 									</div>
 							</div>
-							</span>
+							</span> -->
 							</div>													
 						<div id="moreOptions">
 
@@ -154,6 +161,7 @@
 					</div>
 				
 				</div>
+			</div>
 			</div>
 		</div>
 

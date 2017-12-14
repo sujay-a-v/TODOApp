@@ -3,6 +3,7 @@
 #mainHome {
 	background-color:#e8e8e8;
 	width: 100%;
+	height: 300%;
 }
 /* .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
@@ -73,6 +74,12 @@
 #card ul{
 	background-color: white;
 	cursor: pointer;
+}
+.col-sm{
+	width: 100px;
+}
+.col-lg{
+	width: 100px;
 }
 
 .dropdown img{
