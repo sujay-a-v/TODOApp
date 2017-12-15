@@ -2,7 +2,7 @@
 
 #mainHome {
 	background-color:#e8e8e8;
-	width: 125%;
+	width: 80%;
 	height: 300%;
 }
 /* .card {
@@ -75,12 +75,8 @@
 	background-color: white;
 	cursor: pointer;
 }
-.col-sm{
-	width: 100px;
-}
-.col-lg{
-	width: 100px;
-}
+
+
 
 .dropdown img{
 	padding-left: 10px;
@@ -164,3 +160,26 @@
 }
 }
 
+@media (min-width: 900px){
+.col-lg-9 {
+    width: 100%;
+}
+}
+
+@media (max-width: 1200px){
+.col-md-6 {
+    width: 31%;
+}
+}
+
+@media (max-width: 850px){
+.col-md-6 {
+    width: 46%;
+}
+}
+
+@media (max-width: 550px){
+.col-md-6 {
+    width: 97%;
+}
+}
