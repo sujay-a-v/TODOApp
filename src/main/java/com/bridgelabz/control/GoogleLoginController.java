@@ -34,12 +34,12 @@ public class GoogleLoginController {
 	@Autowired
 	private Response response;
 	
-	/**
+	/****
 	 * @param request
 	 * @param response
 	 * @throws Exception
 	 * @description first get the login page URL and redirect to google login page
-	 */
+	 ***/
 	@RequestMapping(value="/googleLogin")
 	public void googleLogin(HttpServletRequest request, HttpServletResponse response)throws Exception
 	{

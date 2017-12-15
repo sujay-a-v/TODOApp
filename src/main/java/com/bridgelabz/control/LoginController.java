@@ -44,13 +44,13 @@ public class LoginController {
 	
 	public static int id;
 
-	/**
+	/****
 	 * @param user
 	 * @param session
 	 * @return String(message)
 	 * @throws Exception
 	 * @description login by using user-Email and User-Password
-	 */
+	 ***/
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<Response> doLogin(@RequestBody User user, HttpSession session) throws Exception {
 		Response response=new Response();

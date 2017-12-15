@@ -53,13 +53,13 @@ public class UserController {
 	@Autowired
 	private Producer producer;
 
-	/**
+	/****
 	 * @param user
 	 * @param request
 	 * @return response message (String)
 	 * @throws Exception
 	 * @Description This method is used to store the user details in the database
-	 */
+	 ***/
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResponseEntity<Response> doRegister(@RequestBody User user,
 			HttpServletRequest request) throws Exception {

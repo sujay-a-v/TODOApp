@@ -44,12 +44,12 @@ public class NotesController {
 	private Response response;
 
 	// ***** Adding the Notes ******///
-	/**
+	/****
 	 * @param notes
 	 * @param request
 	 * @return response message (String)
 	 * @description creating the new note
-	 */
+	 ***/
 	@RequestMapping(value = "/notesCreate", method = RequestMethod.POST)
 	public ResponseEntity<Response> addNotes(@RequestBody Notes notes, HttpServletRequest request) {
 		System.out.println(notes);

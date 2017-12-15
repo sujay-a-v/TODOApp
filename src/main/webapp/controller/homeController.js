@@ -20,7 +20,7 @@ var getNotes=function(){
 }
 
 
-/****** Get current user ********/
+/****** Get current user *********/
 getUser();
 function getUser(){
 	var token=localStorage.getItem('token');

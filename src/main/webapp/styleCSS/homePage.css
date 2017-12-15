@@ -2,7 +2,7 @@
 
 #mainHome {
 	background-color:#e8e8e8;
-	width: 100%;
+	width: 125%;
 	height: 300%;
 }
 /* .card {
@@ -147,5 +147,20 @@
     -webkit-border-radius: 6px 0 6px 6px;
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
+}
+
+
+@media screen and (max-width: 763px) {
+.container-fluid>.navbar-header{
+	margin-right: 110px;
+    margin-left: -15px;
+}
+}
+
+@media screen and (max-width: 400px) {
+.container-fluid>.navbar-header{
+	margin-right: 43px;
+    margin-left: -15px;
+}
 }
 

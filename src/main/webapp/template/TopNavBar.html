@@ -1,5 +1,64 @@
 
-<nav class="navbar">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid" id="topNavigation" ng-style="{'background-color': navBarColor}">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" ng-click="toggleSideBar()">
+			<span style="font-size: 25px; cursor: pointer">&#9776;</span></a>
+      <a class="navbar-brand">{{navBarHeading}}</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+			<!-- <li><i class="glyphicons glyphicons-show-lines"></i></li>
+			<li ng-click="toggleSideBar()">
+			<span style="font-size: 25px; cursor: pointer">&#9776;</span></li>
+			<li><h4>{{navBarHeading}}</h4></li> -->
+			<li><span style="padding-top: 10px" class="glyphicon glyphicon-search"></span></li>
+			<li>
+				<div class="form-group">
+				<input type="text" id="search" ng-show="searching" class="form-control" placeholder="Search" ng-model="searchText">
+						<button id="search" ng-hide="searching" ng-click="goToSearchPage()">Search</button>
+				</div>
+			</li>
+		</ul>
+      <ul class="nav navbar-nav navbar-right">
+		<li ng-click="ListViewToggle()"><img ng-if="!ListView" height="30px" alt="gride" src="images/gridView.svg">
+		<img ng-if="ListView" height="30px" alt="list" src="images/listView.svg"></li>
+			<li>
+				<div class="dropdown">
+					<span class="btn dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
+						<img alt="{{User.userName.charAt(0)}}" class="img-circle" height="50" width="70" ng-src="{{User.profile}}" ><!-- <span class="glyphicon glyphicon-user"></span> -->
+					</span>
+					<ul class="dropdown-menu" role="menu" style="background-color: white; padding-left: 10px" aria-labelledby="menu1">
+						
+						<li     style="height: 150px;width: 200px;">
+						
+						 <img alt="{{User.userName.charAt(0)}}" title="{{User.userName.charAt(0)}}" class="img-circle" ng-src="{{User.profile}}" height="80px" width="60px" ng-click="openImageUploader('user')">
+						<!-- <button ng-click="openImageUploader('user')">Change Profile</button>
+						<img alt="ChangeProfile" ng-click="openImageUploader('user')" src="" height="20px">
+						
+						 <input id="imageuploader" ng-show="false"  type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
+					 --><br/>
+						{{User.userName}}
+						{{User.userEmail}}
+						
+						</li>
+						<li><button ng-click="openImageUploader('user')" style="background-color: blue; color: white">Change Profile</button></li>
+						<li ng-click="logout()">logout</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- <nav class="navbar">
 <div class="row">
 
 
@@ -27,17 +86,17 @@
 			<li>
 				<div class="dropdown">
 					<span class="btn dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
-						<img alt="{{User.userName.charAt(0)}}" class="img-circle" height="50" width="70" ng-src="{{User.profile}}" ><!-- <span class="glyphicon glyphicon-user"></span> -->
+						<img alt="{{User.userName.charAt(0)}}" class="img-circle" height="50" width="70" ng-src="{{User.profile}}" ><span class="glyphicon glyphicon-user"></span>
 					</span>
 					<ul class="dropdown-menu" role="menu" style="background-color: white; padding-left: 10px" aria-labelledby="menu1">
 						
 						<li     style="height: 150px;width: 200px;">
 						
 						 <img alt="{{User.userName.charAt(0)}}" title="{{User.userName.charAt(0)}}" class="img-circle" ng-src="{{User.profile}}" height="100px" width="100px" ng-click="openImageUploader('user')">
-						<!--<button ng-click="openImageUploader('user')">Change Profile</button>
+						<button ng-click="openImageUploader('user')">Change Profile</button>
 						<img alt="ChangeProfile" ng-click="openImageUploader('user')" src="" height="20px">
 						
-						 <input id="imageuploader" ng-show="false"  type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc"> -->
+						 <input id="imageuploader" ng-show="false"  type="file" ng-file-select="onFileSelect($files)" ng-model="imageSrc">
 					<br/>
 						{{User.userName}}
 						{{User.userEmail}}
@@ -52,7 +111,7 @@
 	</div>
 	</div>
 </nav>
-
+ -->
 <!-- <li>
 				<div class="imagedropdown">
 					<span class="btn dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">

@@ -20,7 +20,7 @@ toDoApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$u
 	})
 	.state('user',{
 		url:'/user',
-		templateUrl:'template/user.html',
+		templateUrl:'template/user.html'
 	})
 	.state('home',{
 		url:'/home',

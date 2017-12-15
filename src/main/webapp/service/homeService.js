@@ -24,7 +24,7 @@ toDoApp.factory('homeService',function($http){
 		});
 	}
 	
-	/*******  Common Service ********/
+	/*******  Common Service **********/
 	notes.service=function(url,method,note,token){
 		return $http({
 			method:method,
