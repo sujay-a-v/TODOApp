@@ -30,7 +30,7 @@
 					</div>
 					 
 						<div>
-						<div  ng-if="note.image!=''"><img ng-click="open(note)" style="height: 200px;" ng-src="{{note.image}}"/></div>
+						<div ng-if="note.image!=''"><img  ng-click="open(note)"  ng-src="{{note.image}} " style="width: 100%;"/></div>
 						<span ng-click="removeImage(note)" > <img ng-if="note.image!=''" alt="delete" id="moreOptions" src="images/delete.svg" height="20px"></span>
 								<b><div style="margin: 8px" ng-click="open(note)" ng-bind-html="note.title"></div></b>
 								<div style="margin: 7px" ng-click="open(note)" ng-bind-html="note.description"></div><br/>
@@ -83,7 +83,7 @@
 						</div>
 					 
 						<div><div >
-						<div ng-if="note.image!=''"><img  ng-click="open(note)"  ng-src="{{note.image}} "/></div><br>
+						<div ng-if="note.image!=''"><img  ng-click="open(note)"  ng-src="{{note.image}} " style="width: 100%;"/></div><br>
 						<span ng-click="removeImage(note)" > <img ng-if="note.image!=''" alt="delete" id="moreOptions" src="images/delete.svg" height="20px" style="float: right"></span>
 								<b><div style="margin: 8px" ng-click="open(note)" ng-bind-html="note.title"></div></b>
 								<div style="margin: 7px" ng-click="open(note)" ng-bind-html="note.description"></div><br/>	

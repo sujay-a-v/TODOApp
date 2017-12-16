@@ -13,6 +13,7 @@ var getNotes=function(){
 	var notes=homeService.getNotes(token);
 	notes.then(function(response){
 		notes=response.data;
+		$scope.ListViewToggle();
 		$scope.notes=notes;
 	},function(response){
 		$scope.logout();
@@ -50,9 +51,10 @@ function getUserLabels(){
 }
 
 	/****** List and Grid *******/
-
+/*ListViewToggle();*/
 	/*$scope.ListView = true;*/
 $scope.ListView=localStorage.getItem('LISTGRID');
+console.log($scope.ListView);
 	$scope.ListViewToggle = function() {
 		
 		if ($scope.ListView == true) {
