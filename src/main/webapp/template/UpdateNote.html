@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
 	<div id="editNoteModal"
 		style="margin-top: -4px; margin-left: -16px; margin-right: 556px; background-color: {{note.noteColor}}">
 		<div style="float: right; margin-right: 7px; margin-top: 8px;">
@@ -52,5 +52,65 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+ -->
+<div class="modal-content " style="background-color: {{note.noteColor}}">
+	<div class="modal-body" style="margin-bottom: 10%;">
+	
+		<div style="float: right; margin-right: 7px; margin-top: 8px;">
+			<span style="cursor: pointer" ng-click="note.pin=!note.pin">
+				<img ng-hide="note.pin" style="height: 17px" alt="pin"
+				src="images/pin.png"><img ng-show="note.pin"
+				style="height: 17px" alt="pin" src="images/pin.png">
+			</span>
+		</div>
+		<div>
+			<img ng-if="note.image!=''" contenteditable="true"
+				style="height: 598px;" ng-src="{{note.image}}" /><br> <span
+				ng-click="removeImage(note)"> <img contenteditable="true"
+				ng-if="note.image!=''" alt="delete" ng-show="true"
+				src="images/delete.svg" height="20px" style="float: right"></span> <b><div
+					id="title" contenteditable="true" style="margin: 8px"
+					ng-bind-html="note.title"></div></b>
+			<div id="description" contenteditable="true" style="margin: 8px"
+				ng-bind-html="note.description"></div>
+			<br> <br>
+			<div ng-if="note.reminderStatus!=''">
+				{{note.reminderStatus}}<span ng-click="deleteReminder(note)"
+					style="margin-left: 10px; background-color: {{note.noteColor"><img
+					alt="cancel" src="images/cancel.svg" height="20px"></span>
+			</div>
+			<br />
+			<div style="margin-left: 434px;">Edited : {{note.modifiedDate |
+				date:'dd-MMM-yyyy'}}</div>
+		</div>
+		<div>
+			<url-program></url-program>
+		</div>
+		<div >
+
+			<div style="float: left;">
+				<reminder-icon></reminder-icon>
+
+				<img alt="collaborator" src="images/collaborator.png" height="20px"
+					style="margin: 8px">
+				<note-color></note-color>
+				<img alt="image" src="images/ic_photo_black_24px.svg" height="20px"
+					ng-click="openImageUploader(note)"> <input id="imageuploader"
+					ng-show="false" type="file" ng-file-select="onFileSelect($files)"
+					ng-model="imageSrc"> <span ng-click="archiveNote(note)">
+					<img alt="archive" src="images/ic_archive_black_24px.svg"
+					height="20px" style="margin: 8px">
+				</span>
+				<more-option></more-option>
+				<div>
+					<span ng-click="editNote(note)" style="margin-left: 500px;">DONE</span>
+				</div>
+			</div>
+		</div>
+
+
+
 	</div>
 </div>

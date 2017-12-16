@@ -14,6 +14,7 @@ var getNotes=function(){
 	notes.then(function(response){
 		notes=response.data;
 		$scope.ListViewToggle();
+		$scope.toggleSideBar();
 		$scope.notes=notes;
 	},function(response){
 		$scope.logout();
@@ -271,6 +272,23 @@ console.log($scope.ListView);
 /************  Toggle side bar   ********/
 $scope.showSideBar = false;
 $scope.toggleSideBar = function() {
+	if(screen.width<550){
+		document.getElementById("noteToggle").style.paddingLeft = "0px";
+		
+		if($scope.showSideBar){
+			$scope.showSideBar=false;
+			document.getElementById("sideToggle").style.paddingLeft = "150px";
+			
+		}
+		else{
+			$scope.showSideBar = true;
+			document.getElementById("sideToggle").style.paddingLeft = "0px";
+			
+		}
+	}
+	
+	else{
+	
 	if($scope.showSideBar){
 		$scope.showSideBar=false;
 		document.getElementById("sideToggle").style.paddingLeft = "150px";
@@ -280,6 +298,7 @@ $scope.toggleSideBar = function() {
 		$scope.showSideBar = true;
 		document.getElementById("sideToggle").style.paddingLeft = "0px";
 		document.getElementById("noteToggle").style.paddingLeft = "15px";
+	}
 	}
 }
 

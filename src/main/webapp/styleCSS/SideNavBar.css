@@ -5,9 +5,12 @@
 	height: 100%;
 	width :20%;
     position : fixed;
-	z-index:2;
+	z-index:1;
 	transition : 1000.0ms;
 	margin-top: -10px;
+}
+#labelEdit{
+	margin-left: 35px;
 }
 
 .SideNavigation li{
@@ -23,4 +26,16 @@
 .SideNavigation a{
 	color: black;
     display: block;
+}
+
+@media (max-width: 550px){
+.SideNavigation{
+	background-color:#f2f2f2;
+	width :0;
+	margin-top: -19px;
+	  position : ;
+}
+#labelEdit{
+	margin-left: 14px;
+}
 }
