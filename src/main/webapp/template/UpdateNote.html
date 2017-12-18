@@ -56,7 +56,7 @@
 </div>
  -->
 <div class="modal-content " style="background-color: {{note.noteColor}}">
-	<div class="modal-body" style="margin-bottom: 10%;">
+	<div class="modal-body" style="margin-bottom: 12%;">
 	
 		<div style="float: right; margin-right: 7px; margin-top: 8px;">
 			<span style="cursor: pointer" ng-click="note.pin=!note.pin">
@@ -66,8 +66,8 @@
 			</span>
 		</div>
 		<div>
-			<img ng-if="note.image!=''" contenteditable="true"
-				style="height: 598px;" ng-src="{{note.image}}" /><br> <span
+			<img ng-if="note.image!=''" contenteditable="true" id="modelImage"
+				 ng-src="{{note.image}}" /><br> <span
 				ng-click="removeImage(note)"> <img contenteditable="true"
 				ng-if="note.image!=''" alt="delete" ng-show="true"
 				src="images/delete.svg" height="20px" style="float: right"></span> <b><div
@@ -82,8 +82,8 @@
 					alt="cancel" src="images/cancel.svg" height="20px"></span>
 			</div>
 			<br />
-			<div style="margin-left: 434px;">Edited : {{note.modifiedDate |
-				date:'dd-MMM-yyyy'}}</div>
+			<div id="editDate">Edited : {{note.modifiedDate |
+				date:'dd-MMM'}}</div>
 		</div>
 		<div>
 			<url-program></url-program>
@@ -105,7 +105,7 @@
 				</span>
 				<more-option></more-option>
 				<div>
-					<span ng-click="editNote(note)" style="margin-left: 500px;">DONE</span>
+					<span ng-click="editNote(note)" id="editDone">DONE</span>
 				</div>
 			</div>
 		</div>

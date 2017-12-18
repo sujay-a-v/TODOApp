@@ -183,3 +183,66 @@
     width: 97%;
 }
 }
+
+
+#modelImage{
+	height: 100%;
+    width: 100%;
+}
+
+@media (max-width: 550px){
+#modelImage{
+	height: 112%;
+}
+}
+
+@media (max-width: 400px){
+#modelImage{
+	height: 96%;
+}
+}
+
+@media (max-width: 380px){
+#modelImage{
+	height: 88%;
+}
+}
+@media (max-width: 330px){
+#modelImage{
+	height: 82%;
+}
+}
+
+#editDate{
+	margin-left: 75%;
+}
+@media (max-width: 430px){
+#editDate{
+	margin-left: 70%;
+}
+}
+@media (max-width: 360px){
+#editDate{
+	margin-left: 65%;
+}
+}
+
+#editDone{
+	margin-left: 500px;
+}
+@media (max-width: 500px){
+#editDone{
+	margin-left: 370px;
+}
+}
+
+@media (max-width: 370px){
+#editDone{
+	margin-left: 288px;
+}
+}
+@media (max-width: 340px){
+#editDone{
+	margin-left: 255px;
+}
+}

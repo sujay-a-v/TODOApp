@@ -3,7 +3,7 @@
 .SideNavigation{
 	/* background-color:#66686b; */
 	height: 100%;
-	width :20%;
+	/* width :20%; */
     position : fixed;
 	z-index:1;
 	transition : 1000.0ms;

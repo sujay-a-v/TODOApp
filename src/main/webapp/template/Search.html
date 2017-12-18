@@ -8,7 +8,9 @@
 			<div style="margin-left: 100px; "><side-nav-bar></side-nav-bar ></div>
 			<!-- ********************* End of Side Bar *************************** -->
 	</div>
-<!-- as searchedNotes searchedNotes.length &&  -->
+	
+<!-- as searchedNotes searchedNotes.length &&  -->   <!-- ng-show=" searchText.length>=1 " -->
+	<div id="noteToggle">
 	<div class="col-sm-9" id="mainWrapper">
 		<br> <br>
 			<h4>IN Search page</h4>
@@ -22,7 +24,9 @@
 			</div> -->
 			
 			<div class="{{card}}" style="padding: 2px 16px; background-color:{{note.noteColor}};" id="card"  
-					ng-show="searchedNotes.length && searchText.length>=3 " ng-repeat="note in notes |  filter :searchText  as searchedNotes" >
+				ng-show=" searchText.length>=2 "	 ng-repeat="note in notes|  filter :searchText " >
+					 
+					<!--  |  filter :searchText  -->	<!-- searchText -->
 					 
 					 <div id="moreOptions" style="float: right">
 							<span style="cursor: pointer"
@@ -81,6 +85,6 @@
 					<br>
 					</div>
 
-	</div>
+	</div></div>
 	</div>
 </div>

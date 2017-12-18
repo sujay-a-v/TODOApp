@@ -1,4 +1,4 @@
-<div id="mainHome" style=" width: 100%;height:100%; background-color:#e8e8e8;">
+<div id="mainHome" style="  background-color:#e8e8e8;">
 	<!-- ************************************* Start of Top Bar ********************************************** -->
 	<top-nav-bar></top-nav-bar>
 	<!-- ************************************* End of Top Bar  ********************************************** -->
@@ -10,7 +10,7 @@
 			
 			<!-- ********************* End of Side Bar ***************************** -->
 	</div>
-
+<div id="noteToggle">
 
 	<div class="col-sm-10" id="mainWrapper">
 		<br> <br>
@@ -22,7 +22,7 @@
 						alt="pin" style="height: 17px" src="images/pin.png"></img>
 					</span>
 				</div>
-				<img ng-if="note.image!=''" ng-click="open(note)" style="height: 200px;" ng-src="{{note.image}}"/><br>
+				<img ng-if="note.image!=''" ng-click="open(note)" style="height: 177px;" ng-src="{{note.image}}"/><br>
 		<span ng-click="removeImage(note)" > <img ng-if="note.image!=''" alt="delete" id="moreOptions" src="images/delete.svg" height="20px" style="float: right"></span>
 				
 				<b><div style="margin: 8px" ng-bind-html="note.title"></div></b>
@@ -61,6 +61,6 @@
 						</div>
 				
 			</div>
-		</div>
+		</div></div>
 	</div>
 </div>

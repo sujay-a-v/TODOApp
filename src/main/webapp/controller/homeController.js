@@ -14,7 +14,7 @@ var getNotes=function(){
 	notes.then(function(response){
 		notes=response.data;
 		$scope.ListViewToggle();
-		$scope.toggleSideBar();
+		/*$scope.toggleSideBar();*/
 		$scope.notes=notes;
 	},function(response){
 		$scope.logout();
